@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATOS — Até os Confins da Terra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Crimson+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vinho:#6D2E46; --rose:#A26769; --carvao:#36454F; --creme:#ECE2D0; --perg:#F4EBD9; --perg2:#E3D3B4;
+  --ouro:#B8892B; --ouro2:#E2B95A; --mar:#3F7C8C; --mar2:#2C5C6B; --tinta:#2B2118; --bom:#2E6D4E; --mau:#B3261E;
+  --disp:'Cinzel Decorative','Cinzel',Georgia,serif; --tit:'Cinzel',Georgia,serif; --sub:'Cormorant Garamond',Georgia,serif; --txt:'Crimson Pro',Georgia,serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#231a16 radial-gradient(ellipse at 50% 0%,#4a2f33 0%,#231a16 70%);color:var(--tinta);font-family:var(--txt);font-size:17px;line-height:1.35}
+button{font-family:inherit;cursor:pointer}
+.app{max-width:1500px;margin:0 auto;padding:10px 12px 24px}
+/* topo */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 16px;background:linear-gradient(#f6eeda,#e6d7b6);border:2px solid var(--vinho);outline:1px solid var(--ouro);outline-offset:-6px;border-radius:6px;box-shadow:0 6px 20px #0007}
+.logo{font-family:var(--disp);font-weight:900;font-size:34px;color:var(--vinho);letter-spacing:3px;line-height:1}
+.logo small{display:block;font-family:var(--sub);font-style:italic;font-weight:500;font-size:15px;letter-spacing:.5px;color:var(--rose);margin-top:3px}
+.stats{display:flex;flex-wrap:wrap;gap:8px 10px;margin-left:auto;align-items:stretch}
+.stat{min-width:92px;padding:5px 12px;border:1px solid #c9b48a;border-radius:5px;background:#fbf5e6;text-align:center}
+.stat b{display:block;font-family:var(--tit);font-weight:700;font-size:26px;line-height:1.05;color:var(--vinho)}
+.stat b i{font-style:normal;font-size:16px;color:var(--rose)}
+.stat span{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--carvao)}
+.stat.alert b{color:var(--mau)}
+.regs{display:flex;gap:4px;justify-content:center;margin-top:3px}
+.regs em{width:13px;height:13px;border-radius:50%;border:2px solid;opacity:.28}
+.regs em.on{opacity:1}
+.pips{display:flex;gap:3px;justify-content:center;margin:4px 0 2px}
+.pips em{width:13px;height:18px;border-radius:2px;border:1px solid #9c8a6a;background:#efe4cb}
+.pips em.on{background:linear-gradient(#e0473a,#8f1a14);border-color:#6d120e}
+.tbtn{align-self:center;border:1px solid var(--vinho);background:transparent;color:var(--vinho);border-radius:4px;padding:7px 12px;font-family:var(--tit);font-size:13px;letter-spacing:1px}
+.tbtn:hover{background:var(--vinho);color:#fff}
+/* corpo */
+.main{display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:12px;margin-top:12px;align-items:start}
+.board{position:relative;border:2px solid var(--vinho);outline:1px solid var(--ouro);outline-offset:-7px;border-radius:6px;overflow:hidden;background:var(--mar2);box-shadow:0 6px 20px #0007}
+.board svg{display:block;width:100%;height:auto}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.hint{position:absolute;left:14px;right:14px;bottom:12px;display:flex;justify-content:center;pointer-events:none}
+.hint div{background:#2b2118e6;color:#f6eeda;padding:7px 16px;border-radius:20px;font-size:16px;border:1px solid var(--ouro);max-width:100%}
+.hint b{color:var(--ouro2);font-size:18px}
+.side{display:flex;flex-direction:column;gap:10px}
+.pan{background:linear-gradient(#f6eeda,#eadcbd);border:1px solid var(--vinho);border-radius:6px;padding:11px 13px;box-shadow:0 4px 14px #0006}
+.pan h3{margin:0 0 7px;font-family:var(--tit);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--rose);display:flex;justify-content:space-between;align-items:baseline}
+.who{display:flex;gap:11px;align-items:center}
+.pawn{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--disp);font-size:22px;border:3px solid #fff8;box-shadow:0 2px 6px #0006}
+.who h2{margin:0;font-family:var(--tit);font-size:22px;color:var(--vinho);line-height:1.1}
+.who p{margin:2px 0 0;font-size:15px}
+.who p i{font-family:var(--sub);color:var(--rose)}
+.team{display:flex;gap:5px;margin-top:9px;flex-wrap:wrap}
+.team span{font-size:13px;padding:2px 8px;border-radius:12px;color:#fff;opacity:.45}
+.team span.on{opacity:1;outline:2px solid var(--ouro2)}
+.dice{display:flex;gap:10px;margin:4px 0 10px;flex-wrap:wrap}
+.die{width:58px;height:58px;border-radius:11px;border:2px solid #9c8a6a;background:linear-gradient(145deg,#fffdf6,#e9dcc0);box-shadow:0 3px 0 #b7a37c,0 5px 8px #0004;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:8px;gap:2px;transition:transform .12s}
+.die i{border-radius:50%;background:transparent}
+.die i.p{background:radial-gradient(circle at 35% 35%,#8d3c5c,#4a1b2e)}
+.die:hover{transform:translateY(-2px)}
+.die.sel{border-color:var(--ouro);box-shadow:0 0 0 3px var(--ouro2),0 5px 10px #0005;transform:translateY(-3px)}
+.die.used{opacity:.28;box-shadow:none;transform:none;cursor:default;filter:grayscale(1)}
+.die.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:rotate(-200deg) scale(.5);opacity:0}100%{transform:none;opacity:1}}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.act{border:1px solid var(--vinho);background:#fbf5e6;border-radius:5px;padding:7px 8px;text-align:left;color:var(--tinta);font-size:15px;line-height:1.2}
+.act b{display:block;font-family:var(--tit);font-size:15px;color:var(--vinho);letter-spacing:.5px}
+.act small{font-size:13px;color:var(--carvao)}
+.act small strong{font-size:16px;color:var(--vinho)}
+.act:hover:not(:disabled){background:var(--vinho);color:#fff}
+.act:hover:not(:disabled) b,.act:hover:not(:disabled) small,.act:hover:not(:disabled) strong{color:#fff}
+.act:disabled{opacity:.38;cursor:not-allowed}
+.end{grid-column:1/-1;background:var(--vinho);border-color:var(--vinho);text-align:center}
+.end b{color:#fff;font-size:16px}.end small{color:#f0d9b0}
+.end:hover:not(:disabled){background:#4f1f31}
+.pray{display:flex;align-items:center;gap:10px}
+.pray b{font-family:var(--tit);font-size:34px;color:var(--vinho);line-height:1}
+.pray span{font-size:14.5px;color:var(--carvao)}.pray span b{font-family:inherit;font-size:17px}
+.cards{display:flex;flex-direction:column;gap:6px}
+.card{display:block;width:100%;text-align:left;border:1px solid var(--ouro);border-left:5px solid var(--ouro);background:#fffaf0;border-radius:4px;padding:6px 9px;font-size:14.5px;color:var(--tinta)}
+.card b{font-family:var(--tit);font-size:14px;color:var(--vinho)}
+.card i{font-family:var(--sub);color:var(--rose);font-size:13px;float:right}
+button.card:hover{background:#fff1cf}
+.card.comp{border-color:var(--bom);border-left-color:var(--bom);background:#f3f7ee}
+.card.comp b{color:var(--bom)}
+.empty{font-style:italic;color:#7a6a55;font-size:14.5px}
+.log{max-height:210px;overflow:auto;font-size:14.5px;display:flex;flex-direction:column;gap:3px}
+.log div{padding-left:9px;border-left:3px solid #c9b48a}
+.log .g{border-color:var(--bom);color:#1f4a35}.log .b{border-color:var(--mau);color:#7d1a14;font-weight:600}.log .o{border-color:#c9862b}
+.log .t{border:0;padding:0;margin-top:5px;font-family:var(--tit);font-size:11.5px;letter-spacing:1.5px;color:var(--rose)}
+/* mapa */
+.lbl{font-family:var(--tit);font-weight:700;font-size:15.5px;fill:#2B2118;paint-order:stroke;stroke:#f6eedacc;stroke-width:4.5px;stroke-linejoin:round;text-anchor:middle;pointer-events:none}
+.reglbl{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:4px;opacity:.5;text-anchor:middle;pointer-events:none}
+.sealbl{font-family:var(--sub);font-style:italic;font-size:21px;fill:#cfe6ea;opacity:.55;letter-spacing:5px;text-anchor:middle;pointer-events:none}
+.porta{font-family:var(--tit);font-weight:700;font-size:23px;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.city{cursor:pointer}
+.city:hover .ring{stroke-width:6.5}
+.reach{fill:none;stroke:var(--ouro2);stroke-width:4;stroke-dasharray:7 5;animation:spin 6s linear infinite,pulse 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{stroke-dashoffset:-120}}
+@keyframes pulse{50%{opacity:.45}}
+.flash{animation:flash .9s ease-out 2;transform-box:fill-box;transform-origin:center}
+@keyframes flash{0%{transform:scale(.6);opacity:1}100%{transform:scale(2.3);opacity:0}}
+/* modais */
+.ov{position:fixed;inset:0;background:#170f0cd9;display:grid;place-items:center;padding:14px;z-index:20;overflow:auto}
+.sheet{width:min(880px,100%);max-height:94vh;overflow:auto;background:linear-gradient(#f8f0dc,#e8d9b8);border:2px solid var(--vinho);outline:1px solid var(--ouro);outline-offset:-8px;border-radius:8px;padding:26px 30px;box-shadow:0 20px 60px #000c}
+.sheet h1{font-family:var(--disp);font-weight:900;font-size:52px;letter-spacing:6px;color:var(--vinho);margin:0;text-align:center;line-height:1}
+.sheet .sub{font-family:var(--sub);font-style:italic;text-align:center;color:var(--rose);font-size:21px;margin:4px 0 2px}
+.sheet .vers{text-align:center;font-family:var(--sub);font-style:italic;font-size:16px;color:var(--carvao);margin-bottom:16px}
+.sheet h4{font-family:var(--tit);letter-spacing:2px;font-size:14px;text-transform:uppercase;color:var(--rose);margin:18px 0 8px;border-bottom:1px solid #c9b48a;padding-bottom:4px}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.pcard{border:2px solid #c9b48a;border-radius:6px;background:#fbf5e6;padding:10px;text-align:left;font-size:14.5px;color:var(--tinta);position:relative;opacity:.55}
+.pcard.on{opacity:1;border-color:var(--ouro);box-shadow:0 0 0 2px var(--ouro2)}
+.pcard .pawn{width:38px;height:38px;font-size:18px;margin-bottom:6px}
+.pcard b{display:block;font-family:var(--tit);font-size:16px;color:var(--vinho)}
+.pcard i{font-family:var(--sub);color:var(--rose);display:block;margin-bottom:4px}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.go{display:block;margin:20px auto 0;background:var(--vinho);color:#fff;border:0;border-radius:5px;padding:12px 34px;font-family:var(--tit);font-size:18px;letter-spacing:2px}
+.go:hover{background:#4f1f31}.go:disabled{opacity:.4}
+.rules{font-size:16.5px}
+.rules ol,.rules ul{padding-left:22px;margin:6px 0}
+.rules li{margin:3px 0}
+.rules b{color:var(--vinho)}
+.big{font-family:var(--tit);font-weight:700;font-size:1.25em;color:var(--vinho)}
+.x{float:right;border:0;background:none;font-size:26px;color:var(--vinho);line-height:1}
+.res{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+@media (min-width:981px){.board{position:sticky;top:10px}}
+@media (max-width:760px){.scroll svg{width:820px;max-width:none}.hint{position:static;padding:8px;background:#2b2118}.hint div{border:0;background:none;padding:0;font-size:15px;text-align:center}.stats{display:grid;grid-template-columns:repeat(3,1fr);width:100%}.stat{min-width:0}.tbtn{grid-column:span 3}.stats .tbtn{grid-column:auto}}
+@media (max-width:980px){.main{grid-template-columns:1fr}.pgrid{grid-template-columns:repeat(2,1fr)}.dgrid{grid-template-columns:1fr}.logo{font-size:26px}.stats{margin-left:0}.stat{min-width:76px;padding:4px 8px}.stat b{font-size:22px}.sheet{padding:18px 16px}.sheet h1{font-size:38px}.lbl{font-size:19px}.porta{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+// ATOS — Até os Confins da Terra · motor de regras (sem DOM)
+const REG = {
+  J: { n: 'Judeia & Síria', c: '#C62828' },
+  A: { n: 'Ásia Menor', c: '#1565C0' },
+  M: { n: 'Macedônia & Grécia', c: '#E0A21A' },
+  I: { n: 'Itália', c: '#2b2b2b' }
+};
+const CITIES = [
+  { id: 'jer', n: 'Jerusalém', reg: 'J', x: 925, y: 598, porta: 1, need: 3, ref: 'Atos 1:8' },
+  { id: 'ces', n: 'Cesareia', reg: 'J', x: 868, y: 548, porta: 4, need: 3, ref: 'Atos 10:1', comp: 'cornelio' },
+  { id: 'tir', n: 'Tiro', reg: 'J', x: 898, y: 490, porta: 2, need: 3, ref: 'Atos 21:3' },
+  { id: 'dam', n: 'Damasco', reg: 'J', x: 958, y: 474, porta: 6, need: 3, ref: 'Atos 9:25' },
+  { id: 'ans', n: 'Antioquia da Síria', reg: 'J', x: 916, y: 392, porta: 3, need: 3, ref: 'Atos 11:26' },
+  { id: 'sal', n: 'Salamina', reg: 'J', x: 828, y: 440, porta: 5, need: 3, ref: 'Atos 13:5' },
+  { id: 'tar', n: 'Tarso', reg: 'A', x: 872, y: 318, porta: 2, need: 3, ref: 'Atos 22:3' },
+  { id: 'lis', n: 'Listra', reg: 'A', x: 792, y: 352, porta: 5, need: 3, ref: 'Atos 16:1', comp: 'timoteo' },
+  { id: 'ico', n: 'Icônio', reg: 'A', x: 802, y: 276, porta: 1, need: 3, ref: 'Atos 14:1' },
+  { id: 'anp', n: 'Antioquia da Pisídia', reg: 'A', x: 728, y: 238, porta: 4, need: 3, ref: 'Atos 13:14' },
+  { id: 'efe', n: 'Éfeso', reg: 'A', x: 650, y: 312, porta: 6, need: 4, ref: 'Atos 19:20', comp: 'apolo' },
+  { id: 'tro', n: 'Trôade', reg: 'A', x: 612, y: 196, porta: 3, need: 3, ref: 'Atos 16:9', comp: 'lucas' },
+  { id: 'fil', n: 'Filipos', reg: 'M', x: 540, y: 96, porta: 1, need: 3, ref: 'Atos 16:14', comp: 'lidia' },
+  { id: 'tes', n: 'Tessalônica', reg: 'M', x: 458, y: 118, porta: 4, need: 3, ref: 'Atos 17:1' },
+  { id: 'ber', n: 'Bereia', reg: 'M', x: 398, y: 172, porta: 2, need: 3, ref: 'Atos 17:11' },
+  { id: 'ate', n: 'Atenas', reg: 'M', x: 506, y: 318, porta: 5, need: 3, ref: 'Atos 17:22' },
+  { id: 'cor', n: 'Corinto', reg: 'M', x: 430, y: 300, porta: 3, need: 4, ref: 'Atos 18:8', comp: 'aquila' },
+  { id: 'cre', n: 'Creta', reg: 'M', x: 548, y: 470, porta: 6, need: 3, ref: 'Tito 1:5', comp: 'tito' },
+  { id: 'mal', n: 'Malta', reg: 'I', x: 196, y: 508, porta: 2, need: 3, ref: 'Atos 28:1', comp: 'publio' },
+  { id: 'sir', n: 'Siracusa', reg: 'I', x: 214, y: 416, porta: 5, need: 3, ref: 'Atos 28:12' },
+  { id: 'reg', n: 'Régio', reg: 'I', x: 250, y: 334, porta: 1, need: 3, ref: 'Atos 28:13' },
+  { id: 'pot', n: 'Pôteoli', reg: 'I', x: 188, y: 222, porta: 4, need: 3, ref: 'Atos 28:13' },
+  { id: 'trt', n: 'Três Tavernas', reg: 'I', x: 138, y: 154, porta: 3, need: 3, ref: 'Atos 28:15' },
+  { id: 'rom', n: 'Roma', reg: 'I', x: 84, y: 92, porta: 6, need: 4, ref: 'Atos 23:11' }
+];
+// [a, b, mar?]
+const EDGES = [
+  ['jer', 'ces', 0], ['jer', 'dam', 0], ['ces', 'tir', 0], ['tir', 'dam', 0], ['dam', 'ans', 0],
+  ['tir', 'sal', 1], ['ans', 'sal', 1], ['ans', 'tar', 0], ['tar', 'lis', 0], ['tar', 'ico', 0],
+  ['lis', 'ico', 0], ['ico', 'anp', 0], ['anp', 'efe', 0], ['efe', 'tro', 0], ['tro', 'fil', 1],
+  ['fil', 'tes', 0], ['tes', 'ber', 0], ['ber', 'ate', 0], ['ate', 'cor', 0], ['cor', 'efe', 1],
+  ['ate', 'cre', 1], ['cre', 'sal', 1], ['cre', 'mal', 1], ['efe', 'cre', 1], ['mal', 'sir', 1],
+  ['sir', 'reg', 0], ['reg', 'pot', 1], ['pot', 'trt', 0], ['trt', 'rom', 0], ['cor', 'reg', 1]
+];
+const PERSONAS = {
+  paulo: { n: 'Paulo', sub: 'Apóstolo dos Gentios', ref: 'Atos 9:15', txt: 'Uma vez por turno, prega com qualquer dado sem gastar Oração.', cor: '#6D2E46' },
+  barnabe: { n: 'Barnabé', sub: 'Filho da Consolação', ref: 'Atos 4:36', txt: 'Ao Orar, ganha 4 Orações em vez de 2.', cor: '#2E6D4E' },
+  silas: { n: 'Silas', sub: 'Louvor na prisão', ref: 'Atos 16:25', txt: 'Ao Fortalecer, remove toda a oposição da cidade. Nunca perde dado por prisão.', cor: '#2E4B6D' },
+  marcos: { n: 'João Marcos', sub: 'O ajudante', ref: 'Atos 12:25', txt: 'Ao Viajar, anda até 4 cidades em vez de 2.', cor: '#8A5A1C' }
+};
+const COMPS = {
+  timoteo: { n: 'Timóteo', ref: 'Atos 16:1', txt: 'Pregar aceita dado com 1 de diferença sem gastar Oração.' },
+  lidia: { n: 'Lídia', ref: 'Atos 16:14', txt: '+1 Oração no início de cada turno.' },
+  lucas: { n: 'Lucas', ref: 'Atos 16:10', txt: 'No início do turno, remove 1 oposição da cidade do missionário.' },
+  aquila: { n: 'Áquila & Priscila', ref: 'Atos 18:2', txt: 'Oposição não entra em cidade onde há missionário.' },
+  apolo: { n: 'Apolo', ref: 'Atos 18:24', txt: 'Uma vez por turno, rerrole os dados não usados.' },
+  cornelio: { n: 'Cornélio', ref: 'Atos 10:1', txt: 'O primeiro tumulto de cada Viagem é ignorado.' },
+  publio: { n: 'Públio', ref: 'Atos 28:7', txt: 'Viajar alcança 1 cidade a mais.' },
+  tito: { n: 'Tito', ref: 'Tito 1:5', txt: 'Cada igreja plantada rende +2 Orações.' }
+};
+const CARDS = {
+  noite: { n: 'Uma Noite Tranquila', ref: 'Salmo 4:8', txt: 'Neste turno, nenhuma carta de Oposição é revelada.' },
+  resiliente: { n: 'População Resiliente', ref: 'Provérbios 28:1', txt: 'Remova 1 oposição de cada cidade com igreja.' },
+  bencao: { n: 'Bênção', ref: 'Deuteronômio 28:12', txt: 'Ganhe 3 Orações.' },
+  luz: { n: 'Luz ao Povo', ref: 'Atos 13:47', txt: 'Coloque 1 discípulo na sua cidade, sem dado.' },
+  porta: { n: 'Porta Aberta', ref: 'Atos 14:27', txt: 'Vá para a igreja mais próxima do seu objetivo: escolha qualquer cidade com igreja.' },
+  anjo: { n: 'Anjo Libertador', ref: 'Atos 12:7', txt: 'Remova toda a oposição da sua cidade e liberte quem estiver preso.' },
+  visao: { n: 'Visão Noturna', ref: 'Atos 16:9', txt: 'Rerrole todos os seus dados não usados.' }
+};
+CARDS.porta.txt = 'Mova-se para qualquer cidade com igreja.';
+const ALERTS = {
+  prisao: { n: 'Prisão', ref: 'Atos 16:24', txt: 'O missionário da vez é preso: rola 1 dado a menos no próximo turno.' },
+  apedrejamento: { n: 'Apedrejamento', ref: 'Atos 7:59', txt: '+2 oposição na cidade da Judeia & Síria mais pressionada.' },
+  ourives: { n: 'Tumulto dos Ourives', ref: 'Atos 19:24', txt: '+2 oposição em Éfeso.' },
+  naufragio: { n: 'Naufrágio', ref: 'Atos 27:41', txt: 'A equipe perde 2 Orações.' }
+};
+const GOALS = { facil: [12, 11, 9], normal: [14, 13, 11], dificil: [15, 14, 12] }; // por nº de missionários (2, 3, 4)
+const MAX_CHAOS = 7;
+const C = Object.fromEntries(CITIES.map(c => [c.id, c]));
+const ADJ = {};
+CITIES.forEach(c => (ADJ[c.id] = []));
+EDGES.forEach(([a, b]) => { ADJ[a].push(b); ADJ[b].push(a); });
+
+function shuffle(a, rng) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const d6 = rng => 1 + Math.floor(rng() * 6);
+const has = (s, k) => s.comps.includes(k);
+const me = s => s.players[s.cur];
+function log(s, t, k) { s.log.push({ t, k: k || 'i', turn: s.turn }); }
+
+function newGame(opts, rng) {
+  const personas = opts.personas || ['paulo', 'barnabe'];
+  const s = {
+    diff: opts.diff || 'normal', goal: GOALS[opts.diff || 'normal'][personas.length - 2],
+    players: personas.map((p, i) => ({ i, persona: p, city: 'ans', jailed: false })),
+    cur: 0, turn: 1, era: 1, speed: 3, chaos: 0, prayer: 3,
+    cities: {}, deck: [], discard: [], hand: [], be: [], comps: [], dice: [],
+    log: [], over: null, skipThreat: false, apoloUsed: false, pauloUsed: false, cornUsed: false, flash: []
+  };
+  CITIES.forEach(c => (s.cities[c.id] = { opp: 0, disc: 0, church: false }));
+  ['jer', 'ans'].forEach(id => { s.cities[id].church = true; s.cities[id].disc = C[id].need; });
+  const be = [];
+  Object.keys(CARDS).forEach(k => be.push(k, k));
+  s.be = shuffle(be, rng);
+  s.hand = [s.be.pop(), s.be.pop()];
+  const cityCards = shuffle(CITIES.map(c => c.id).filter(id => id !== 'jer' && id !== 'ans'), rng);
+  const init = cityCards.splice(0, 6);
+  init.forEach((id, i) => { s.cities[id].opp = i < 2 ? 2 : 1; });
+  s.discard = init.slice();
+  s.deck = shuffle(cityCards.concat(['jer', 'ans'], Object.keys(ALERTS).map(k => '!' + k)), rng);
+  log(s, 'A missão parte de Antioquia da Síria. Objetivo: ' + s.goal + ' igrejas, nas 4 regiões, incluindo Roma.', 'g');
+  startTurn(s, rng);
+  return s;
+}
+
+function rollDice(s, rng) {
+  const p = me(s);
+  let n = 3 - (p.jailed && p.persona !== 'silas' ? 1 : 0);
+  p.jailed = false;
+  s.dice = Array.from({ length: n }, () => ({ v: d6(rng), used: false }));
+}
+function startTurn(s, rng) {
+  const p = me(s);
+  s.apoloUsed = false; s.pauloUsed = false; s.skipThreat = false;
+  if (p.jailed && p.persona !== 'silas') log(s, PERSONAS[p.persona].n + ' sai da prisão com 1 dado a menos.', 'b');
+  rollDice(s, rng);
+  if (s.cities[p.city].church) s.prayer++;
+  if (has(s, 'lidia')) s.prayer++;
+  if (has(s, 'lucas') && s.cities[p.city].opp > 0) s.cities[p.city].opp--;
+}
+
+function moveRange(s) { const p = me(s); return (p.persona === 'marcos' ? 4 : 2) + (has(s, 'publio') ? 1 : 0); }
+// distâncias com trechos igreja–igreja gratuitos
+function distFrom(s, from, freeNet) {
+  const dist = { [from]: 0 }; const q = [from];
+  while (q.length) {
+    q.sort((a, b) => dist[a] - dist[b]);
+    const u = q.shift();
+    for (const v of ADJ[u]) {
+      const w = freeNet && s.cities[u].church && s.cities[v].church ? 0 : 1;
+      if (dist[v] === undefined || dist[u] + w < dist[v]) { dist[v] = dist[u] + w; q.push(v); }
+    }
+  }
+  return dist;
+}
+function reachable(s) {
+  const d = distFrom(s, me(s).city, true), r = moveRange(s);
+  return Object.keys(d).filter(id => id !== me(s).city && d[id] <= r);
+}
+function preachCost(s, v, cityId) {
+  const p = C[cityId].porta; let d = Math.abs(v - p); d = Math.min(d, 6 - d);
+  if (has(s, 'timoteo')) d = Math.max(0, d - 1);
+  d += s.cities[cityId].opp;
+  if (me(s).persona === 'paulo' && !s.pauloUsed && cityId === me(s).city) return 0;
+  return d;
+}
+function rawCost(s, v, cityId) {
+  const p = C[cityId].porta; let d = Math.abs(v - p); d = Math.min(d, 6 - d);
+  if (has(s, 'timoteo')) d = Math.max(0, d - 1);
+  return d + s.cities[cityId].opp;
+}
+function canPreach(s, di) {
+  const d = s.dice[di], c = s.cities[me(s).city];
+  if (!d || d.used || c.church) return false;
+  if (c.opp >= 3) return false;
+  return preachCost(s, d.v, me(s).city) <= s.prayer;
+}
+function useDie(s, di) { const d = s.dice[di]; if (!d || d.used || s.over) return null; d.used = true; return d; }
+
+function addDisc(s, id, rng) {
+  const c = s.cities[id]; c.disc++;
+  if (c.disc >= C[id].need && !c.church) plant(s, id);
+}
+function plant(s, id) {
+  const c = s.cities[id]; c.church = true; c.disc = C[id].need;
+  log(s, 'Igreja plantada em ' + C[id].n + '!', 'g'); s.flash.push({ id, k: 'church' });
+  if (s.be.length) { const k = s.be.pop(); s.hand.push(k); log(s, 'Bem-aventurança recebida: ' + CARDS[k].n + '.', 'g'); }
+  if (has(s, 'tito')) s.prayer += 2;
+  if (C[id].comp && !has(s, C[id].comp)) { s.comps.push(C[id].comp); log(s, COMPS[C[id].comp].n + ' se junta à missão.', 'g'); }
+  checkWin(s);
+}
+function churches(s) { return CITIES.filter(c => s.cities[c.id].church); }
+function regionsCovered(s) { return new Set(churches(s).map(c => c.reg)); }
+function checkWin(s) {
+  if (churches(s).length >= s.goal && regionsCovered(s).size === 4 && s.cities.rom.church) {
+    s.over = { win: true, why: 'O evangelho chegou a Roma e às quatro regiões.' };
+    log(s, 'Vitória! ' + s.over.why, 'g');
+  }
+}
+
+function actMove(s, di, to) {
+  if (!reachable(s).includes(to)) return false;
+  if (!useDie(s, di)) return false;
+  me(s).city = to; return true;
+}
+function actPreach(s, di) {
+  if (!canPreach(s, di)) return false;
+  const id = me(s).city, cost = preachCost(s, s.dice[di].v, id);
+  if (me(s).persona === 'paulo' && !s.pauloUsed && rawCost(s, s.dice[di].v, id) > 0) s.pauloUsed = true;
+  useDie(s, di); s.prayer -= cost; addDisc(s, id); return true;
+}
+function actFortify(s, di) {
+  const id = me(s).city, c = s.cities[id];
+  if (c.opp === 0 || !s.dice[di] || s.dice[di].used) return false;
+  const v = useDie(s, di).v;
+  c.opp = me(s).persona === 'silas' ? 0 : Math.max(0, c.opp - (v === C[id].porta ? 2 : 1));
+  return true;
+}
+function actPray(s, di) {
+  if (!useDie(s, di)) return false;
+  s.prayer += me(s).persona === 'barnabe' ? 4 : 2; return true;
+}
+function actApolo(s, rng) {
+  if (!has(s, 'apolo') || s.apoloUsed || s.over) return false;
+  s.apoloUsed = true; s.dice.forEach(d => { if (!d.used) d.v = d6(rng); }); return true;
+}
+function playCard(s, hi, rng, target) {
+  const k = s.hand[hi]; if (!k || s.over) return false;
+  const p = me(s), c = s.cities[p.city];
+  if (k === 'luz' && c.church) return false;
+  if (k === 'porta' && !(target && s.cities[target] && s.cities[target].church && target !== p.city)) return false;
+  s.hand.splice(hi, 1);
+  log(s, 'Carta jogada: ' + CARDS[k].n + '.', 'g');
+  if (k === 'noite') s.skipThreat = true;
+  if (k === 'resiliente') churches(s).forEach(x => { if (s.cities[x.id].opp > 0) s.cities[x.id].opp--; });
+  if (k === 'bencao') s.prayer += 3;
+  if (k === 'luz') addDisc(s, p.city);
+  if (k === 'porta') p.city = target;
+  if (k === 'anjo') { c.opp = 0; s.players.forEach(x => (x.jailed = false)); }
+  if (k === 'visao') s.dice.forEach(d => { if (!d.used) d.v = d6(rng); });
+  return true;
+}
+
+function addOpp(s, id, n) {
+  for (let i = 0; i < n; i++) {
+    if (has(s, 'aquila') && s.players.some(p => p.city === id)) { log(s, 'Áquila & Priscila protegem ' + C[id].n + '.', 'g'); return; }
+    const c = s.cities[id];
+    if (c.opp < 3) { c.opp++; s.flash.push({ id, k: 'opp' }); continue; }
+    if (has(s, 'cornelio') && !s.cornUsed) { s.cornUsed = true; log(s, 'Cornélio contém o tumulto em ' + C[id].n + '.', 'g'); return; }
+    s.chaos++; s.flash.push({ id, k: 'riot' });
+    let t = 'Tumulto em ' + C[id].n + '! Descontrole ' + s.chaos + '/' + MAX_CHAOS + '.';
+    if (!c.church && c.disc > 0) { c.disc--; t += ' Um discípulo se dispersa.'; }
+    s.players.forEach(p => { if (p.city === id) { p.jailed = true; t += ' ' + PERSONAS[p.persona].n + ' é preso.'; } });
+    log(s, t, 'b');
+    if (s.chaos >= MAX_CHAOS) { s.over = { win: false, why: 'A perseguição saiu do controle.' }; log(s, 'Derrota: ' + s.over.why, 'b'); }
+    return;
+  }
+}
+function nextEra(s, rng) {
+  if (s.era >= 3) { s.over = { win: false, why: 'A terceira Viagem terminou antes de o testemunho chegar a Roma.' }; log(s, 'Derrota: ' + s.over.why, 'b'); return; }
+  s.era++; s.speed++; s.cornUsed = false; s.prayer += 2;
+  s.deck = shuffle(s.discard.splice(0), rng);
+  log(s, 'Começa a ' + s.era + 'ª Viagem. A oposição acelera: ' + s.speed + ' cartas por turno. +2 Orações.', 'b');
+}
+function endTurn(s, rng) {
+  if (s.over) return [];
+  const revealed = [];
+  if (s.skipThreat) log(s, 'Uma noite tranquila: nenhuma oposição revelada.', 'g');
+  else for (let i = 0; i < s.speed && !s.over; i++) {
+    if (!s.deck.length) { nextEra(s, rng); break; }
+    const k = s.deck.pop(); s.discard.push(k); revealed.push(k);
+    if (k[0] === '!') {
+      const a = k.slice(1); log(s, 'Alerta — ' + ALERTS[a].n + ': ' + ALERTS[a].txt, 'b');
+      if (a === 'prisao') me(s).jailed = true;
+      if (a === 'naufragio') s.prayer = Math.max(0, s.prayer - 2);
+      if (a === 'ourives') addOpp(s, 'efe', 2);
+      if (a === 'apedrejamento') {
+        const t = CITIES.filter(c => c.reg === 'J').sort((x, y) => s.cities[y.id].opp - s.cities[x.id].opp)[0];
+        addOpp(s, t.id, 2);
+      }
+    } else { log(s, 'Oposição cresce em ' + C[k].n + '.', 'o'); addOpp(s, k, 1); }
+  }
+  if (!s.over && !s.deck.length) nextEra(s, rng);
+  if (s.over) return revealed;
+  s.cur = (s.cur + 1) % s.players.length; s.turn++;
+  startTurn(s, rng);
+  return revealed;
+}
+function turnsLeft(s) {
+  let t = Math.ceil(s.deck.length / s.speed);
+  for (let e = s.era + 1, sp = s.speed + 1; e <= 3; e++, sp++) t += Math.ceil(28 / sp);
+  return t;
+}
+const ATOS = { REG, CITIES, EDGES, PERSONAS, COMPS, CARDS, ALERTS, GOALS, MAX_CHAOS, C, ADJ, newGame, reachable, preachCost, canPreach, actMove, actPreach, actFortify, actPray, actApolo, playCard, endTurn, churches, regionsCovered, moveRange, distFrom, turnsLeft, me, has };
+if (typeof module !== 'undefined') module.exports = ATOS;
+
+</script>
+<script>
+(function(){
+const A = ATOS, $ = s => document.querySelector(s), rng = Math.random;
+const KEY = 'atos_confins_v1';
+let S = null, ui = { sel: null, mode: null, last: [], rolled: true, modal: null };
+let setup = { personas: ['paulo', 'barnabe'], diff: 'normal' };
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function load(){ try{ const v = JSON.parse(localStorage.getItem(KEY)); if (v && v.players && v.cities) return v; }catch(e){} return null; }
+function clear(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+
+/* ---------- mapa ---------- */
+const LAND = [
+  'M22,30 L140,30 L192,116 L244,198 L296,300 L278,356 L232,350 L212,274 L148,236 L86,176 L34,112 Z',
+  'M322,34 L628,34 L606,112 L546,134 L504,172 L524,250 L546,322 L506,356 L474,336 L466,388 L408,388 L396,322 L374,240 L342,172 Z',
+  'M588,208 L636,150 L720,116 L1010,96 L1010,670 L884,670 L846,586 L854,530 L882,470 L904,410 L898,366 L858,346 L814,388 L760,378 L700,354 L642,350 L618,290 Z'
+];
+const ISLES = [[206,412,52,30],[196,508,20,13],[548,470,62,17],[824,440,44,16]];
+const LBLPOS = { rom:[0,-30], trt:[62,6,'start'], pot:[-34,6,'end'], reg:[36,6,'start'], sir:[-34,6,'end'], mal:[0,42], fil:[0,-30], tes:[0,-30], ber:[-32,6,'end'], ate:[34,6,'start'], cor:[-32,6,'end'], cre:[0,42], tro:[-30,6,'end'], efe:[0,44], anp:[0,-30], ico:[0,-30], lis:[-30,6,'end'], tar:[0,-30], ans:[4,46], sal:[0,-30], dam:[-2,46], tir:[-30,6,'end'], ces:[-30,6,'end'], jer:[0,44] };
+const SHORT = { ans:'Antioquia', anp:'Antioquia da Pisídia' };
+function mapSVG(){
+  const cur = A.me(S), selOk = ui.sel !== null && S.dice[ui.sel] && !S.dice[ui.sel].used && !S.over;
+  const reach = ui.mode === 'porta' ? A.churches(S).map(c => c.id).filter(id => id !== cur.city) : (selOk ? A.reachable(S) : []);
+  let h = `<svg viewBox="0 0 1010 670" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa do Mediterrâneo">
+  <defs>
+    <radialGradient id="sea" cx="45%" cy="60%" r="75%"><stop offset="0" stop-color="#5a9aa8"/><stop offset="1" stop-color="#2a5866"/></radialGradient>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7"/><feDisplacementMap in="SourceGraphic" scale="16"/></filter>
+    <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.25  0 0 0 0 0.12  0 0 0 0.16 0"/><feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="multiply"/></filter>
+    <pattern id="waves" width="46" height="22" patternUnits="userSpaceOnUse"><path d="M2,12 q6,-6 12,0 t12,0" fill="none" stroke="#cfe6ea" stroke-opacity=".16" stroke-width="1.4"/></pattern>
+    <filter id="sh"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".45"/></filter>
+  </defs>
+  <rect width="1010" height="670" fill="url(#sea)"/><rect width="1010" height="670" fill="url(#waves)"/>
+  <g filter="url(#rough)"><g stroke="#f2e6c8" stroke-opacity=".5" stroke-width="12" fill="none" stroke-linejoin="round">${LAND.map(d=>`<path d="${d}"/>`).join('')}${ISLES.map(e=>`<ellipse cx="${e[0]}" cy="${e[1]}" rx="${e[2]}" ry="${e[3]}"/>`).join('')}</g>
+  <g fill="#e6d5ad" stroke="#8a6f45" stroke-width="2" stroke-linejoin="round" filter="url(#paper)">${LAND.map(d=>`<path d="${d}"/>`).join('')}${ISLES.map(e=>`<ellipse cx="${e[0]}" cy="${e[1]}" rx="${e[2]}" ry="${e[3]}"/>`).join('')}</g></g>
+  <text class="reglbl" x="96" y="290" fill="#2b2b2b" transform="rotate(-62 96 290)">ITÁLIA</text>
+  <text class="reglbl" x="476" y="66" fill="#8a5f00" style="font-size:15px;letter-spacing:3px">MACEDÔNIA &amp; GRÉCIA</text>
+  <text class="reglbl" x="830" y="168" fill="#0d3f7a">ÁSIA MENOR</text>
+  <text class="reglbl" x="992" y="250" fill="#8a1c1c" style="font-size:15px;letter-spacing:3px" transform="rotate(90 992 250)">JUDEIA &amp; SÍRIA</text>
+  <text class="sealbl" x="390" y="520">Mar Mediterrâneo</text><text class="sealbl" x="575" y="270" style="font-size:16px;letter-spacing:3px" transform="rotate(70 575 270)">Mar Egeu</text>
+  <g opacity=".75" transform="translate(690,585)"><circle r="34" fill="none" stroke="#f2e6c8" stroke-width="1.5"/><path d="M0,-42 L7,0 L0,42 L-7,0 Z" fill="#f2e6c8"/><path d="M-42,0 L0,-7 L42,0 L0,7 Z" fill="#f2e6c8" opacity=".6"/><text y="-48" text-anchor="middle" fill="#f2e6c8" style="font-family:var(--tit);font-size:14px">N</text></g>`;
+  // rotas
+  A.EDGES.forEach(([a,b,sea])=>{
+    const p=A.C[a],q=A.C[b], net=S.cities[a].church&&S.cities[b].church;
+    const mx=(p.x+q.x)/2, my=(p.y+q.y)/2+(sea?26:0);
+    const d=sea?`M${p.x},${p.y} Q${mx},${my} ${q.x},${q.y}`:`M${p.x},${p.y} L${q.x},${q.y}`;
+    h+=net?`<path d="${d}" fill="none" stroke="#fff3c4" stroke-width="7" stroke-linecap="round" opacity=".9"/><path d="${d}" fill="none" stroke="#B8892B" stroke-width="3.5" stroke-linecap="round"/>`
+          :`<path d="${d}" fill="none" stroke="${sea?'#d9eef2':'#5b4630'}" stroke-width="${sea?2.4:3}" ${sea?'stroke-dasharray="3 8"':'stroke-dasharray="1 0"'} stroke-linecap="round" opacity="${sea?.85:.7}"/>`;
+  });
+  // cidades
+  A.CITIES.forEach(c=>{
+    const st=S.cities[c.id], col=A.REG[c.reg].c, lp=LBLPOS[c.id];
+    const fl=S.flash.filter(f=>f.id===c.id);
+    h+=`<g class="city" data-city="${c.id}" transform="translate(${c.x},${c.y})">`;
+    fl.forEach(f=>{ h+=`<circle class="flash" r="22" fill="none" stroke="${f.k==='church'?'#E2B95A':'#e0473a'}" stroke-width="5"/>`; });
+    if (reach.includes(c.id)) h+=`<circle class="reach" r="31"/>`;
+    if (st.church){
+      h+=`<circle class="ring" r="21" fill="#f7e3a1" stroke="${col}" stroke-width="5" filter="url(#sh)"/><circle r="15.5" fill="none" stroke="#B8892B" stroke-width="1.5"/>
+      <path d="M0,-14 v8 M-4,-10.5 h8" stroke="#6D2E46" stroke-width="2.6" stroke-linecap="round"/><path d="M-9.5,10 v-9 L0,-6.5 L9.5,1 v9 Z" fill="#6D2E46"/><path d="M-2.6,10 v-5.5 a2.6,2.6 0 0 1 5.2,0 v5.5 Z" fill="#f7e3a1"/>`;
+    } else {
+      h+=`<circle class="ring" r="20" fill="#fbf5e6" stroke="${col}" stroke-width="5" filter="url(#sh)"/><text class="porta" fill="${col}">${c.porta}</text>`;
+      for(let i=0;i<c.need;i++){ const x=(i-(c.need-1)/2)*11; h+=`<circle cx="${x}" cy="29" r="4.4" fill="${i<st.disc?'#2E6D4E':'#fbf5e6'}" stroke="#2B2118" stroke-width="1.3"/>`; }
+    }
+    for(let i=0;i<st.opp;i++){ const x=(i-(st.opp-1)/2)*15; h+=`<g transform="translate(${x},-31)"><path d="M0,9 C-8,9 -8,0 -4,-4 C-3,-1 -1,-1 -1,-4 C-1,-8 2,-10 2,-12 C6,-7 8,-3 7,2 C6.5,6 4,9 0,9 Z" fill="#d93025" stroke="#5c0f0a" stroke-width="1.2"/><path d="M0,7 C-3,7 -3.5,3 -1,0 C0,2 3,2 2,6 Z" fill="#ffc94d"/></g>`; }
+    if (c.comp && !A.has(S,c.comp)) h+=`<g transform="translate(22,-16)"><circle r="9.5" fill="#2E6D4E" stroke="#fff" stroke-width="1.6"/><path d="M0,-5.5 L1.6,-1.7 L5.6,-1.5 L2.4,1 L3.5,5 L0,2.7 L-3.5,5 L-2.4,1 L-5.6,-1.5 L-1.6,-1.7 Z" fill="#ffe9a8"/></g>`;
+    const yoff=(lp[1]<0&&st.opp?-16:0)+(lp[1]>20&&!st.church?4:0);
+    h+=`<text class="lbl" x="${lp[0]}" y="${lp[1]+yoff}" ${lp[2]?`style="text-anchor:${lp[2]}"`:''}>${esc(SHORT[c.id]||c.n)}</text><title>${esc(c.n)} — porta ${c.porta} — ${c.ref}</title></g>`;
+  });
+  // peões
+  const here={};
+  S.players.forEach(p=>{ (here[p.city]=here[p.city]||[]).push(p); });
+  Object.keys(here).forEach(id=>{ const c=A.C[id]; here[id].forEach((p,i)=>{
+    const n=here[id].length, x=c.x-26+(i-(n-1)/2)*20*(n>1?1:0)-(n>1?0:0), y=c.y+10+(n>2?(i%2)*8:0), col=A.PERSONAS[p.persona].cor, on=p.i===S.cur;
+    h+=`<g transform="translate(${x-(n>1?6:0)},${y})" filter="url(#sh)" pointer-events="none">${on?'<circle cy="-2" r="17" fill="none" stroke="#fff3c4" stroke-width="2.5"/>':''}<path d="M-9,12 C-9,2 -5,-2 -4,-5 A6.5,6.5 0 1 1 4,-5 C5,-2 9,2 9,12 Z" fill="${col}" stroke="#fff" stroke-width="2"/>${p.jailed?'<path d="M-6,-2 v13 M0,-2 v13 M6,-2 v13" stroke="#111" stroke-width="1.6"/>':''}<text y="9" text-anchor="middle" fill="#fff" style="font-family:var(--tit);font-weight:700;font-size:11px">${A.PERSONAS[p.persona].n[0]}</text></g>`;
+  }); });
+  return h+'</svg>';
+}
+
+/* ---------- painel ---------- */
+const PIP = {1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+function dieHTML(d,i){
+  let c='';for(let k=0;k<9;k++) c+=`<i class="${PIP[d.v].includes(k)?'p':''}"></i>`;
+  return `<button class="die${d.used?' used':''}${ui.sel===i?' sel':''}${ui.rolled&&!d.used?' roll':''}" data-die="${i}" ${d.used?'disabled':''} aria-label="Dado ${d.v}">${c}</button>`;
+}
+function render(){
+  if (!S) return renderSetup();
+  const p=A.me(S), per=A.PERSONAS[p.persona], here=S.cities[p.city], C=A.C[p.city];
+  const sel = ui.sel!==null && S.dice[ui.sel] && !S.dice[ui.sel].used ? ui.sel : null; ui.sel=sel;
+  const cov=A.regionsCovered(S), n=A.churches(S).length, left=A.turnsLeft(S);
+  const free=S.dice.filter(d=>!d.used).length;
+  let hint='';
+  if (S.over) hint='';
+  else if (ui.mode==='porta') hint='<b>Porta Aberta:</b> escolha uma cidade com igreja';
+  else if (sel!==null) hint=`Dado <b>${S.dice[sel].v}</b> — clique numa cidade destacada para <b>viajar</b> ou escolha uma ação`;
+  else if (free) hint='Escolha um <b>dado</b> para agir';
+  else hint='Sem dados — <b>encerre o turno</b>';
+  const cost = sel!==null ? A.preachCost(S,S.dice[sel].v,p.city) : null;
+  const okP = sel!==null && A.canPreach(S,sel);
+  let pTxt = here.church?'Aqui já há igreja':here.opp>=3?'Oposição no máximo: fortaleça antes':sel===null?`Porta <strong>${C.porta}</strong> · precisa do dado certo`:cost===0?'<strong>+1</strong> discípulo, sem custo':`<strong>+1</strong> discípulo · custa <strong>${cost}</strong> 🙏`;
+  const fortN = sel!==null ? (p.persona==='silas'?here.opp:Math.min(here.opp,S.dice[sel].v===C.porta?2:1)) : 0;
+  const html=`
+  <div class="top">
+    <div class="logo">ATOS<small>Até os Confins da Terra</small></div>
+    <div class="stats">
+      <div class="stat"><b>${n}<i>/${S.goal}</i></b><span>Igrejas</span><div class="regs">${Object.keys(A.REG).map(k=>`<em class="${cov.has(k)?'on':''}" style="background:${A.REG[k].c};border-color:${A.REG[k].c}" title="${A.REG[k].n}"></em>`).join('')}</div></div>
+      <div class="stat${S.cities.rom.church?'':' alert'}"><b>${S.cities.rom.church?'✓':S.cities.rom.disc+'<i>/4</i>'}</b><span>Roma</span></div>
+      <div class="stat"><b>${S.era}ª<i>/3</i></b><span>Viagem</span></div>
+      <div class="stat${left<=5?' alert':''}"><b>${left}</b><span>Turnos rest.</span></div>
+      <div class="stat"><b>${S.speed}</b><span>Cartas/turno</span></div>
+      <div class="stat${S.chaos>=5?' alert':''}"><b>${S.chaos}<i>/${A.MAX_CHAOS}</i></b><div class="pips">${Array.from({length:A.MAX_CHAOS},(_,i)=>`<em class="${i<S.chaos?'on':''}"></em>`).join('')}</div><span>Descontrole</span></div>
+      <button class="tbtn" data-act="rules">Regras</button><button class="tbtn" data-act="new">Nova partida</button>
+    </div>
+  </div>
+  <div class="main">
+    <div class="board"><div class="scroll">${mapSVG()}</div>${hint?`<div class="hint"><div>${hint}</div></div>`:''}</div>
+    <div class="side">
+      <div class="pan">
+        <h3><span>Turno ${S.turn}</span><span>${esc(A.C[p.city].n)}</span></h3>
+        <div class="who"><div class="pawn" style="background:${per.cor}">${per.n[0]}</div><div><h2>${per.n}${p.jailed?' ⛓':''}</h2><p><i>${per.sub}.</i> ${per.txt}</p></div></div>
+        <div class="team">${S.players.map(x=>`<span class="${x.i===S.cur?'on':''}" style="background:${A.PERSONAS[x.persona].cor}">${A.PERSONAS[x.persona].n} · ${esc(SHORT[x.city]||A.C[x.city].n)}</span>`).join('')}</div>
+      </div>
+      <div class="pan">
+        <h3><span>Dados do Caminho</span>${A.has(S,'apolo')&&!S.apoloUsed&&free&&!S.over?'<button class="tbtn" style="padding:2px 8px;font-size:11px" data-act="apolo">Apolo: rerrolar</button>':''}</h3>
+        <div class="dice">${S.dice.map(dieHTML).join('')}</div>
+        <div class="acts">
+          <button class="act" data-act="preach" ${okP?'':'disabled'}><b>Pregar</b><small>${pTxt}</small></button>
+          <button class="act" data-act="fort" ${sel!==null&&here.opp>0?'':'disabled'}><b>Fortalecer</b><small>${here.opp===0?'Sem oposição aqui':sel===null?'Remove oposição daqui':`Remove <strong>${fortN}</strong> oposição`}</small></button>
+          <button class="act" data-act="pray" ${sel!==null?'':'disabled'}><b>Orar</b><small><strong>+${p.persona==='barnabe'?4:2}</strong> 🙏 Orações</small></button>
+          <button class="act" disabled style="opacity:${sel!==null?1:.38};cursor:default"><b>Viajar</b><small>Até <strong>${A.moveRange(S)}</strong> cidades · clique no mapa</small></button>
+          <button class="act end" data-act="end" ${S.over?'disabled':''}><b>Encerrar turno</b><small>${S.skipThreat?'Noite tranquila: nenhuma carta':`A oposição revela ${S.speed} cartas`}</small></button>
+        </div>
+      </div>
+      <div class="pan"><h3><span>Orações da equipe</span></h3><div class="pray"><b>${S.prayer}</b><span>🙏 Ajustam o dado para pregar: <b>1</b> por ponto de diferença, <b>+1</b> por oposição na cidade.</span></div></div>
+      ${ui.last.length?`<div class="pan"><h3><span>Última fase de oposição</span></h3><div class="cards">${ui.last.map(k=>k[0]==='!'?`<div class="card" style="border-color:var(--mau);border-left-color:var(--mau)"><b style="color:var(--mau)">⚠ ${A.ALERTS[k.slice(1)].n}</b><i>${A.ALERTS[k.slice(1)].ref}</i><br>${A.ALERTS[k.slice(1)].txt}</div>`:`<div class="card" style="border-color:${A.REG[A.C[k].reg].c};border-left-color:${A.REG[A.C[k].reg].c}"><b>${esc(A.C[k].n)}</b> · +1 oposição</div>`).join('')}</div></div>`:''}
+      <div class="pan"><h3><span>Bem-aventuranças</span><span>${S.hand.length}</span></h3><div class="cards">${S.hand.length?S.hand.map((k,i)=>`<button class="card" data-card="${i}"><b>${A.CARDS[k].n}</b><i>${A.CARDS[k].ref}</i><br>${A.CARDS[k].txt}</button>`).join(''):'<div class="empty">Cada igreja plantada rende uma carta.</div>'}</div></div>
+      <div class="pan"><h3><span>Companheiros</span><span>${S.comps.length}/8</span></h3><div class="cards">${S.comps.length?S.comps.map(k=>`<div class="card comp"><b>${A.COMPS[k].n}</b><i>${A.COMPS[k].ref}</i><br>${A.COMPS[k].txt}</div>`).join(''):'<div class="empty">Plante igrejas nas cidades com ★ para recrutar.</div>'}</div></div>
+      <div class="pan"><h3><span>Diário da missão</span></h3><div class="log">${logHTML()}</div></div>
+    </div>
+  </div>${S.over?overHTML():''}${ui.modal==='rules'?rulesHTML(true):''}`;
+  $('#app').innerHTML=html; ui.rolled=false;
+  if (S.flash.length) setTimeout(()=>{ if(S){ S.flash=[]; } },1900);
+}
+function logHTML(){
+  let out='', t=null; const L=S.log.slice(-60).reverse();
+  L.forEach(e=>{ if(e.turn!==t){ t=e.turn; out+=`<div class="t">TURNO ${t}</div>`; } out+=`<div class="${e.k}">${esc(e.t)}</div>`; });
+  return out;
+}
+function overHTML(){
+  const n=A.churches(S).length;
+  return `<div class="ov"><div class="sheet" style="width:min(560px,100%);text-align:center">
+    <h1 style="font-size:40px;color:${S.over.win?'var(--bom)':'var(--mau)'}">${S.over.win?'VITÓRIA':'DERROTA'}</h1>
+    <p class="sub">${esc(S.over.why)}</p>
+    <p class="vers">${S.over.win?'“…pregando o reino de Deus, com toda a liberdade, sem impedimento algum.” — Atos 28:31':'“Em tudo somos atribulados, mas não angustiados.” — 2 Coríntios 4:8'}</p>
+    <div class="res"><div class="stat"><b>${n}<i>/${S.goal}</i></b><span>Igrejas</span></div><div class="stat"><b>${S.comps.length}</b><span>Companheiros</span></div><div class="stat"><b>${S.turn}</b><span>Turnos</span></div><div class="stat"><b>${S.chaos}<i>/${A.MAX_CHAOS}</i></b><span>Descontrole</span></div></div>
+    <button class="go" data-act="new">Jogar de novo</button></div></div>`;
+}
+function rulesHTML(closable){
+  return `<div class="ov" data-act="${closable?'close':''}"><div class="sheet rules" onclick="event.stopPropagation()">
+  ${closable?'<button class="x" data-act="close" aria-label="Fechar">×</button>':''}
+  <h4 style="margin-top:0">Objetivo — cooperativo</h4>
+  <p>A equipe vence junta quando houver a <b>meta de igrejas</b>, com pelo menos uma em <b>cada uma das 4 regiões</b> e uma em <b>Roma</b> (Atos 1:8; 23:11). Perde se o <b>Descontrole chegar a ${A.MAX_CHAOS}</b> ou se a <b>3ª Viagem</b> terminar antes.</p>
+  <h4>Seu turno</h4>
+  <p>Role <span class="big">3 dados</span>. Cada dado vale uma ação:</p>
+  <ul>
+    <li><b>Viajar</b> (qualquer dado): ande até <span class="big">2</span> cidades. Trechos entre duas igrejas (dourados) são <b>gratuitos</b>.</li>
+    <li><b>Pregar</b>: coloque 1 discípulo na cidade. O dado precisa ser igual à <b>porta</b> da cidade (o número no círculo). Cada ponto de diferença custa <span class="big">1</span> Oração (6 e 1 são vizinhos), e cada oposição na cidade custa <span class="big">+1</span>. Com 3 oposições não se prega.</li>
+    <li><b>Fortalecer</b> (qualquer dado): remove <span class="big">1</span> oposição — <span class="big">2</span> se o dado for igual à porta.</li>
+    <li><b>Orar</b> (qualquer dado): a equipe ganha <span class="big">2</span> Orações.</li>
+  </ul>
+  <p>Começar o turno numa cidade com igreja rende <span class="big">+1</span> Oração.</p>
+  <h4>Igrejas e companheiros</h4>
+  <p>Com <span class="big">3</span> discípulos a cidade vira <b>igreja</b> (Roma, Éfeso e Corinto pedem <span class="big">4</span>). Cada igreja rende uma <b>Bem-aventurança</b> (jogue no seu turno, sem gastar dado). Cidades com ★ trazem um <b>companheiro</b> com poder permanente para a equipe toda.</p>
+  <h4>Oposição</h4>
+  <p>Ao encerrar o turno, revelam-se cartas de Oposição: <span class="big">3</span> por turno na 1ª Viagem, <span class="big">4</span> na 2ª, <span class="big">5</span> na 3ª. Cada carta põe 1 oposição na cidade. Na quarta oposição há <b>tumulto</b>: Descontrole +1, um discípulo se dispersa (igrejas resistem) e quem estiver lá é <b>preso</b> — rola 1 dado a menos no próximo turno. Quando o baralho acaba, começa a Viagem seguinte.</p>
+  </div></div>`;
+}
+function renderSetup(){
+  const P=A.PERSONAS, n=setup.personas.length, goal=n>=2?A.GOALS[setup.diff][n-2]:'—', saved=load();
+  $('#app').innerHTML=`<div class="ov" style="position:static;background:none;min-height:96vh"><div class="sheet">
+    <h1>ATOS</h1><div class="sub">Até os Confins da Terra</div>
+    <div class="vers">“…e sereis minhas testemunhas tanto em Jerusalém como em toda a Judeia e Samaria, e até aos confins da terra.” — Atos 1:8</div>
+    <h4>Missionários — escolha de 2 a 4 (um por jogador; sozinho, controle dois)</h4>
+    <div class="pgrid">${Object.keys(P).map(k=>`<button class="pcard${setup.personas.includes(k)?' on':''}" data-per="${k}"><div class="pawn" style="background:${P[k].cor}">${P[k].n[0]}</div><b>${P[k].n}</b><i>${P[k].sub} · ${P[k].ref}</i>${P[k].txt}</button>`).join('')}</div>
+    <h4>Dificuldade — meta de igrejas</h4>
+    <div class="dgrid">${[['facil','Peregrino','Para aprender'],['normal','Missionário','Equilibrado'],['dificil','Apóstolo','Exige plano']].map(d=>`<button class="pcard${setup.diff===d[0]?' on':''}" data-diff="${d[0]}"><b>${d[1]}</b><i>${d[2]}</i><span class="big">${n>=2?A.GOALS[d[0]][n-2]:'—'}</span> igrejas</button>`).join('')}</div>
+    <button class="go" data-act="start" ${n<2?'disabled':''}>Iniciar missão</button>
+    ${saved&&!saved.over?'<button class="tbtn" style="display:block;margin:12px auto 0" data-act="resume">Continuar partida salva</button>':''}
+    <button class="tbtn" style="display:block;margin:12px auto 0" data-act="rules">Como jogar</button>
+  </div></div>${ui.modal==='rules'?rulesHTML(true):''}`;
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-die],[data-act],[data-card],[data-city],[data-per],[data-diff]'); if(!t) return;
+  const d=t.dataset;
+  if (d.per){ const i=setup.personas.indexOf(d.per); if(i>=0) setup.personas.splice(i,1); else setup.personas.push(d.per); return render(); }
+  if (d.diff){ setup.diff=d.diff; return render(); }
+  if (d.act==='rules'){ ui.modal='rules'; return render(); }
+  if (d.act==='close'){ ui.modal=null; return render(); }
+  if (d.act==='start'){ const order=Object.keys(A.PERSONAS).filter(k=>setup.personas.includes(k)); S=A.newGame({diff:setup.diff,personas:order},rng); ui={sel:null,mode:null,last:[],rolled:true,modal:null}; autoSel(); save(); return render(); }
+  if (d.act==='resume'){ S=load(); ui={sel:null,mode:null,last:[],rolled:true,modal:null}; autoSel(); return render(); }
+  if (d.act==='new'){ if(S&&!S.over&&!confirmNew()) return; clear(); S=null; ui.modal=null; return render(); }
+  if (!S||S.over) return;
+  if (d.die!==undefined){ const i=+d.die; ui.mode=null; ui.sel=i; return render(); }
+  if (d.city){
+    if (ui.mode==='porta'){ if(A.playCard(S,ui.cardIdx,rng,d.city)){ ui.mode=null; done(); } return; }
+    if (ui.sel!==null && A.actMove(S,ui.sel,d.city)){ ui.sel=null; done(); }
+    return;
+  }
+  if (d.card!==undefined){ const i=+d.card,k=S.hand[i];
+    if (k==='porta'){ ui.mode=ui.mode==='porta'?null:'porta'; ui.cardIdx=i; if(ui.mode) ui.sel=null; else autoSel(); return render(); }
+    if (A.playCard(S,i,rng)){ if(k==='visao') ui.rolled=true; done(); } return; }
+  if (d.act==='preach'&&ui.sel!==null){ if(A.actPreach(S,ui.sel)){ ui.sel=null; done(); } return; }
+  if (d.act==='fort'&&ui.sel!==null){ if(A.actFortify(S,ui.sel)){ ui.sel=null; done(); } return; }
+  if (d.act==='pray'&&ui.sel!==null){ if(A.actPray(S,ui.sel)){ ui.sel=null; done(); } return; }
+  if (d.act==='apolo'){ if(A.actApolo(S,rng)){ ui.rolled=true; done(); } return; }
+  if (d.act==='end'){ ui.sel=null; ui.mode=null; ui.last=A.endTurn(S,rng); ui.rolled=true; done(); }
+});
+function autoSel(){ if(!S||S.over||ui.mode) return; if(ui.sel===null||!S.dice[ui.sel]||S.dice[ui.sel].used){ const i=S.dice.findIndex(x=>!x.used); ui.sel=i>=0?i:null; } }
+let armed=0;
+function confirmNew(){ const now=Date.now(); if(now-armed<4000) return true; armed=now; const b=document.querySelector('[data-act="new"]'); if(b) b.textContent='Clique de novo para confirmar'; return false; }
+function done(){ // auto-seleciona o próximo dado livre
+  autoSel(); save(); render();
+}
+window.__atos={get S(){return S;},set S(v){S=v;},render,A};
+render();
+})();
+</script>
+</body>
+</html>
