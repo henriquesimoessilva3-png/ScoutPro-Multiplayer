@@ -1970,6 +1970,234 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
 /* menu com 6 modos: permite rolar em telas baixas (celular) */
 #menu{overflow-y:auto;justify-content:flex-start}
 #menu .menu-inner{margin:auto 0}
+
+/* ═════ v0.3 — layout novo ═════ */
+.m7{padding:.8rem 1rem 8.5rem;font-size:.86rem}
+.m7 h3{font-size:.86rem;color:var(--text);display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.55rem}
+.m7 h3 span{font-family:'Barlow',sans-serif;font-weight:400;font-size:.74rem;letter-spacing:0;text-transform:none;color:var(--text2)}
+.m7panel{border-radius:12px;padding:.8rem .85rem;margin-bottom:.8rem}
+.m7mut{font-size:.76rem;color:var(--text2);line-height:1.4}
+.m7link{margin-left:auto;background:none;border:none;color:var(--accent);font-size:.74rem;cursor:pointer;text-transform:none;letter-spacing:0;font-family:'Barlow',sans-serif}
+/* HUD */
+.m7hud{display:flex;gap:.55rem;align-items:stretch;margin-bottom:.6rem;flex-wrap:wrap}
+.m7hud .hb{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:.5rem .8rem;min-width:118px}
+.m7hud .hb.grow{flex:1;min-width:200px}
+.m7hud small{display:block;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text2)}
+.m7hud .rnd{display:flex;align-items:baseline;gap:.3rem;font-family:'Barlow Condensed',sans-serif;line-height:1}
+.m7hud .rnd b{font-size:2rem;font-weight:800}
+.m7hud .rnd span{font-size:1rem;color:var(--text2)}
+.m7hud .coins b{color:var(--gold)}
+.m7hud .coin{color:var(--gold)!important;font-size:1.1rem!important}
+.m7hud .sub{font-size:.7rem;color:var(--text2);margin-top:.15rem}
+.m7hud .loc{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;line-height:1.5}
+.m7hud .pips{display:flex;gap:3px;margin-top:.3rem}
+.m7hud .pips i{width:9px;height:9px;border-radius:50%;background:var(--bg3);border:1px solid var(--border)}
+.m7hud .pips i.d{background:var(--text2);border-color:var(--text2)}
+.m7hud .pips i.c{background:var(--accent);border-color:var(--accent);box-shadow:0 0 6px var(--accent)}
+.m7hud .ord{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;display:flex;gap:.35rem;align-items:center;flex-wrap:wrap;line-height:1.9}
+.m7hud .ord span{padding:0 .5rem;border-radius:20px;background:var(--bg3);border:1px solid var(--border);color:var(--text2)}
+.m7hud .ord span.on{background:rgba(0,229,255,.12);border-color:var(--accent);color:var(--accent)}
+.m7hud .ord em{font-style:normal;color:var(--text2)}
+.m7hint{background:linear-gradient(160deg,#2a2208,#3d3008);border:1px solid var(--gold);color:var(--gold);border-radius:12px;padding:.4rem 1rem;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem}
+.m7hint span{font-size:1.3rem}
+.m7hint:disabled{opacity:.35;cursor:not-allowed}
+/* seleções */
+.m7sels{display:flex;gap:.55rem;flex-wrap:wrap;align-items:stretch;margin-bottom:.8rem}
+.selc{flex:1;min-width:210px;background:var(--bg2);border:1px solid var(--border);border-left:4px solid var(--rc);border-radius:10px;padding:.45rem .7rem}
+.selh{display:flex;justify-content:space-between;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;color:var(--rc);text-transform:uppercase;letter-spacing:.03em}
+.selh b{background:var(--rc);color:#0a0d14;border-radius:20px;padding:0 .5rem;font-size:.9rem}
+.selr{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem;font-size:.78rem;color:var(--text2)}
+.selr span{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:.1rem .45rem}
+.selr span b{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;color:var(--text)}
+.selr span.ld{border-color:var(--gold);color:var(--gold)}
+.selr span.ld b{color:var(--gold)}
+.selr span.me{font-weight:600;color:var(--text)}
+.selx{flex-basis:100%;font-size:.74rem;color:var(--text2)}
+.selx b{color:var(--text)}
+.m7grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:.8rem}
+@media(max-width:1000px){.m7grid{grid-template-columns:1fr}}
+/* rivais */
+.m7rvs{display:flex;gap:.55rem;flex-wrap:wrap}
+.rv{flex:1;min-width:150px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.5rem .6rem}
+.rv.turn{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.rvh{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--text2)}
+.rvh b{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;color:var(--text);text-transform:uppercase;margin-right:auto}
+.rvh .co{color:var(--gold);font-weight:600}
+.rvt{font-size:.74rem;color:var(--text2);margin:.15rem 0 .35rem}
+.rvp{background:linear-gradient(180deg,#0e3a22,#0b2c1a);border-radius:8px;padding:.35rem .4rem}
+.rvp>div{display:flex;align-items:center;gap:4px;justify-content:center;margin:3px 0;position:relative;min-height:14px}
+.rvp em{position:absolute;left:0;font-style:normal;font-size:.56rem;letter-spacing:.08em;color:rgba(255,255,255,.45)}
+.rvp .bn{border-top:1px dashed rgba(255,255,255,.15);padding-top:4px;margin-top:5px}
+.rvp .bn span{color:rgba(255,255,255,.3);font-size:.7rem}
+.m7d{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.75);box-shadow:0 1px 2px rgba(0,0,0,.5)}
+.m7d.e{background:none;border:2px dashed rgba(255,255,255,.25);box-shadow:none}
+.rvad{margin-top:.45rem;width:100%;display:flex;align-items:center;gap:.4rem;background:rgba(245,197,66,.1);border:1px solid var(--gold);border-radius:8px;padding:.35rem .5rem;color:var(--text);cursor:pointer;font-size:.74rem;text-align:left}
+.rvad span{color:var(--gold);font-weight:600;white-space:nowrap}
+.rvad b{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:.92rem}
+.rvad i{font-style:normal;background:var(--gold);color:#1a1000;font-family:'Barlow Condensed',sans-serif;font-weight:900;border-radius:20px;padding:0 .45rem;font-size:.95rem}
+.rvad:disabled{opacity:.55;cursor:not-allowed}
+.rvad:not(:disabled):hover{background:rgba(245,197,66,.2)}
+/* mercados */
+.m7regs{gap:.65rem}
+.m7reg{border-radius:11px;padding:.6rem;background:linear-gradient(180deg,color-mix(in srgb,var(--rc) 9%,var(--bg3)),var(--bg3))}
+.m7regh .nm{font-size:1.1rem}
+.m7regh .tr{font-size:.76rem}
+.m7pawns{font-size:.68rem;min-height:1rem}
+.m7vit{gap:.4rem;justify-content:flex-start;min-height:128px}
+.m7c{width:96px;min-height:124px;padding:.35rem .4rem .4rem;border-radius:9px}
+.m7c .st{font-size:.68rem}
+.m7c .nm{font-size:.86rem}
+.m7c .nm.lg{font-size:.68rem}
+.m7c .nt{font-size:.64rem}
+.m7c .ps{font-size:.76rem}
+.m7c .pr{font-size:.95rem;padding:.05rem .5rem}
+.m7c.sm{width:70px;min-height:92px}
+.m7c.sm .nm{font-size:.68rem}
+.m7c.sm .nm.lg{font-size:.54rem}
+.m7c.sm .nt{font-size:.52rem}
+.m7olh{display:flex;align-items:center;gap:.5rem;padding:.5rem .6rem;border-style:solid;border-width:1px;background:color-mix(in srgb,var(--rc) 14%,transparent);font-size:.8rem;margin-top:.7rem}
+.m7olh span{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;text-transform:uppercase;letter-spacing:.04em}
+.m7olh em{font-style:normal;color:var(--text2);font-size:.72rem;flex:1;text-align:left}
+.m7olh b{background:var(--gold);color:#1a1000;font-family:'Barlow Condensed',sans-serif;font-weight:900;border-radius:20px;padding:0 .5rem;font-size:.95rem}
+.m7olh:not(:disabled):hover{background:color-mix(in srgb,var(--rc) 26%,transparent)}
+/* vestiário */
+.m7vest{display:grid;grid-template-columns:1fr 1fr auto;gap:.6rem}
+@media(max-width:620px){.m7vest{grid-template-columns:1fr}}
+.m7tec{position:relative;border-radius:10px;padding:.55rem .7rem;font-size:.78rem}
+.m7tec b{font-size:1.05rem;margin-bottom:.15rem}
+.m7tec p{color:var(--text);line-height:1.35;font-size:.78rem;margin:0}
+.m7tec .cst{float:none;position:absolute;top:.45rem;right:.5rem;background:var(--gold);color:#1a1000;font-family:'Barlow Condensed',sans-serif;font-weight:900;border-radius:20px;padding:0 .5rem;font-size:.95rem}
+.m7tec .now{margin-top:.35rem;font-size:.74rem;color:var(--green)}
+.m7tec .now strong{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem}
+.m7tec.off{opacity:.45}
+.m7tec.own{border-color:var(--gold)}
+.m7spons{background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);cursor:pointer;padding:.5rem 1.1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+.m7spons span{font-size:1.4rem}
+.m7spons b{font-family:'Barlow Condensed',sans-serif;font-size:1rem;text-transform:uppercase;letter-spacing:.05em}
+.m7spons em{font-style:normal;color:var(--gold);font-size:.8rem}
+.m7spons:disabled{opacity:.4;cursor:not-allowed}
+.m7spons:not(:disabled):hover{border-color:var(--gold)}
+/* meu time */
+.m7sc{display:flex;gap:.5rem;align-items:stretch;margin-bottom:.6rem;flex-wrap:wrap}
+.m7sc>div{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.35rem .7rem;text-align:center;flex:1;min-width:78px}
+.m7sc b{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;line-height:1.1}
+.m7sc small{font-size:.66rem;color:var(--text2);line-height:1.2;display:block}
+.m7sc .tot{background:linear-gradient(160deg,#2a2208,#3d3008);border-color:var(--gold);flex:1.2}
+.m7sc .tot b{font-size:2.2rem;color:var(--gold)}
+.m7sc .tot small{letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.m7sc .bad b{color:var(--red)}
+.m7sc .q b{color:var(--text2)}
+.m7pitch{padding:.6rem .4rem;background:
+  repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 46px,transparent 46px 92px),linear-gradient(180deg,#0f4226,#0b2c1a)}
+.m7rowl{font-size:.68rem}
+.m7row{gap:.4rem}
+.m7slot{width:70px;min-height:92px;flex-direction:column;gap:.15rem;font-size:.62rem}
+.m7slot b{font-family:'Barlow Condensed',sans-serif;font-size:1rem;color:rgba(255,255,255,.55);letter-spacing:.05em}
+.m7side{gap:.55rem;margin-top:.65rem}
+.m7box{min-width:160px;border-radius:10px;padding:.55rem .6rem}
+.m7box h3{font-size:.78rem;margin-bottom:.4rem}
+.m7ad{font-size:.76rem;line-height:1.5}
+.m7ad b{color:var(--gold)}
+.m7log{font-size:.78rem;max-height:none}
+.m7log.all{max-height:60vh;overflow-y:auto}
+.m7log div{padding:.22rem 0}
+/* barra */
+.m7bar{padding:.6rem 1rem;gap:.6rem}
+.m7bar .msg{font-size:.88rem;line-height:1.35}
+.m7bar .ws{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.25rem}
+.m7bar .w{font-size:.72rem;border:1px solid var(--border);border-radius:20px;padding:.05rem .55rem;color:var(--text2)}
+.m7bar .w.r{border-color:var(--red);color:var(--red)}
+.m7bar .w.g{border-color:var(--green);color:var(--green)}
+.m7bar .w.y{border-color:var(--gold);color:var(--gold)}
+.m7b.sm{padding:.5rem .85rem;font-size:.84rem}
+.m7nav{display:none}
+/* modais */
+.m7md{padding:1.2rem 1.3rem;border-radius:14px}
+.m7md h2{font-size:1.5rem}
+.m7md p{font-size:.9rem}
+.m7md p.stp{color:var(--text);display:flex;gap:.6rem;align-items:flex-start}
+.m7md p.stp>b{flex:0 0 auto;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--accent);color:#06121a;display:inline-flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif}
+.m7chip{font-size:.84rem;padding:.4rem .8rem}
+.m7chip.lie{border-style:dashed}
+.pack{align-items:flex-start;gap:1rem!important}
+.pk{display:flex;flex-direction:column;align-items:center;gap:.4rem;max-width:130px}
+.pk small{font-size:.7rem;color:var(--text2);text-align:center;line-height:1.3;min-height:2.6em}
+.pk .m7c{width:112px;min-height:146px}
+.pk .m7c .nm{font-size:.95rem}
+.pk .m7c .nm.lg{font-size:.78rem}
+.pack.anim .pk .m7c{animation:m7flip .5s both;animation-delay:calc(var(--i)*.22s)}
+@keyframes m7flip{0%{transform:rotateY(90deg) scale(.85);opacity:0;filter:brightness(2.2)}60%{filter:brightness(1.5)}100%{transform:none;opacity:1;filter:none}}
+.m7say{display:flex;gap:1.2rem;flex-wrap:wrap;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.6rem .8rem;margin-top:.3rem}
+.m7say small{display:block;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:.2rem}
+.m7say .m7chips{margin:.2rem 0 .3rem}
+.m7two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.5rem 0}
+@media(max-width:520px){.m7two{grid-template-columns:1fr}}
+.m7opt2{background:var(--bg3);border:1px solid var(--accent);border-radius:10px;padding:.7rem .8rem;color:var(--text);cursor:pointer;text-align:left}
+.m7opt2 b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;text-transform:uppercase;color:var(--accent)}
+.m7opt2 span{font-size:.78rem;color:var(--text2);line-height:1.35;display:block;margin-top:.15rem}
+.m7opt2.d{border-color:var(--gold)}
+.m7opt2.d b{color:var(--gold)}
+.m7opt2:disabled{opacity:.4;cursor:not-allowed}
+.m7opt2:not(:disabled):hover{background:var(--bg2)}
+.m7bk.lg{width:96px;height:124px;font-size:1.3rem}
+@media(max-width:560px){
+  .m7{padding:.6rem .6rem 10.5rem}
+  .m7c{width:88px;min-height:116px}
+  .m7c.sm,.m7slot{width:60px;min-height:84px}
+  .m7hud .hb{min-width:0;flex:1;padding:.4rem .55rem}
+  .m7hud .hb.grow{flex-basis:100%}
+  .m7hud .rnd b{font-size:1.5rem}
+  .m7hud .pips i{width:7px;height:7px}
+  .m7hint{flex-direction:row;padding:.4rem .8rem}
+  .selc{min-width:100%}
+  .m7vit{overflow-x:auto;padding-bottom:.7rem}
+  .m7nav{display:flex;gap:.3rem;flex-basis:100%}
+  .m7nav button{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.35rem;font-size:.76rem}
+  .pk .m7c{width:92px;min-height:124px}
+  .pack{gap:.5rem!important}
+}
+
+.m7bar .msg b{color:var(--gold)}
+@media(max-width:560px){
+  .m7bar{padding:.4rem .5rem;gap:.35rem}
+  .m7bar .msg{flex-basis:100%;font-size:.8rem}
+  .m7bar .msg .lg{display:none}
+  .m7bar .ws{margin-top:.15rem}
+  .m7bar>.m7b{flex:1;padding:.5rem .4rem}
+  .m7nav button{padding:.3rem}
+  .m7hud{gap:.35rem}
+  .m7hud .loc{font-size:.95rem;line-height:1.3}
+  .m7hud .sub{display:none}
+  .m7hud .hb.grow{padding:.3rem .55rem}
+  .m7hud .ord{font-size:.9rem;line-height:1.6}
+  .m7hint{flex-basis:100%;padding:.3rem}
+  .m7hint span{font-size:1rem}
+  .selc{padding:.3rem .55rem}
+  .selh{font-size:.9rem}
+  .selx{display:none}
+  .m7sels{gap:.35rem}
+}
+
+.m7dbtn,.m7dl{background:none;border:none;padding:0 2px;display:inline-flex;flex-direction:column;align-items:center;gap:1px;color:rgba(255,255,255,.6)}
+.m7dbtn{cursor:pointer}
+.m7dbtn:hover .m7d{box-shadow:0 0 0 3px var(--gold)}
+.m7dbtn u,.m7dl u{text-decoration:none;font-size:.52rem;letter-spacing:.05em}
+.rvp .bn{min-height:30px}
+.m7ngr{display:flex;align-items:center;gap:.8rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.5rem .7rem;margin:.4rem 0}
+.m7ngr>b{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;text-transform:uppercase;min-width:3.5rem}
+.m7ngr>div{display:flex;gap:.5rem;flex-wrap:wrap}
+.m7ngb{background:none;border:1px solid var(--border);border-radius:8px;padding:.35rem .5rem;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:.45rem;font-size:.78rem}
+.m7ngb:not(:disabled):hover{border-color:var(--gold)}
+.m7ngb:disabled{opacity:.45;cursor:not-allowed}
+
+/* v0.4 */
+.m7c .tg{position:absolute;left:-2px;bottom:-.55rem;background:#0a0d14;color:var(--red);border:1px solid var(--red);font-size:.56rem;letter-spacing:.04em;text-transform:uppercase;border-radius:20px;padding:0 .35rem;white-space:nowrap}
+.m7leg{font-size:.72rem;color:var(--text2);margin-top:.55rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.m7leg span{display:inline-flex;align-items:center;gap:.25rem;color:var(--text)}
+.m7leg .m7d{width:11px;height:11px}
+.m7c.icone{background:linear-gradient(150deg,#fff8dc 0%,#ffffff 35%,#ffe9a6 70%,#fff 100%);border-color:#f5c542;box-shadow:0 0 14px rgba(245,197,66,.65)}
+.m7opt2 u{display:block;text-decoration:none;color:var(--red);margin-top:.2rem}
+.m7ad .m7step button{width:24px;height:24px;font-size:.9rem}
 </style>
 </head>
 <body>
@@ -2013,8 +2241,8 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
       <div class="mode-card" onclick="M7.open()">
         <div class="mode-num">06</div>
         <div class="mode-title">Janela Secreta</div>
-        <div class="mode-desc">Monte seu 11 em segredo: olheiro, blefe na vitrine, técnico, convocação e negociação. Revelação no fim.</div>
-        <div class="mode-tag">🕵️ Novo · Teste v0.2 · vs IA</div>
+        <div class="mode-desc">Monte seu 11 em segredo: olheiro, blefe nos anúncios, técnico, seleções e negociação. Revelação no fim.</div>
+        <div class="mode-tag">🕵️ Novo · Teste v0.4 · vs IA</div>
       </div>
     </div>
   </div>
@@ -2422,7 +2650,7 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
     <div class="game-title">Janela Secreta</div>
     <button class="m7hbtn" onclick="M7.rules()">❓ Regras</button>
     <button class="m7hbtn" onclick="M7.tests()">📊 Testes</button>
-    <div class="badge" id="m7badge">Teste v0.2</div>
+    <div class="badge" id="m7badge">Teste v0.4</div>
   </div>
   <div class="m7" id="m7body"></div>
   <div class="m7bar" id="m7bar" style="display:none"></div>
@@ -7218,8 +7446,8 @@ const SP7 = (function(){
   const PSHORT = {goleiro:'GOL',defesa:'DEF',meio:'MEI',ataque:'ATA'};
 
   const DEFAULTS = {
-    startCoins:6, income:3, sponsor:4, emptyPen:2, maxRounds:10, endOn11:false, rotate:true, vitRotate:true,
-    benchMax:3, tecCost:4, treinoCost:3, maxTreino:3, convPts:4, firstBonus:0,
+    startCoins:6, income:3, sponsor:4, emptyPen:2, maxRounds:10, endOn11:false, rotate:true, vitRotate:true, simple:false,
+    benchMax:3, doubtFine:2, tecCost:4, treinoCost:3, maxTreino:3, convPts:4, firstBonus:0,
     price:{bronze:1,prata:2,ouro:4,especial:6,icone:8},
     olheiro:{br:2,as:3,rm:3,eu:6}
   };
@@ -7245,9 +7473,9 @@ const SP7 = (function(){
   ];
 
   const STYLES = {
-    equilibrado:{n:'Equilibrado', lam:.45, emptyW:1.0, starW:1.0, lie:.30},
+    equilibrado:{n:'Equilibrado', lam:.45, emptyW:1.0, starW:1.0, lie:.40},
     apressado:  {n:'Apressado',   lam:.40, emptyW:2.2, starW:.8,  lie:.45},
-    galactico:  {n:'Estrelas',    lam:.32, emptyW:.5,  starW:1.3, lie:.20}
+    galactico:  {n:'Estrelas',    lam:.32, emptyW:.5,  starW:1.3, lie:.35}
   };
 
   function stars(c){return STARS[c.r]+(c.tr?1:0)}
@@ -7297,7 +7525,7 @@ const SP7 = (function(){
     }
   }
   /* fim de rodada: a carta mais antiga de cada vitrine volta ao monte e entra uma nova */
-  function rotateVit(G){RORD.forEach(r=>{if(G.vit[r].length&&G.decks[r].length){G.decks[r].push(G.vit[r].shift());refill(G,r)}})}
+  function rotateVit(G){const out=[];RORD.forEach(r=>{if(G.vit[r].length&&G.decks[r].length){const c=G.vit[r].shift();G.decks[r].push(c);out.push(c.n+' ('+REG[r].n+')');refill(G,r)}});if(out.length)L(G,'Saíram das vitrines: '+out.join(', ')+'.')}
   const mo=n=>n+(n===1?' moeda':' moedas');
   function cur(G){return G.players[G.order[G.turn]]}
   function L(G,msg,who){G.log.push({r:G.round,who:who==null?-1:who,msg})}
@@ -7331,8 +7559,10 @@ const SP7 = (function(){
   function place(G,p,c){
     const k=c.p;G._out=null;
     if(p.field[k].length<FORM[k]){p.field[k].push(c);checkFull(G,p);return 'titular'}
-    const w=worstIn(p,k);
-    if(cardVal(p,c)>cardVal(p,w)){p.field[k][p.field[k].indexOf(w)]=c;G._out=w;toBench(G,p,w);return 'titular'}
+    let w=worstIn(p,k);
+    const wv=cardVal(p,w),ties=p.field[k].filter(x=>cardVal(p,x)===wv);
+    if(ties.length>1){const noConv=ties.filter(x=>G.conv.indexOf(x.nr)<0);w=(noConv.length?noConv:ties)[0]}
+    if(cardVal(p,c)>wv){p.field[k][p.field[k].indexOf(w)]=c;G._out=w;toBench(G,p,w);return 'titular'}
     toBench(G,p,c);return 'banco';
   }
   function saleValue(G,c){return Math.max(1,Math.floor(G.cfg.price[c.r]/2))}
@@ -7370,10 +7600,11 @@ const SP7 = (function(){
     return {ok:true,cards};
   }
   /* keep: índice que fica; list: índice que vai para a vitrine própria (ou null); claim: raridade declarada; price */
-  function resolveScout(G,p,keep,list,claim,price){
+  function resolveScout(G,p,keep,list,claim,price,replace){
     const pd=G.pending;if(!pd||pd.type!=='scout')return {ok:false};
     const kept=pd.cards[keep];
     let listed=null;
+    if(replace&&p.shop&&list!=null&&list!==keep&&pd.cards[list]){G.decks[p.shop.card.m].push(p.shop.card);p.shop=null}
     if(list!=null&&list!==keep&&pd.cards[list]&&!p.shop){
       listed=pd.cards[list];p.shop={card:listed,claim:claim||listed.r,price:Math.max(1,price|0)};
     }
@@ -7381,7 +7612,7 @@ const SP7 = (function(){
     G.pending=null;
     const where=place(G,p,kept);
     L(G,p.name+' usou o olheiro n'+artigo(pd.r)+' '+REG[pd.r].n+' e ficou com 1 '+PSHORT[kept.p]+' (fechado).',p.id);
-    if(listed)L(G,p.name+' pôs um '+PSHORT[listed.p]+' na vitrine por '+mo(p.shop.price)+': “é '+RNAME[p.shop.claim]+'”.',p.id);
+    if(listed)L(G,p.name+' anunciou um '+PSHORT[listed.p]+' por '+mo(p.shop.price)+': “é '+RNAME[p.shop.claim]+'”.',p.id);
     return {ok:true,card:kept,where};
   }
   function actSponsor(G,p){
@@ -7422,8 +7653,25 @@ const SP7 = (function(){
     p.trust[sellerId]=honest?Math.min(.95,t+.15):t*.45;
     const where=place(G,p,sh.card);G.acted=true;count(G,'vitrine_rival');
     if(!honest)count(G,'blefe_pegou');
-    L(G,p.name+' comprou '+(s.human?'da sua vitrine':'da vitrine de '+s.name)+' por '+mo(sh.price)+' — '+(honest?'o relatório era verdadeiro.':'era blefe!'),p.id);
+    L(G,p.name+' comprou '+(s.human?'o seu anúncio':'o anúncio de '+s.name)+' por '+mo(sh.price)+' — '+(honest?'o relatório era verdadeiro.':'era blefe!'),p.id);
     return {ok:true,card:sh.card,claim:sh.claim,honest,where};
+  }
+
+  /* duvidar: vira a carta antes de pagar. Blefe → leva por 1 moeda. Verdade → paga o preço + multa. */
+  function actDoubt(G,p,sellerId){
+    if(G.acted)return {ok:false,msg:'Você já fez sua ação.'};
+    const s=G.players[sellerId];if(!s||!s.shop||s===p)return {ok:false,msg:'Indisponível.'};
+    const sh=s.shop,full=sh.price+G.cfg.doubtFine;
+    if(p.coins<full)return {ok:false,msg:'Para duvidar você precisa ter '+mo(full)+' (preço + multa de '+G.cfg.doubtFine+').'};
+    const honest=RORDER.indexOf(sh.card.r)>=RORDER.indexOf(sh.claim);
+    const paid=honest?full:1;
+    pay(p,paid);if(honest)s.coins+=paid;s.shop=null;
+    const t=p.trust[sellerId]==null?.6:p.trust[sellerId];
+    p.trust[sellerId]=honest?Math.min(.95,t+.2):t*.4;
+    const where=place(G,p,sh.card);G.acted=true;count(G,'duvidou');
+    if(!honest)count(G,'duvida_certa');
+    L(G,p.name+' duvidou d'+(s.human?'o seu anúncio':'o anúncio de '+s.name)+': '+(honest?'era verdade, pagou '+mo(paid)+' (com multa).':'era blefe! Levou a carta por 1 moeda.'),p.id);
+    return {ok:true,card:sh.card,claim:sh.claim,honest,where,paid,doubt:true};
   }
 
   /* ── AÇÕES LIVRES ── */
@@ -7445,7 +7693,7 @@ const SP7 = (function(){
   function retractShop(G,p){
     if(!p.shop)return {ok:false};
     const c=p.shop.card;p.shop=null;G.decks[c.m].push(c);
-    L(G,p.name+' recolheu a carta da vitrine; ela voltou ao monte.',p.id);return {ok:true};
+    L(G,p.name+' retirou o anúncio; a carta voltou ao monte.',p.id);return {ok:true};
   }
 
   /* ── PONTUAÇÃO ── */
@@ -7509,12 +7757,19 @@ const SP7 = (function(){
     });
     G.players.forEach(s=>{
       if(s===p||!s.shop||s.shop.price>p.coins)return;
-      const tr=p.trust[s.id]==null?.6:p.trust[s.id];
+      let tr=p.trust[s.id]==null?.6:p.trust[s.id];
+      if(s.shop.price<=G.cfg.price[s.shop.claim]-2&&STARS[s.shop.claim]>=3)tr*=.7;
       const est=tr*STARS[s.shop.claim]+(1-tr)*1.2;
       const k=s.shop.card.p;let g;
       if(p.field[k].length<FORM[k])g=est*st.starW+G.cfg.emptyPen*urgency(G,p,st);
       else{const w=worstIn(p,k);g=Math.max(0,est-stars(w))*st.starW}
       opts.push({t:'shop',s:s.id,u:g-lam*s.shop.price});
+      /* duvidar: só quando desconfia e a posição serve mesmo que a carta seja fraca */
+      const full=s.shop.price+G.cfg.doubtFine;
+      if(tr<.5&&full<=p.coins&&p.field[k].length<FORM[k]){
+        const gl=1.2*st.starW+G.cfg.emptyPen*urgency(G,p,st),gt=STARS[s.shop.claim]*st.starW+G.cfg.emptyPen*urgency(G,p,st);
+        opts.push({t:'doubt',s:s.id,u:(1-tr)*(gl-lam*1)+tr*(gt-lam*full)+0.2});
+      }
     });
     if(!p.tec&&p.coins>=G.cfg.tecCost){
       G.tecOpen.forEach((id,i)=>{
@@ -7537,7 +7792,7 @@ const SP7 = (function(){
   }
   /* treino (ação livre): sobra de moedas vira +1★ */
   function aiTrain(G,p,st){
-    if(p.trained||p.treinos>=G.cfg.maxTreino||p.coins<G.cfg.treinoCost)return;
+    if(G.cfg.simple||p.trained||p.treinos>=G.cfg.maxTreino||p.coins<G.cfg.treinoCost)return;
     const last=turnsLeft(G)<=1;
     const reserve=last?0:Math.max(2,emptySlots(p)*1.5);
     if(p.coins-G.cfg.treinoCost<reserve&&p.tec!=='paizao')return;
@@ -7562,6 +7817,7 @@ const SP7 = (function(){
       res=Object.assign(res,resolveScout(G,p,keep,list,li&&li.claim,li&&li.price));
     }
     else if(o.t==='shop')res=Object.assign(res,actBuyShop(G,p,o.s));
+    else if(o.t==='doubt')res=Object.assign(res,actDoubt(G,p,o.s));
     else if(o.t==='tec')res=Object.assign(res,actTec(G,p,o.i));
     else res=Object.assign(res,actSponsor(G,p));
     aiTrain(G,p,st);
@@ -7624,6 +7880,22 @@ const SP7 = (function(){
     L(G,ai.name+' comprou um reserva seu por '+mo(pr.offer)+'.',ai.id);return {ok:true};
   }
 
+  /* dica para o jogador: a melhor jogada segundo o avaliador da IA (sem olhar cartas fechadas dos rivais) */
+  function hint(G,p){
+    const save=p.style;p.style='equilibrado';const os=aiOptions(G,p);p.style=save;
+    let o=os[0];if(!o)return null;
+    /* técnico que já rende 3+ e ainda não foi contratado: lembrar a partir do meio do jogo */
+    const ot=os.filter(x=>x.t==='tec').sort((a,b)=>b.u-a.u)[0];
+    if(ot&&!p.tec&&G.round>=Math.ceil(G.cfg.maxRounds*.5)){const sv=p.tec;p.tec=G.tecOpen[ot.i];const now=tecPoints(p);p.tec=sv;if(now>=3&&emptySlots(p)<=turnsLeft(G)-1)o=ot}
+    const pts=n=>' Vale cerca de <b>'+(n>0?'+':'')+n+' pontos</b>.';
+    if(o.t==='vit'){const c=G.vit[o.r][o.i];const emp=p.field[c.p].length<FORM[c.p];const g=emp?stars(c)+G.cfg.emptyPen:stars(c)-stars(worstIn(p,c.p));
+      return {t:o.t,r:o.r,i:o.i,txt:'Contratar <b>'+c.n+'</b> ('+RNAME[c.r]+' '+PSHORT[c.p]+') na vitrine d'+artigo(o.r)+' '+REG[o.r].n+'.',why:(emp?'Preenche uma vaga de '+PSHORT[c.p]+': vaga vazia tira '+G.cfg.emptyPen+' pontos no fim, então até um jogador fraco ajuda.':'É melhor que o seu titular mais fraco nessa posição.')+pts(g)}}
+    if(o.t==='olh')return {t:o.t,r:o.r,txt:'Usar o <b>olheiro</b> n'+artigo(o.r)+' '+REG[o.r].n+' ('+mo(travelCost(p,o.r)+G.cfg.olheiro[o.r])+').',why:'Você vê 3 cartas fechadas e escolhe a que mais ajuda. É uma aposta: pode vir melhor ou pior que a vitrine.'};
+    if(o.t==='shop'||o.t==='doubt'){const s=G.players[o.s];return {t:o.t,s:o.s,txt:(o.t==='doubt'?'<b>Duvidar</b> do':'Comprar o')+' anúncio de <b>'+s.name+'</b> ('+PSHORT[s.shop.card.p]+' “'+RNAME[s.shop.claim]+'” por '+mo(s.shop.price)+').',why:'Você precisa dessa posição e o preço compensa o risco.'}}
+    if(o.t==='tec'){const t=tecDef(G.tecOpen[o.i]);const sv=p.tec;p.tec=G.tecOpen[o.i];const now=tecPoints(p);p.tec=sv;return {t:o.t,i:o.i,txt:'Contratar o técnico <b>'+t.n+'</b> ('+mo(G.cfg.tecCost)+').',why:t.d+'.'+pts(now)+' E pode render mais até o fim.'}}
+    return {t:'spons',txt:'Pegar o <b>patrocínio</b> (+'+G.cfg.sponsor+' moedas).',why:'Nada que dá para pagar agora vale a ação; junte moedas para a próxima rodada.'};
+  }
+
   /* ── SIMULAÇÃO IA × IA ── */
   function simulate(n,opts){
     opts=opts||{};const np=opts.players||4;
@@ -7658,7 +7930,7 @@ const SP7 = (function(){
 
   return {DB,REG,RORD,TRAVEL,STARS,RNAME,RORDER,FORM,POS,PSHORT,DEFAULTS,TECS,STYLES,
     stars,titulares,emptySlots,isFull,newGame,cur,startTurn,endTurn,travelCost,saleValue,
-    actBuyVit,actScout,resolveScout,actSponsor,actTec,actTreino,actBuyShop,canTrain,
+    actBuyVit,actScout,resolveScout,actSponsor,actTec,actTreino,actBuyShop,actDoubt,hint,canTrain,
     sell,swap,retractShop,score,ranking,convPoints,convCount,tecPoints,tecDef,cardVal,
     aiTurn,aiOptions,aiRelease,aiReleaseAll,bids,quote,doTrade,aiProposal,acceptProposal,simulate};
 })();
@@ -7677,7 +7949,7 @@ const M7 = (function(){
   function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
   function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 
-  let opt=Object.assign({rivals:2,maxRounds:10,income:3,startCoins:6,emptyPen:2,convPts:4,endOn11:false},lsGet(LSC,{}));
+  let opt=Object.assign({rivals:2,maxRounds:10,income:3,startCoins:6,emptyPen:2,convPts:4,endOn11:false,simple:false},lsGet(LSC,{}));
 
   function toast(m,d){const t=$('m7toast');t.innerHTML=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),d||2600)}
   function modal(html,wide){$('m7md').className='m7md'+(wide?' wide':'');$('m7md').innerHTML=html;$('m7ov').classList.add('show');$('m7md').scrollTop=0}
@@ -7693,15 +7965,17 @@ const M7 = (function(){
       '<div class="nm'+((c.n.length>13||c.n.split(/[\s-]/).some(w=>w.length>8))?' lg':'')+'">'+esc(c.n)+'</div>'+
       '<div class="nt"><span class="m7dot" style="background:'+E.REG[c.nr].c+'"></span>'+esc(c.nat)+'</div>'+
       '<div class="rr">'+E.RNAME[c.r]+'</div>'+
-      (o.price!=null?'<div class="pr">'+o.price+'</div>':'')+'</div>';
+      (o.price!=null?'<div class="pr">'+o.price+'</div>':'')+(o.tag?'<div class="tg">'+o.tag+'</div>':'')+'</div>';
   }
-  function backH(c,o){o=o||{};return '<span class="m7bk'+(o.lg?' lg':'')+'" style="--rc:'+E.REG[c.m].c+'" title="Veio do mercado: '+E.REG[c.m].n+'">'+E.PSHORT[c.p]+'</span>'}
+  function backH(c,o){o=o||{};return '<span class="m7bk'+(o.lg?' lg':'')+'" style="--rc:'+E.REG[c.nr].c+'" title="Conta para a Seleção '+E.REG[c.nr].n+'">'+E.PSHORT[c.p]+'</span>'}
+  function dotH(c){return '<i class="m7d" style="background:'+E.REG[c.nr].c+'" title="'+E.PSHORT[c.p]+' · Seleção '+E.REG[c.nr].n+'"></i>'}
+  function dot0(){return '<i class="m7d e"></i>'}
   function shopBk(c,o){o=o||{};return '<span class="m7bk'+(o.lg?' lg':'')+'" style="--rc:#5b6478" title="Carta fechada">'+E.PSHORT[c.p]+'</span>'}
   function emptyBk(){return '<span class="m7bk empty">·</span>'}
 
   /* ── SETUP ── */
   function open(){
-    scr('mode7');G=null;$('m7bar').style.display='none';$('m7badge').textContent='Teste v0.2';closeModal();
+    scr('mode7');G=null;$('m7bar').style.display='none';$('m7badge').textContent='Teste v0.4';closeModal();
     renderSetup();
   }
   function stepper(k,min,max,lbl){
@@ -7710,8 +7984,9 @@ const M7 = (function(){
   function renderSetup(){
     $('m7body').innerHTML='<div class="m7setup">'+
       '<div class="m7panel"><div class="m7hero">Janela <span>Secreta</span></div>'+
-      '<div class="m7lead">Você tem <b>'+opt.maxRounds+' rodadas</b> para viajar o mundo e montar seu 11. Ninguém vê o time de ninguém: só as costas das cartas. No fim, todos revelam setor por setor e vence a maior pontuação. Estrelas contam, mas técnico, convocação e treino decidem.</div>'+
+      '<div class="m7lead">Você tem <b>'+opt.maxRounds+' rodadas</b> para viajar o mundo e montar seu 11. Ninguém vê a força do time de ninguém: só a posição e a seleção de cada carta. No fim, todos revelam setor por setor e vence a maior pontuação. Estrelas contam, mas técnico, convocação e treino decidem.</div>'+
       '<div class="m7opts">'+
+        '<div class="m7opt"><label>Regras</label><div class="m7tog"><button class="'+(!opt.simple?'on':'')+'" onclick="M7.setSimple(false)">Completas</button><button class="'+(opt.simple?'on':'')+'" onclick="M7.setSimple(true)">Primeira partida</button></div><div class="m7mut" style="margin-top:.3rem">'+(opt.simple?'Sem treino e sem negociação: só vitrine, olheiro, anúncios, técnico e patrocínio.':'Tudo liberado.')+'</div></div>'+
         '<div class="m7opt"><label>Rivais (IA)</label><div class="m7tog">'+[1,2,3].map(n=>'<button class="'+(opt.rivals===n?'on':'')+'" onclick="M7.setRivals('+n+')">'+n+'</button>').join('')+'</div></div>'+
       '</div>'+
       '<div class="m7btns"><button class="m7b gold" onclick="M7.start()">Começar ▶</button><button class="m7b sec" onclick="M7.rules()">Como jogar</button><button class="m7b sec" onclick="M7.tests()">📊 Testes e simulação</button></div></div>'+
@@ -7724,9 +7999,10 @@ const M7 = (function(){
   }
   function setOpt(k,d,min,max){opt[k]=Math.max(min,Math.min(max,opt[k]+d));lsSet(LSC,opt);renderSetup()}
   function setRivals(n){opt.rivals=n;lsSet(LSC,opt);renderSetup()}
+  function setSimple(v){opt.simple=v;lsSet(LSC,opt);renderSetup()}
   function setEnd(v){opt.endOn11=v;lsSet(LSC,opt);renderSetup()}
-  function resetOpt(){opt={rivals:opt.rivals,maxRounds:10,income:3,startCoins:6,emptyPen:2,convPts:4,endOn11:false};lsSet(LSC,opt);renderSetup()}
-  function cfgFromOpt(){return {maxRounds:opt.endOn11?Math.max(opt.maxRounds,16):opt.maxRounds,income:opt.income,startCoins:opt.startCoins,emptyPen:opt.emptyPen,convPts:opt.convPts,endOn11:opt.endOn11,firstBonus:opt.endOn11?0:0}}
+  function resetOpt(){opt={rivals:opt.rivals,maxRounds:10,income:3,startCoins:6,emptyPen:2,convPts:4,endOn11:false,simple:opt.simple};lsSet(LSC,opt);renderSetup()}
+  function cfgFromOpt(){return {maxRounds:opt.endOn11?Math.max(opt.maxRounds,16):opt.maxRounds,income:opt.income,startCoins:opt.startCoins,emptyPen:opt.emptyPen,convPts:opt.convPts,endOn11:opt.endOn11,firstBonus:0,simple:!!opt.simple}}
 
   function start(){
     G=E.newGame({players:opt.rivals+1,human:true,cfg:cfgFromOpt()});
@@ -7745,16 +8021,22 @@ const M7 = (function(){
       const g=G;
       await sleep(550);if(G!==g)return;
       /* proposta da IA ao humano (ação livre) */
-      if(G.rng()<.45){
+      if(!G.cfg.simple&&G.rng()<.45){
         const pr=E.aiProposal(G,p,me);G._ref=G._ref||{};
         const key=pr&&(p.id+'_'+pr.card.id);
         if(pr&&!G._ref[key]){const ok=await askProposal(p,pr);if(G!==g)return;if(ok){E.acceptProposal(G,p,me,pr);hs('troca');render()}else G._ref[key]=1}
       }
       const res=E.aiTurn(G);
+      if(res.t==='doubt'&&res.ok&&res.card&&res.seller===0){
+        hs(res.honest?'duvidaram_verdade':'blefe_descoberto');
+        await tell('<h2>'+(res.honest?'💰 Duvidaram e você ganhou!':'😳 Pegaram seu blefe!')+'</h2><div class="rowc">'+cardH(res.card)+'</div>'+
+          '<p><b>'+esc(p.name)+'</b> duvidou do seu anúncio de <b>'+E.RNAME[res.claim]+'</b>. '+(res.honest?'Era verdade: pagou <b>'+mo(res.paid)+'</b>, com multa.':'Era <b>'+E.RNAME[res.card.r]+'</b>: levou a carta por 1 moeda.')+'</p>');
+        if(G!==g)return;
+      }
       if(res.t==='shop'&&res.ok&&res.card&&res.seller===0){
         hs(res.honest?'venda_vitrine':'blefe_vendido');
         await tell('<h2>'+(res.honest?'💰 Vendido!':'🃏 Caiu no seu blefe!')+'</h2><div class="rowc">'+cardH(res.card)+'</div>'+(res.card.f?'<div class="m7frase">'+esc(res.card.f)+'</div>':'')+
-          '<p><b>'+esc(p.name)+'</b> pagou a você pela carta da sua vitrine, anunciada como <b>'+E.RNAME[res.claim]+'</b>.'+(res.honest?'':' Era <b>'+E.RNAME[res.card.r]+'</b>. Agora esse rival desconfia dos seus relatórios.')+'</p>');
+          '<p><b>'+esc(p.name)+'</b> pagou a você pelo seu anúncio de <b>'+E.RNAME[res.claim]+'</b>.'+(res.honest?'':' Era <b>'+E.RNAME[res.card.r]+'</b>. Agora esse rival desconfia dos seus relatórios.')+'</p>');
         if(G!==g)return;
       }
       render();await sleep(420);if(G!==g)return;
@@ -7775,91 +8057,94 @@ const M7 = (function(){
 
   /* ── RENDER DO JOGO ── */
   function myTurn(){return G&&!G.over&&E.cur(G)===me&&!busy}
-  function partial(){
-    const sc=E.score(G)[0];return sc;
-  }
+  function partial(){return E.score(G)[0]}
+  const SECN={ataque:'Ataque',meio:'Meio',defesa:'Defesa',goleiro:'Goleiro'};
   function render(){
     if(!G)return;
-    const p=E.cur(G),mine=myTurn();
+    const p=E.cur(G),mine=myTurn(),canAct=mine&&!G.acted;
     $('m7badge').textContent='Rodada '+G.round+(G.cfg.endOn11?'':' / '+G.cfg.maxRounds);
     let h='';
-    /* topo */
-    h+='<div class="m7top">'+
-      '<div class="m7stat"><small>Rodada</small><b>'+G.round+(G.cfg.endOn11?'':'<span style="font-size:.9rem;color:var(--text2)"> / '+G.cfg.maxRounds+'</span>')+'</b></div>'+
-      '<div class="m7stat"><small>Suas moedas</small><b class="gold">'+me.coins+'</b></div>'+
-      '<div class="m7stat"><small>Você está em</small><b style="font-size:1.05rem;color:'+E.REG[me.reg].c+'">'+E.REG[me.reg].f+' '+E.REG[me.reg].n+'</b></div>'+
-      '<div class="m7stat"><small>Ordem desta rodada</small><b style="font-size:.82rem;font-family:Barlow,sans-serif;font-weight:600">'+G.order.map(i=>(G.players[i]===p&&!G.over?'<span style="color:var(--accent)">':'<span>')+esc(G.players[i].name)+'</span>').join(' → ')+'</b></div>'+
-      '<div class="m7stat" style="flex:1"><small>Convocações abertas — mais titulares da região leva +'+G.cfg.convPts+'</small><div class="m7convs">'+
-        G.conv.map(r=>'<span class="m7conv" style="border-color:'+E.REG[r].c+';color:'+E.REG[r].c+'">'+E.REG[r].f+' Seleção · '+E.REG[r].n+' — você tem <b>'+E.convCount(me,r)+'</b></span>').join('')+
-      '</div></div></div>';
+    /* HUD */
+    const pips=G.cfg.endOn11?'':Array.from({length:G.cfg.maxRounds},(_,i)=>'<i class="'+(i+1<G.round?'d':i+1===G.round?'c':'')+'"></i>').join('');
+    h+='<div class="m7hud">'+
+      '<div class="hb"><small>Rodada</small><div class="rnd"><b>'+G.round+'</b>'+(G.cfg.endOn11?'':'<span>/ '+G.cfg.maxRounds+'</span>')+'</div><div class="pips">'+pips+'</div></div>'+
+      '<div class="hb coins"><small>Suas moedas</small><div class="rnd"><span class="coin">●</span><b>'+me.coins+'</b></div><div class="sub">+'+G.cfg.income+' por turno</div></div>'+
+      '<div class="hb"><small>Você está em</small><div class="loc" style="color:'+E.REG[me.reg].c+'">'+E.REG[me.reg].f+' '+E.REG[me.reg].n+'</div><div class="sub">viajar custa 1 a 3</div></div>'+
+      '<div class="hb grow"><small>Ordem desta rodada</small><div class="ord">'+G.order.map(i=>'<span class="'+(G.players[i]===p&&!G.over?'on':'')+'">'+esc(G.players[i].name)+'</span>').join('<em>›</em>')+'</div><div class="sub">'+(mine?'é a sua vez':esc(p.name)+' está jogando')+'</div></div>'+
+      '<button class="m7hint" '+(mine?'':'disabled')+' onclick="M7.hint()"><span>💡</span>Dica</button></div>';
+    /* seleções: corrida aberta */
+    h+='<div class="m7sels">';
+    G.conv.forEach(r=>{
+      const cs=G.players.map(x=>E.convCount(x,r)),mx=Math.max(...cs);
+      h+='<div class="selc" style="--rc:'+E.REG[r].c+'"><div class="selh"><span>'+E.REG[r].f+' Seleção '+E.REG[r].n+'</span><b>+'+G.cfg.convPts+'</b></div><div class="selr">'+
+        G.players.map((x,i)=>'<span class="'+(cs[i]===mx&&mx>0?'ld':'')+(x.human?' me':'')+'">'+esc(x.name)+' <b>'+cs[i]+'</b></span>').join('')+'</div></div>';
+    });
+    h+='<div class="selx">Quem tiver <b>mais titulares</b> de cada seleção no fim ganha os pontos. A cor da bolinha na carta mostra a seleção.</div></div>';
+
     h+='<div class="m7grid"><div>';
-    /* mercados */
-    h+='<div class="m7panel"><h3>Mercados — vitrine aberta e olheiro</h3><div class="m7regs">';
-    E.RORD.forEach(r=>{
-      const R=E.REG[r],tc=E.travelCost(me,r),here=me.reg===r;
-      const pawns=G.players.filter(x=>x.reg===r).map(x=>x.human?'📍 Você':'✈ '+esc(x.name)).join(' · ');
-      h+='<div class="m7reg'+(here?' here':'')+'" style="--rc:'+R.c+'"><div class="m7regh"><span class="nm">'+R.f+' '+R.n+'</span><span class="tr">'+(here?'você está aqui':'viagem <b>'+tc+'</b>')+'</span></div>'+
-        '<div class="m7pawns">'+pawns+'</div><div class="m7vit">';
-      G.vit[r].forEach((c,i)=>{
-        const cost=tc+G.cfg.price[c.r],can=mine&&!G.acted&&me.coins>=cost;
-        h+=cardH(c,{price:cost,click:mine&&!G.acted?'M7.buy(\''+r+'\','+i+')':null,no:mine&&!G.acted&&!can});
-      });
-      if(!G.vit[r].length)h+='<span style="font-size:.7rem;color:var(--text2)">vitrine vazia</span>';
-      const oc=tc+G.cfg.olheiro[r];
-      h+='</div><button class="m7olh" '+((mine&&!G.acted&&me.coins>=oc&&G.decks[r].length)?'':'disabled')+' onclick="M7.scout(\''+r+'\')">🔭 Olheiro <b>'+oc+'</b> — vê 3 fechadas, fica com 1 · monte: '+G.decks[r].length+'</button></div>';
-    });
-    h+='</div></div>';
-    /* vestiário */
-    h+='<div class="m7panel"><h3>Vestiário e ofertas dos rivais — valem em qualquer região</h3><div class="m7side" style="margin-top:0">';
-    G.tecOpen.forEach((id,i)=>{
-      const t=E.tecDef(id),can=mine&&!G.acted&&!me.tec&&me.coins>=G.cfg.tecCost;
-      const sv=me.tec;me.tec=id;const now=E.tecPoints(me);me.tec=sv;
-      h+='<div class="m7box"><div class="m7tec'+(can?' buy':'')+'" '+(can?'onclick="M7.tec('+i+')"':'style="opacity:'+(me.tec?'.5':'.8')+'"')+'><span class="cst">'+G.cfg.tecCost+' moedas</span><b>🎓 '+t.n+'</b>'+t.d+(me.tec?'':'<br><span style="color:var(--green)">No seu time de hoje: <b style="display:inline;font-size:1rem;color:var(--green)">+'+now+'</b></span>')+'</div></div>';
-    });
-    h+='<div class="m7box" style="flex:0 1 190px"><button class="m7b sec" style="width:100%" '+(mine&&!G.acted?'':'disabled')+' onclick="M7.sponsor()">💰 Patrocínio +'+G.cfg.sponsor+'</button><div style="font-size:.66rem;color:var(--text2);margin-top:.35rem">Gasta sua ação do turno.</div></div>';
-    h+='</div>';
-    const offers=G.players.filter(x=>!x.human&&x.shop);
-    if(offers.length){
-      h+='<div class="m7offers">'+offers.map(x=>{const can=mine&&!G.acted&&me.coins>=x.shop.price;
-        return '<div class="m7shop">'+shopBk(x.shop.card)+'<span><b>'+esc(x.name)+'</b> anuncia: <q>'+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'</q> por <b style="color:var(--gold)">'+x.shop.price+'</b></span><button class="m7b sm" style="margin-left:auto" '+(can?'':'disabled')+' onclick="M7.buyShop('+x.id+')">Comprar às cegas</button></div>'}).join('')+'</div>';
-    }
-    h+='</div>';
-    /* log */
-    h+='<div class="m7panel"><h3>O que aconteceu</h3><div class="m7log">'+G.log.slice(-40).reverse().map(l=>'<div class="'+(l.who===0?'me':'')+'"><i>R'+l.r+'</i>'+esc(l.msg)+'</div>').join('')+'</div></div>';
-    h+='</div><div>';
-    /* meu time */
-    const sc=partial();
-    h+='<div class="m7panel"><h3>Seu time — só você vê</h3><div class="m7pitch">';
-    ['ataque','meio','defesa','goleiro'].forEach(k=>{
-      h+='<div class="m7rowl">'+({ataque:'Ataque',meio:'Meio',defesa:'Defesa',goleiro:'Goleiro'})[k]+'</div><div class="m7row">';
-      me.field[k].forEach(c=>{h+=cardH(c,{sm:1,click:'M7.cardMenu('+c.id+')'})});
-      for(let i=me.field[k].length;i<E.FORM[k];i++)h+='<div class="m7slot">vaga</div>';
-      h+='</div>';
-    });
-    h+='</div><div class="m7partial"><span>Estrelas <b>'+sc.stars+'</b></span><span>Técnico <b>+'+sc.tec+'</b></span><span>Convocações: só no fim</span><span>Vagas vazias <b>'+E.emptySlots(me)+'</b> (−'+G.cfg.emptyPen+' cada)</span><span class="tot">Parcial <b>'+(sc.stars+sc.tec+sc.empty)+'</b></span></div>';
-    h+='<div class="m7side">'+
-      '<div class="m7box"><h3>Banco ('+me.bench.length+'/'+G.cfg.benchMax+')</h3><div class="cards">'+(me.bench.map(c=>cardH(c,{sm:1,click:'M7.cardMenu('+c.id+')'})).join('')||'<span style="font-size:.7rem;color:var(--text2)">vazio</span>')+'</div></div>'+
-      '<div class="m7box"><h3>Técnico</h3>'+(me.tec?'<div class="m7tec"><b>🎓 '+E.tecDef(me.tec).n+'</b>'+E.tecDef(me.tec).d+'</div>':'<span style="font-size:.7rem;color:var(--text2)">sem técnico — contrate no Vestiário</span>')+
-        '<h3 style="margin-top:.5rem">Treinos '+me.treinos+'/'+G.cfg.maxTreino+'</h3><span style="font-size:.7rem;color:var(--text2)">Clique em um jogador seu para treinar ('+G.cfg.treinoCost+' moedas, +1★, ação livre).</span></div>'+
-      '<div class="m7box"><h3>Sua vitrine</h3>'+(me.shop?'<div class="cards">'+cardH(me.shop.card,{sm:1})+'<div style="font-size:.7rem;line-height:1.4">Anunciado como<br><b style="color:var(--gold)">'+E.RNAME[me.shop.claim]+'</b> por <b style="color:var(--gold)">'+me.shop.price+'</b><br><button class="m7b sec sm" style="margin-top:.3rem" '+(mine?'':'disabled')+' onclick="M7.retract()">Recolher (volta ao monte)</button></div></div>':'<span style="font-size:.7rem;color:var(--text2)">vazia — o olheiro deixa você anunciar 1 carta fechada</span>')+'</div>'+
-      '</div></div>';
     /* rivais */
-    h+='<div class="m7panel"><h3>Rivais — você só vê as costas (cor = mercado de origem)</h3>';
+    h+='<div class="m7panel" id="m7a-rv"><h3>Rivais <span>você vê a posição e a seleção de cada carta, nunca a força</span></h3><div class="m7rvs">';
     G.players.filter(x=>!x.human).forEach(x=>{
-      h+='<div class="m7rival'+(p===x&&!G.over?' turn':'')+'"><div class="m7rh"><span class="n">'+esc(x.name)+'</span><span class="co">moedas <b>'+x.coins+'</b></span><span>'+E.REG[x.reg].f+' '+E.REG[x.reg].n+'</span><span>'+(x.tec?'🎓 '+E.tecDef(x.tec).n:'sem técnico')+'</span><span>titulares '+E.titulares(x).length+'/11</span></div><div class="m7rb">';
-      ['goleiro','defesa','meio','ataque'].forEach(k=>{
-        h+='<span class="grp" data-l="'+E.PSHORT[k]+'">'+x.field[k].map(c=>backH(c)).join('');
-        for(let i=x.field[k].length;i<E.FORM[k];i++)h+=emptyBk();
-        h+='</span>';
+      h+='<div class="rv'+(p===x&&!G.over?' turn':'')+'"><div class="rvh"><b>'+esc(x.name)+'</b><span class="co">● '+x.coins+'</span><span>'+E.REG[x.reg].f+'</span></div>'+
+        '<div class="rvt">'+(x.tec?'🎓 '+E.tecDef(x.tec).n:'sem técnico')+' · '+E.titulares(x).length+'/11</div><div class="rvp">';
+      ['ataque','meio','defesa','goleiro'].forEach(k=>{
+        h+='<div><em>'+E.PSHORT[k]+'</em>'+x.field[k].map(dotH).join('')+Array(E.FORM[k]-x.field[k].length).fill(dot0()).join('')+'</div>';
       });
-      h+='<span class="grp" data-l="banco">'+(x.bench.map(c=>backH(c)).join('')||emptyBk())+'</span></div>';
+      h+='<div class="bn"><em>banco</em>'+(x.bench.map((c,k)=>(mine&&!me.negUsed&&!G.cfg.simple)?'<button class="m7dbtn" onclick="M7.ngPeek('+x.id+','+k+')" title="Pedir para ver e saber o preço">'+dotH(c)+'<u>'+E.PSHORT[c.p]+'</u></button>':'<span class="m7dl">'+dotH(c)+'<u>'+E.PSHORT[c.p]+'</u></span>').join('')||'<span>—</span>')+'</div></div>';
       if(x.shop){
-        const can=mine&&!G.acted&&me.coins>=x.shop.price;
-        h+='<div class="m7shop">'+shopBk(x.shop.card)+'<span>Vitrine: <q>É um '+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'.</q> — <b style="color:var(--gold)">'+x.shop.price+' moedas</b></span></div>';
+        h+='<button class="rvad" '+(canAct?'':'disabled')+' onclick="M7.buyShop('+x.id+')"><span>📢 Anúncio</span><b>'+E.PSHORT[x.shop.card.p]+' “'+E.RNAME[x.shop.claim]+'”</b><i>'+x.shop.price+'</i></button>';
       }
       h+='</div>';
     });
-    h+='</div></div></div>';
+    h+='</div><div class="m7leg">Cor da bolinha = seleção: '+E.RORD.map(r=>'<span><i class="m7d" style="background:'+E.REG[r].c+'"></i>'+E.REG[r].n+'</span>').join('')+(G.cfg.simple?'':' · clique num reserva do banco de um rival para negociar')+'</div></div>';
+    /* mercados */
+    h+='<div class="m7panel" id="m7a-mk"><h3>Mercados <span>clique numa carta para contratar, ou use o olheiro para ver 3 fechadas</span></h3><div class="m7regs">';
+    E.RORD.forEach(r=>{
+      const R=E.REG[r],tc=E.travelCost(me,r),here=me.reg===r;
+      const pawns=G.players.filter(x=>x.reg===r&&!x.human).map(x=>esc(x.name)).join(', ');
+      h+='<div class="m7reg'+(here?' here':'')+'" style="--rc:'+R.c+'"><div class="m7regh"><span class="nm">'+R.f+' '+R.n+'</span><span class="tr">'+(here?'📍 você está aqui':'✈ viagem <b>+'+tc+'</b>')+'</span></div>'+
+        '<div class="m7pawns">'+(pawns?'aqui: '+pawns:'&nbsp;')+'</div><div class="m7vit">';
+      G.vit[r].forEach((c,i)=>{
+        const cost=tc+G.cfg.price[c.r];
+        h+=cardH(c,{price:cost,click:canAct?'M7.buy(\''+r+'\','+i+')':null,no:canAct&&me.coins<cost,tag:(i===0&&G.cfg.vitRotate&&G.decks[r].length&&G.round<G.cfg.maxRounds)?'sai na próxima':null});
+      });
+      if(!G.vit[r].length)h+='<span class="m7mut">vitrine vazia</span>';
+      const oc=tc+G.cfg.olheiro[r];
+      h+='</div><button class="m7olh" '+((canAct&&me.coins>=oc&&G.decks[r].length)?'':'disabled')+' onclick="M7.scout(\''+r+'\')"><span>🔭 Olheiro</span><em>vê 3 fechadas, fica com 1</em><b>'+oc+'</b></button></div>';
+    });
+    h+='</div></div>';
+    /* vestiário */
+    h+='<div class="m7panel"><h3>Vestiário <span>vale em qualquer mercado</span></h3><div class="m7vest">';
+    G.tecOpen.forEach((id,i)=>{
+      const t=E.tecDef(id),can=canAct&&!me.tec&&me.coins>=G.cfg.tecCost;
+      const sv=me.tec;me.tec=id;const now=E.tecPoints(me);me.tec=sv;
+      h+='<div class="m7tec'+(can?' buy':'')+(me.tec?' off':'')+'" '+(can?'onclick="M7.tec('+i+')"':'')+'><span class="cst">'+G.cfg.tecCost+'</span><b>🎓 '+t.n+'</b><p>'+t.d+'</p>'+(me.tec?'':'<div class="now">no seu time hoje <strong>+'+now+'</strong></div>')+'</div>';
+    });
+    h+='<button class="m7spons" '+(canAct?'':'disabled')+' onclick="M7.sponsor()"><span>💰</span><b>Patrocínio</b><em>+'+G.cfg.sponsor+' moedas</em></button></div></div>';
+    h+='</div><div>';
+    /* meu time */
+    const sc=partial(),vg=E.emptySlots(me);
+    h+='<div class="m7panel" id="m7a-tm"><div class="m7sc"><div class="tot"><small>Parcial</small><b>'+(sc.stars+sc.tec+sc.empty)+'</b></div>'+
+      '<div class="it"><b>'+sc.stars+'</b><small>estrelas</small></div><div class="it"><b>+'+sc.tec+'</b><small>técnico</small></div>'+
+      '<div class="it'+(vg?' bad':'')+'"><b>'+(vg?sc.empty:'0')+'</b><small>'+(vg?vg+' vaga'+(vg>1?'s':'')+' (−'+G.cfg.emptyPen+' cada)':'time completo')+'</small></div>'+
+      '<div class="it q"><b>?</b><small>seleções: no fim</small></div></div>'+
+      '<div class="m7pitch">';
+    ['ataque','meio','defesa','goleiro'].forEach(k=>{
+      h+='<div class="m7rowl">'+SECN[k]+'</div><div class="m7row">';
+      me.field[k].forEach(c=>{h+=cardH(c,{sm:1,click:'M7.cardMenu('+c.id+')'})});
+      for(let i=me.field[k].length;i<E.FORM[k];i++)h+='<div class="m7slot"><b>'+E.PSHORT[k]+'</b>vaga</div>';
+      h+='</div>';
+    });
+    h+='</div><div class="m7side">'+
+      '<div class="m7box"><h3>Banco <span>'+me.bench.length+'/'+G.cfg.benchMax+'</span></h3><div class="cards">'+(me.bench.map(c=>cardH(c,{sm:1,click:'M7.cardMenu('+c.id+')'})).join('')||'<span class="m7mut">Reservas aparecem aqui. Clique numa carta sua para treinar, vender ou oferecer.</span>')+'</div></div>'+
+      '<div class="m7box"><h3>Técnico</h3>'+(me.tec?'<div class="m7tec own"><b>🎓 '+E.tecDef(me.tec).n+'</b><p>'+E.tecDef(me.tec).d+'</p><div class="now">hoje <strong>+'+sc.tec+'</strong></div></div>':'<span class="m7mut">Nenhum. Contrate um no Vestiário: é ponto extra no fim.</span>')+
+        (G.cfg.simple?'':'<h3 style="margin-top:.6rem">Treinos <span>'+me.treinos+'/'+G.cfg.maxTreino+'</span></h3><span class="m7mut">Clique num jogador seu: '+G.cfg.treinoCost+' moedas, +1★.</span>')+'</div>'+
+      '<div class="m7box"><h3>Seu anúncio</h3>'+(me.shop?'<div class="cards">'+cardH(me.shop.card,{sm:1})+'<div class="m7ad">Anunciado como<br><b>'+E.RNAME[me.shop.claim]+'</b> por <b>'+me.shop.price+'</b><div class="m7step" style="margin:.25rem 0"><button '+(mine?'':'disabled')+' onclick="M7.adPrice(-1)">−</button><button '+(mine?'':'disabled')+' onclick="M7.adPrice(1)">+</button><span class="m7mut">preço</span></div><button class="m7b sec sm" '+(mine?'':'disabled')+' onclick="M7.retract()">Retirar</button></div></div>':'<span class="m7mut">Vazio. Depois do olheiro você pode pôr 1 carta fechada à venda e dizer o que quiser sobre ela.</span>')+'</div>'+
+      '</div></div>';
+    /* lances */
+    const lg=G.log.slice(-5).reverse();
+    h+='<div class="m7panel"><h3>Últimos lances <button class="m7link" onclick="M7.logAll()">ver todos</button></h3><div class="m7log">'+(lg.map(l=>'<div class="'+(l.who===0?'me':'')+'"><i>R'+l.r+'</i>'+esc(l.msg)+'</div>').join('')||'<span class="m7mut">A partida está começando.</span>')+'</div></div>';
+    h+='</div></div>';
     const body=$('m7body'),st=body.scrollTop;body.innerHTML=h;body.scrollTop=st;
     /* barra */
     let msg,btn='';
@@ -7868,14 +8153,25 @@ const M7 = (function(){
     else{
       const falta=E.POS.filter(k=>me.field[k].length<E.FORM[k]).map(k=>(E.FORM[k]-me.field[k].length)+' '+E.PSHORT[k]).join(', ');
       const left=G.cfg.maxRounds-G.round+1;
-      let warn=falta?' <span style="color:var(--red)">Faltam: '+falta+'.</span>':' <span style="color:var(--green)">Time completo.</span>';
-      if(!me.tec&&G.round>=Math.ceil(G.cfg.maxRounds*.6))warn+=' <span style="color:var(--gold)">Você ainda não tem técnico.</span>';
-      if(!G.cfg.endOn11)warn+=' '+(left===1?'<b>Última rodada!</b>':'Restam '+left+' rodadas.');
-      msg=(G.acted?'Ação feita. Negocie ou treine se quiser, e encerre o turno.':'<b>Sua vez:</b> 1 ação (vitrine, olheiro, técnico, compra às cegas ou patrocínio). Negociar e treinar são livres.')+warn;
+      let warn=falta?'<span class="w r">Faltam '+falta+'</span>':'<span class="w g">Time completo</span>';
+      if(!me.tec&&G.round>=Math.ceil(G.cfg.maxRounds*.5))warn+='<span class="w y">Sem técnico</span>';
+      if(!G.cfg.endOn11)warn+='<span class="w">'+(left===1?'Última rodada!':'Restam '+left+' rodadas')+'</span>';
+      msg=(G.acted?'<b>Ação feita.</b><span class="lg"> Treine ou negocie se quiser e encerre o turno.</span>':'<b>Sua vez: escolha 1 ação.</b><span class="lg"> Carta da vitrine, olheiro, anúncio de rival, técnico ou patrocínio.</span>')+'<div class="ws">'+warn+'</div>';
     }
-    if(mine)btn='<button class="m7b sec sm" '+(me.negUsed?'disabled':'')+' onclick="M7.nego()">🤝 Negociar</button><button class="m7b sm'+(G.acted?' m7pulse':' sec')+'" onclick="M7.end()">'+(G.acted?'Encerrar turno ➜':'Passar a vez')+'</button>';
-    $('m7bar').innerHTML='<div class="msg">'+msg+'</div>'+btn;
+    if(mine)btn=(G.cfg.simple?'':'<button class="m7b sec sm" '+(me.negUsed?'disabled':'')+' onclick="M7.nego()">🤝 Negociar</button>')+'<button class="m7b sm'+(G.acted?' m7pulse':' sec')+'" onclick="M7.end()">'+(G.acted?'Encerrar turno ➜':'Passar a vez')+'</button>';
+    $('m7bar').innerHTML='<div class="m7nav"><button onclick="M7.go(\'mk\')">Mercados</button><button onclick="M7.go(\'tm\')">Meu time</button><button onclick="M7.go(\'rv\')">Rivais</button></div><div class="msg">'+msg+'</div>'+btn;
   }
+  function adPrice(d){if(!myTurn()||!me.shop)return;me.shop.price=Math.max(1,Math.min(12,me.shop.price+d));render()}
+  function go(k){const el=$('m7a-'+k);if(el)$('m7body').scrollTop=el.offsetTop-6}
+  function logAll(){modal('<h2>Todos os lances</h2><div class="m7log all">'+G.log.slice().reverse().map(l=>'<div class="'+(l.who===0?'me':'')+'"><i>R'+l.r+'</i>'+esc(l.msg)+'</div>').join('')+'</div><div class="act"><button class="m7b" onclick="M7.close()">Fechar</button></div>')}
+  function hint(){
+    if(!myTurn())return;
+    if(G.acted){modal('<h2>💡 Dica do auxiliar</h2><p style="font-size:1rem;color:var(--text)">Sua ação deste turno já foi.</p><p>'+((!G.cfg.simple&&me.coins>=G.cfg.treinoCost&&me.treinos<G.cfg.maxTreino&&!me.trained)?'Você ainda pode <b>treinar</b> um jogador (clique nele): +1 estrela por '+mo(G.cfg.treinoCost)+'. ':'')+'Depois, encerre o turno.</p><div class="act"><button class="m7b" onclick="M7.close()">Ok</button></div>');return}
+    const o=E.hint(G,me);if(!o)return;hs('dica');M7._hint=o;
+    modal('<h2>💡 Dica do auxiliar</h2><p style="font-size:1rem;color:var(--text)">'+o.txt+'</p><p>'+o.why+'</p><p>É só uma sugestão: ela olha o seu time e os preços, não o que os rivais escondem.</p><div class="act"><button class="m7b sec" onclick="M7.close()">Vou pensar</button><button class="m7b gold" onclick="M7.hintDo()">Fazer isso</button></div>');
+  }
+  function hintDo(){const o=M7._hint;closeModal();if(!o)return;
+    if(o.t==='vit')buy(o.r,o.i);else if(o.t==='olh')scout(o.r);else if(o.t==='tec')tec(o.i);else if(o.t==='shop'||o.t==='doubt')buyShop(o.s);else sponsor()}
 
   /* ── AÇÕES DO HUMANO ── */
   function afterPlace(c,where){toast('<b>'+esc(c.n)+'</b> ('+E.RNAME[c.r]+') foi para '+(where==='titular'?'o time titular':'o banco')+'.'+(G._out?' <b>'+esc(G._out.n)+'</b> saiu para o banco.':''),3400)}
@@ -7890,26 +8186,29 @@ const M7 = (function(){
   function scout(r){
     if(!myTurn()||G.acted)return;
     const res=E.actScout(G,me,r);if(!res.ok){toast(res.msg);return}
-    hs('olheiro');sel={keep:null,list:null,claim:null,price:null};render();scoutModal();
+    hs('olheiro');sel={keep:null,list:null,claim:null,price:null,replace:false};render();scoutModal(true);
   }
-  function scoutModal(){
+  function scoutModal(first){
     const pd=G.pending,cs=pd.cards;
-    let h='<h2>🔭 Relatório do olheiro — '+E.REG[pd.r].n+'</h2><p><b>1.</b> Escolha a carta que fica com você (ninguém vê).</p><div class="rowc">'+
-      cs.map((c,i)=>cardH(c,{click:'M7.scKeep('+i+')',pick:sel.keep===i?'m7pick':(sel.list===i?'m7pickg':'')})).join('')+'</div>';
+    let h='<h2>🔭 Olheiro — '+E.REG[pd.r].n+'</h2><p class="stp"><b>1</b><span>Escolha a carta que fica com você. Ninguém vê qual foi.</span></p><div class="rowc pack'+(first?' anim':'')+'">'+
+      cs.map((c,i)=>'<div class="pk" style="--i:'+i+'">'+cardH(c,{click:'M7.scKeep('+i+')',pick:sel.keep===i?'m7pick':(sel.list===i?'m7pickg':'')})+'<small>'+(sel.keep===i?'fica com você':sel.list===i?'vai à venda':(c.f?esc(c.f.length>70?c.f.slice(0,68)+'…':c.f):''))+'</small></div>').join('')+'</div>';
     if(sel.keep!=null&&cs.length>1){
-      h+='<p><b>2.</b> Quer anunciar outra na sua vitrine? Ela fica fechada e você diz o que quiser sobre ela. Se um rival comprar, as moedas são suas.'+(me.shop?' <b>Sua vitrine já está ocupada.</b>':'')+'</p>';
-      if(!me.shop){
-        h+='<div class="m7chips">'+cs.map((c,i)=>i===sel.keep?'':'<button class="m7chip'+(sel.list===i?' on':'')+'" onclick="M7.scList('+i+')">Anunciar '+esc(c.n)+'</button>').join('')+'<button class="m7chip'+(sel.list==null?' on':'')+'" onclick="M7.scList(null)">Não anunciar</button></div>';
+      if(me.shop&&!sel.replace)h+='<p class="stp"><b>2</b><span>Você já tem um anúncio no ar (só pode 1 por vez). As outras voltam ao monte, a não ser que você troque o anúncio; nesse caso a carta antiga é que volta ao monte.</span></p><div class="m7chips"><button class="m7chip" onclick="M7.scReplace()">Trocar meu anúncio por uma destas</button></div>';
+      else{
+        h+='<p class="stp"><b>2</b><span>Quer pôr uma das outras à venda, fechada? Você diz o que quiser sobre ela; se um rival comprar, as moedas são suas. É opcional.</span></p><div class="m7chips">'+
+          '<button class="m7chip'+(sel.list==null?' on':'')+'" onclick="M7.scList(null)">Não anunciar</button>'+
+          cs.map((c,i)=>i===sel.keep?'':'<button class="m7chip'+(sel.list===i?' on':'')+'" onclick="M7.scList('+i+')">Anunciar '+esc(c.n)+'</button>').join('')+'</div>';
         if(sel.list!=null){
-          const real=cs[sel.list];
-          h+='<p style="margin-bottom:.2rem">Eu digo que é:</p><div class="m7chips">'+E.RORDER.map(r=>'<button class="m7chip'+(sel.claim===r?' on':'')+'" onclick="M7.scClaim(\''+r+'\')">'+E.RNAME[r]+(r===real.r?' (verdade)':'')+'</button>').join('')+'</div>'+
-            '<p style="margin-bottom:.2rem">Preço pedido:</p><div class="m7step"><button onclick="M7.scPrice(-1)">−</button><b>'+sel.price+'</b><button onclick="M7.scPrice(1)">+</button><span style="font-size:.72rem;color:var(--text2);margin-left:.5rem">tabela: Bronze 1 · Prata 2 · Ouro 4 · Especial 6 · Ícone 8</span></div>';
+          const real=cs[sel.list],ri=E.RORDER.indexOf(real.r);
+          h+='<div class="m7say"><div><small>Eu digo que é</small><div class="m7chips">'+E.RORDER.map((r,i)=>'<button class="m7chip'+(sel.claim===r?' on':'')+(i>ri?' lie':'')+'" onclick="M7.scClaim(\''+r+'\')">'+E.RNAME[r]+(i===ri?' ✓':'')+'</button>').join('')+'</div><span class="m7mut">'+(E.RORDER.indexOf(sel.claim)>ri?'🃏 Isso é blefe. Se duvidarem, levam a carta por 1 moeda.':'✓ Verdade. Se duvidarem, pagam o preço mais '+G.cfg.doubtFine+' de multa.')+'</span></div>'+
+            '<div><small>Preço</small><div class="m7step"><button onclick="M7.scPrice(-1)">−</button><b>'+sel.price+'</b><button onclick="M7.scPrice(1)">+</button></div><span class="m7mut">tabela: '+E.RNAME[sel.claim]+' = '+G.cfg.price[sel.claim]+'</span></div></div>';
         }
       }
     }
     h+='<div class="act"><button class="m7b gold" '+(sel.keep==null?'disabled':'')+' onclick="M7.scOk()">Confirmar</button></div>';
     modal(h);
   }
+  function scReplace(){sel.replace=true;scoutModal()}
   function scKeep(i){sel.keep=i;if(sel.list===i){sel.list=null}scoutModal()}
   function scList(i){sel.list=i;if(i!=null){const c=G.pending.cards[i];sel.claim=c.r;sel.price=Math.max(1,G.cfg.price[c.r]-1)}scoutModal()}
   function scClaim(r){sel.claim=r;sel.price=Math.max(1,G.cfg.price[r]-1);scoutModal()}
@@ -7917,7 +8216,7 @@ const M7 = (function(){
   function scOk(){
     if(sel.keep==null)return;
     const lied=sel.list!=null&&E.RORDER.indexOf(sel.claim)>E.RORDER.indexOf(G.pending.cards[sel.list].r);
-    const res=E.resolveScout(G,me,sel.keep,sel.list,sel.claim,sel.price);closeModal();
+    const res=E.resolveScout(G,me,sel.keep,sel.list,sel.claim,sel.price,!!sel.replace);closeModal();
     if(sel.list!=null){hs('anuncio');if(lied)hs('blefe')}
     afterPlace(res.card,res.where);render();
   }
@@ -7929,28 +8228,40 @@ const M7 = (function(){
   }
   function tecOk(i){const r=E.actTec(G,me,i);closeModal();if(!r.ok){toast(r.msg);return}hs('tecnico');render()}
   function buyShop(id){
-    if(!myTurn()||G.acted)return;const s=G.players[id];
-    modal('<h2>Comprar às cegas</h2><div class="rowc">'+shopBk(s.shop.card,{lg:1})+'</div><p>'+esc(s.name)+' diz: <b>“É um '+E.PSHORT[s.shop.card.p]+' '+E.RNAME[s.shop.claim]+'.”</b> Pode ser verdade. Pode ser blefe. A posição é garantida; o resto, não.</p><p>Preço: <b>'+s.shop.price+' moedas</b>, pagas a '+esc(s.name)+'.</p>'+
-      '<div class="act"><button class="m7b sec" onclick="M7.close()">Desistir</button><button class="m7b gold" onclick="M7.buyShopOk('+id+')">Pagar '+s.shop.price+' e virar a carta</button></div>');
+    if(!myTurn()||G.acted)return;const s=G.players[id];if(!s.shop)return;
+    const full=s.shop.price+G.cfg.doubtFine;
+    modal('<h2>📢 Anúncio de '+esc(s.name)+'</h2><div class="rowc">'+shopBk(s.shop.card,{lg:1})+'</div>'+
+      '<p style="font-size:1rem;color:var(--text)">“É um <b>'+E.PSHORT[s.shop.card.p]+' '+E.RNAME[s.shop.claim]+'</b>.” Preço: <b>'+mo(s.shop.price)+'</b>.</p>'+
+      '<p>A posição é garantida. A raridade pode ser blefe. Você tem <b>'+me.coins+'</b>.</p>'+
+      '<div class="m7two"><button class="m7opt2" '+(me.coins>=s.shop.price?'':'disabled')+' onclick="M7.buyShopOk('+id+')"><b>Confiar e comprar</b><span>Paga '+mo(s.shop.price)+' e vira a carta.</span></button>'+
+      '<button class="m7opt2 d" '+(me.coins>=full?'':'disabled')+' onclick="M7.doubt('+id+')"><b>Duvidar</b><span>Vira antes de pagar. Era blefe: leva por 1 moeda. Era verdade: paga '+mo(full)+'.'+(me.coins<full?' <u>Você precisa ter '+mo(full)+' para duvidar.</u>':'')+'</span></button></div>'+
+      '<div class="act"><button class="m7b sec" onclick="M7.close()">Desistir</button></div>');
+  }
+  function shopResult(r){
+    const t=r.doubt?(r.honest?'😬 Era verdade!':'🎯 Era blefe!'):(r.honest?'✅ Era verdade!':'🃏 Era blefe!');
+    modal('<h2>'+t+'</h2><div class="rowc pack anim"><div class="pk" style="--i:0">'+cardH(r.card)+'</div></div>'+(r.card.f?'<div class="m7frase">'+esc(r.card.f)+'</div>':'')+
+      '<p>Anunciado como <b>'+E.RNAME[r.claim]+'</b>; veio um <b>'+E.RNAME[r.card.r]+'</b>.'+(r.doubt?' Você pagou <b>'+mo(r.paid)+'</b>.':'')+' Ele foi para '+(r.where==='titular'?'o time titular':'o banco')+'.'+(G._out?' <b>'+esc(G._out.n)+'</b> saiu para o banco.':'')+'</p><div class="act"><button class="m7b" onclick="M7.close()">Ok</button></div>');
+    render();
   }
   function buyShopOk(id){
     const r=E.actBuyShop(G,me,id);if(!r.ok){closeModal();toast(r.msg);return}
-    hs('compra_cega');if(!r.honest)hs('cai_no_blefe');
-    modal('<h2>'+(r.honest?'✅ Era verdade!':'🃏 Era blefe!')+'</h2><div class="rowc">'+cardH(r.card)+'</div>'+(r.card.f?'<div class="m7frase">'+esc(r.card.f)+'</div>':'')+
-      '<p>Anunciado como <b>'+E.RNAME[r.claim]+'</b>. Veio um <b>'+E.RNAME[r.card.r]+'</b>, que foi para '+(r.where==='titular'?'o time titular':'o banco')+'.</p><div class="act"><button class="m7b" onclick="M7.close()">Ok</button></div>');
-    render();
+    hs('compra_cega');if(!r.honest)hs('cai_no_blefe');shopResult(r);
   }
-  function retract(){if(!myTurn())return;E.retractShop(G,me);toast('Carta recolhida: ela voltou ao monte do mercado.');render()}
+  function doubt(id){
+    const r=E.actDoubt(G,me,id);if(!r.ok){toast(r.msg);return}
+    hs('duvidei');if(!r.honest)hs('duvida_certa');shopResult(r);
+  }
+  function retract(){if(!myTurn())return;E.retractShop(G,me);toast('Anúncio retirado: a carta voltou ao monte do mercado.');render()}
   function cardMenu(id){
     if(!G||G.over)return;
     const c=E.titulares(me).concat(me.bench).find(x=>x.id===id);if(!c)return;
     const onBench=me.bench.indexOf(c)>=0,mine=myTurn();
     let h='<h2>'+esc(c.n)+'</h2><div class="rowc">'+cardH(c)+'</div>'+(c.f?'<div class="m7frase">'+esc(c.f)+'</div>':'')+'<div class="m7chips">';
     const canT=mine&&E.canTrain(G,me,c)&&!me.trained&&me.coins>=G.cfg.treinoCost;
-    h+='<button class="m7chip" '+(canT?'':'disabled')+' onclick="M7.train('+id+')">🏋️ Treinar +1★ ('+G.cfg.treinoCost+' moedas)</button>';
+    if(!G.cfg.simple)h+='<button class="m7chip" '+(canT?'':'disabled')+' onclick="M7.train('+id+')">🏋️ Treinar +1★ ('+G.cfg.treinoCost+' moedas)</button>';
     if(onBench){
       h+='<button class="m7chip" '+(mine?'':'disabled')+' onclick="M7.sell('+id+')">Vender ao banco (+'+E.saleValue(G,c)+')</button>';
-      h+='<button class="m7chip" '+(mine&&!me.offerUsed?'':'disabled')+' onclick="M7.offer('+id+')">📣 Oferecer aos rivais (1 por turno)</button>';
+      if(!G.cfg.simple)h+='<button class="m7chip" '+(mine&&!me.offerUsed?'':'disabled')+' onclick="M7.offer('+id+')">📣 Oferecer aos rivais (1 por turno)</button>';
       if(me.field[c.p].length<E.FORM[c.p])h+='<button class="m7chip" '+(mine?'':'disabled')+' onclick="M7.swap('+id+',null)">Escalar na vaga</button>';
       h+='</div>';
       if(me.field[c.p].length)h+='<p style="margin-bottom:.2rem">Escalar no lugar de:</p><div class="rowc">'+me.field[c.p].map(f=>cardH(f,{sm:1,click:mine?'M7.swap('+id+','+f.id+')':null})).join('')+'</div>';
@@ -7970,30 +8281,43 @@ const M7 = (function(){
     modal('<h2>📣 Oferta aos rivais</h2><div class="rowc">'+cardH(c)+'</div><p><b>'+esc(b.ai.name)+'</b> oferece <b>'+mo(b.offer)+'</b> por ele. O banco paga '+mo(E.saleValue(G,c))+'.</p><div class="act"><button class="m7b sec" onclick="M7.close()">Recusar</button><button class="m7b gold" onclick="M7.offerOk()">Vender por '+b.offer+'</button></div>');render();
   }
   function offerOk(){const b=M7._bid;if(!b)return;E.acceptProposal(G,b.ai,me,b);M7._bid=null;hs('troca');closeModal();toast('Vendido para '+esc(b.ai.name)+' por '+mo(b.offer)+'.');render()}
-  function end(){if(!myTurn()||G.pending)return;if(!G.acted)hs('passou');busy=true;closeModal();E.endTurn(G);render();loop()}
+  function end(force){
+    if(!myTurn()||G.pending)return;
+    const left=G.cfg.maxRounds-G.round+1,vg=E.emptySlots(me);
+    if(!force&&!G.cfg.endOn11&&left<=2&&(vg>0||!me.tec)){
+      const sv=me.tec;let best=0;if(!me.tec)G.tecOpen.forEach(id=>{me.tec=id;best=Math.max(best,E.tecPoints(me))});me.tec=sv;
+      const w=[];if(vg>0)w.push('Você tem <b>'+vg+' vaga'+(vg>1?'s':'')+' vazia'+(vg>1?'s':'')+'</b>: são <b>−'+(vg*G.cfg.emptyPen)+' pontos</b> no fim. Qualquer jogador barato é melhor que vaga.');
+      if(!me.tec&&best>0)w.push('Você está <b>sem técnico</b>. O melhor do vestiário daria <b>+'+best+' pontos</b> ao seu time por '+mo(G.cfg.tecCost)+'.');
+      if(w.length&&(!G.acted||left===2)){modal('<h2>⚠️ '+(left===1?'Última rodada':'Penúltima rodada')+'</h2>'+w.map(x=>'<p style="font-size:.95rem;color:var(--text)">'+x+'</p>').join('')+'<p>Moeda que sobra no fim não vale ponto.</p><div class="act"><button class="m7b sec" onclick="M7.close()">Voltar</button><button class="m7b gold" onclick="M7.end(true)">'+(G.acted?'Encerrar mesmo assim':'Passar mesmo assim')+'</button></div>');return}
+    }
+    if(!G.acted)hs('passou');busy=true;closeModal();E.endTurn(G);render();loop()}
 
   /* ── NEGOCIAÇÃO ── */
   function nego(){
     if(!myTurn()||me.negUsed)return;sel={ai:null,pos:null,want:null,give:null,offers:null};negoModal();
   }
   function negoModal(){
-    let h='<h2>🤝 Negociar</h2><p>Pergunte à mesa quem tem jogador sobrando numa posição. Quem tiver mostra a carta <b>só para você</b>. Vale 1 consulta com resposta por turno e não gasta a ação.</p><p style="margin-bottom:.2rem">Que posição você procura?</p><div class="m7chips">'+
-      E.POS.map(k=>'<button class="m7chip'+(sel.pos===k?' on':'')+'" '+(sel.offers&&sel.offers.length?'disabled':'')+' onclick="M7.ngPos(\''+k+'\')">'+E.PSHORT[k]+'</button>').join('')+'</div>';
-    if(sel.pos&&sel.offers&&!sel.offers.length)h+='<p><b>Ninguém tem '+E.PSHORT[sel.pos]+' sobrando agora.</b> A consulta não foi gasta: tente outra posição.</p>';
-    if(sel.offers&&sel.offers.length){
-      h+='<p style="margin-bottom:.2rem">Ofertas (clique para escolher):</p><div class="rowc">'+sel.offers.map((o,i)=>'<div style="text-align:center"><div style="font-size:.72rem;margin-bottom:.3rem"><b>'+esc(o.ai.name)+'</b> pede '+mo(E.quote(G,o.ai,o.card,null))+'</div>'+cardH(o.card,{click:'M7.ngPick('+i+')',pick:sel.want===o.card?'m7pick':''})+'</div>').join('')+'</div>';
+    let h='<h2>🤝 Negociar</h2>';
+    if(!sel.want){
+      const rs=G.players.filter(x=>!x.human&&x.bench.length);
+      h+='<p>Os reservas dos rivais estão à vista (posição e seleção). Escolha <b>um</b> para o dono mostrar a carta só para você e dizer o preço. Vale 1 por turno e não gasta a ação.</p>';
+      if(!rs.length)h+='<p><b>Nenhum rival tem reserva agora.</b> Reservas aparecem quando alguém acha no olheiro um jogador que não cabe no time.</p>';
+      rs.forEach(x=>{h+='<div class="m7ngr"><b>'+esc(x.name)+'</b><div>'+x.bench.map((c,k)=>'<button class="m7ngb" '+(me.negUsed?'disabled':'')+' onclick="M7.ngPeek('+x.id+','+k+')">'+backH(c)+'<span>'+E.PSHORT[c.p]+' · '+E.REG[c.nr].n+'</span></button>').join('')+'</div></div>'});
+      h+='<div class="act"><button class="m7b sec" onclick="M7.close()">Fechar</button></div>';
+      modal(h);return;
     }
-    if(sel.want){
-      const ai=G.players[sel.ai],q=E.quote(G,ai,sel.want,sel.give);
-      h+='<p style="margin-bottom:.2rem">Dar um jogador seu em troca abaixa o preço (opcional):</p><div class="rowc">'+
-        me.bench.concat(E.titulares(me)).map(c=>cardH(c,{sm:1,click:'M7.ngGive('+c.id+')',pick:sel.give===c?'m7pick':''})).join('')+'</div>'+
-        '<p>'+(q>0?'Você paga <b>'+mo(q)+'</b>'+(sel.give?' e entrega <b>'+esc(sel.give.n)+'</b>':'')+'.':(q<0&&ai.coins>0)?'Você entrega <b>'+esc(sel.give.n)+'</b> e ainda recebe <b>'+mo(Math.min(-q,ai.coins))+'</b>.':q<0?'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>. O rival está sem moedas para completar a diferença.':'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>.')+' Você tem <b>'+me.coins+'</b>.</p>'+
-        '<div class="act"><button class="m7b sec" onclick="M7.ngNo()">Recusar</button><button class="m7b gold" '+(q>me.coins?'disabled':'')+' onclick="M7.ngOk()">Fechar negócio</button></div>';
-    }else h+='<div class="act"><button class="m7b sec" onclick="M7.close()">Fechar</button></div>';
+    const ai=G.players[sel.ai],q=E.quote(G,ai,sel.want,sel.give);
+    h+='<p><b>'+esc(ai.name)+'</b> mostra só para você:</p><div class="rowc">'+cardH(sel.want)+'</div>'+
+      '<p style="margin-bottom:.2rem">Dar um jogador seu em troca abaixa o preço (opcional):</p><div class="rowc">'+
+      me.bench.concat(E.titulares(me)).map(c=>cardH(c,{sm:1,click:'M7.ngGive('+c.id+')',pick:sel.give===c?'m7pick':''})).join('')+'</div>'+
+      '<p style="font-size:1rem;color:var(--text)">'+(q>0?'Você paga <b>'+mo(q)+'</b>'+(sel.give?' e entrega <b>'+esc(sel.give.n)+'</b>':'')+'.':(q<0&&ai.coins>0)?'Você entrega <b>'+esc(sel.give.n)+'</b> e ainda recebe <b>'+mo(Math.min(-q,ai.coins))+'</b>.':q<0?'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>. O rival está sem moedas para completar a diferença.':'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>.')+' Você tem <b>'+me.coins+'</b>.</p>'+
+      '<div class="act"><button class="m7b sec" onclick="M7.ngNo()">Recusar</button><button class="m7b gold" '+(q>me.coins?'disabled':'')+' onclick="M7.ngOk()">Fechar negócio</button></div>';
     modal(h);
   }
-  function ngPos(k){sel.pos=k;sel.offers=E.aiReleaseAll(G,k);sel.want=null;sel.give=null;hs('consulta');if(sel.offers.length){me.negUsed=true;hs('consulta_com_oferta');if(sel.offers.length===1){sel.want=sel.offers[0].card;sel.ai=sel.offers[0].ai.id}}negoModal();render()}
-  function ngPick(i){const o=sel.offers[i];sel.want=o.card;sel.ai=o.ai.id;sel.give=null;negoModal()}
+  function ngPeek(aiId,k){
+    if(!myTurn()||me.negUsed)return;const ai=G.players[aiId],c=ai.bench[k];if(!c)return;
+    me.negUsed=true;hs('consulta');hs('consulta_com_oferta');sel={ai:aiId,want:c,give:null};negoModal();render();
+  }
   function ngGive(id){const c=me.bench.concat(E.titulares(me)).find(x=>x.id===id);sel.give=(sel.give===c)?null:c;negoModal()}
   function ngNo(){closeModal();render()}
   function ngOk(){
@@ -8032,7 +8356,8 @@ const M7 = (function(){
       const ot=won?rk[1]:rk[0],m0=sc[0],sg=n=>(n>0?'+':'')+n;
       const why=[['estrelas',m0.stars-ot.stars],['técnico',m0.tec-ot.tec],['convocações',m0.conv-ot.conv],['vagas vazias',m0.empty-ot.empty]].filter(x=>x[1]!==0).map(x=>x[0]+' <b>'+sg(x[1])+'</b>').join(' · ');
       h+='<p style="margin-top:.7rem;font-size:1rem"><b>'+(won?'Você venceu a janela!':esc(rk[0].name)+' venceu.')+'</b> Você ficou em '+(rk.findIndex(x=>x.id===0)+1)+'º com '+sc[0].total+' pontos.</p>'+
-        '<p><b>Onde a partida foi decidida</b> (você contra '+esc(ot.name)+'): '+(why||'tudo igual; desempate por estrelas e depois por moedas')+'.'+(!me.tec?' Você jogou <b>sem técnico</b>.':'')+' A partida foi salva em 📊 Testes.</p>'+
+        '<p><b>Onde a partida foi decidida</b> (você contra '+esc(ot.name)+'): '+(why||'empate em tudo')+'.'+(m0.total===ot.total?' <b>Empate em pontos</b>: decidiu '+(m0.stars!==ot.stars?'quem tem mais estrelas ('+m0.stars+' a '+ot.stars+')':'quem guardou mais moedas ('+m0.coins+' a '+ot.coins+')')+'.':'')+(!me.tec?' Você jogou <b>sem técnico</b>.':'')+' A partida foi salva em 📊 Testes.</p>'+
+        '<p class="m7mut">Na última rodada: '+(G.log.filter(l=>l.r===G.round&&l.who>0).map(l=>esc(l.msg)).join(' ')||'nada de novo.')+'</p>'+
         '<div class="act"><button class="m7b sec" onclick="M7.tests()">📊 Testes</button><button class="m7b sec" onclick="M7.open()">Mudar regras</button><button class="m7b gold" onclick="M7.start()">Jogar de novo</button></div>';
     }else h+='<div class="act"><button class="m7b gold" onclick="M7.revNext()">Revelar: '+titles[RSTEPS[rv+1]]+' ➜</button></div>';
     modal(h,true);
@@ -8052,18 +8377,18 @@ const M7 = (function(){
   function rules(){
     const c=G?G.cfg:Object.assign({},E.DEFAULTS,cfgFromOpt());
     modal('<h2>Como jogar — Janela Secreta</h2><div class="m7rules">'+
-    '<h4>Objetivo</h4><ul><li>Montar o 11 (1 goleiro, 4 defensores, 3 meias, 3 atacantes) com a <b>maior pontuação</b> ao fim de <b>'+(c.endOn11?'quando alguém completar os 11':c.maxRounds+' rodadas')+'</b>.</li><li>Os times ficam <b>escondidos</b>. Você vê só as costas das cartas dos rivais: a posição e a cor do mercado de onde vieram.</li></ul>'+
+    '<h4>Objetivo</h4><ul><li>Montar o 11 (1 goleiro, 4 defensores, 3 meias, 3 atacantes) com a <b>maior pontuação</b> ao fim de <b>'+(c.endOn11?'quando alguém completar os 11':c.maxRounds+' rodadas')+'</b>.</li><li>Os times ficam <b>escondidos</b>. Das cartas dos rivais você vê a posição e a seleção (a cor da bolinha), nunca a força.</li></ul>'+
     '<h4>Seu turno</h4><ul><li>Receba <b>'+c.income+' moedas</b> e faça <b>1 ação</b>:</li>'+
     '<li><b>Contratar na vitrine</b>: carta aberta, preço cheio (Bronze 1, Prata 2, Ouro 4, Especial 6, Ícone 8). Todos veem.</li>'+
-    '<li><b>Olheiro</b>: veja 3 cartas fechadas do monte, fique com 1 em segredo. Outra pode ir para a <b>sua vitrine</b>, fechada, com o relatório que você quiser — verdade ou blefe.</li>'+
-    '<li><b>Comprar às cegas</b> da vitrine de um rival: você paga a ele e só então vira a carta.</li>'+
+    '<li><b>Olheiro</b>: veja 3 cartas fechadas do monte, fique com 1 em segredo. Outra pode virar o <b>seu anúncio</b>: fica fechada, à venda, com o relatório que você quiser — verdade ou blefe. Só 1 anúncio por vez; o preço você pode mudar quando quiser.</li>'+
+    '<li><b>Anúncio de um rival</b>: <b>confiar</b> (paga o preço e vira a carta) ou <b>duvidar</b> (vira antes: se era blefe, leva por 1 moeda; se era verdade, paga o preço mais '+c.doubtFine+' de multa; por isso só pode duvidar quem tem esse valor).</li>'+
     '<li><b>Técnico</b> ('+c.tecCost+' moedas, 1 por time) ou <b>Patrocínio</b> (+'+c.sponsor+' moedas).</li>'+
     '<li>Viajar para outra região custa de 1 a 3 moedas e já está somado no preço mostrado. Depois de comprar lá, você fica naquela região.</li>'+
     '<li>Se a posição já está cheia, a carta nova entra só se for melhor que a pior titular, que desce para o banco (máx. '+c.benchMax+' reservas; o excesso é vendido).</li></ul>'+
-    '<h4>O que muda sozinho</h4><ul><li><b>Ordem dos turnos</b>: quem começa gira a cada rodada (está no topo da tela).</li><li><b>Vitrines dos mercados</b>: no fim de cada rodada a carta mais antiga volta ao monte e entra uma nova; nunca há mais de 1 goleiro por vitrine.</li><li><b>Técnicos</b>: quando um é contratado, outro aparece no lugar.</li><li><b>Vitrine de rival</b>: carta encalhada baixa de preço e, depois de um tempo, é recolhida.</li><li><b>Recolher</b> a sua carta da vitrine devolve a carta ao monte; ela não volta para o seu time.</li></ul>'+
-    '<h4>Ações livres</h4><ul><li><b>Treinar</b>: '+c.treinoCost+' moedas, +1★ em um jogador (1 por turno, '+c.maxTreino+' por partida, Ícone não treina).</li><li><b>Negociar</b>: pergunte à mesa quem tem jogador sobrando numa posição; as cartas são mostradas só entre vocês. Dar um jogador seu em troca abaixa o preço.</li><li><b>Oferecer um reserva</b> aos rivais (1 por turno) ou vender ao banco pela metade do preço.</li><li>Mexer no banco: escalar um reserva no lugar de um titular.</li></ul>'+
-    '<h4>Pontuação — 4 linhas</h4><ul><li><b>Estrelas</b> dos 11 titulares.</li><li><b>Técnico</b>: bônus pelo estilo do elenco.</li><li><b>Convocações</b>: quem tem mais titulares daquela região ganha +'+c.convPts+' (empate divide).</li><li><b>Vagas vazias</b>: −'+c.emptyPen+' cada.</li><li>Empate: vence quem tem mais estrelas; depois, mais moedas.</li></ul>'+
-    '<h4>Mercados</h4><ul><li><b>Brasil</b>: barato, muito Bronze e Prata. <b>América do Sul</b>: mistura, com Ouro. <b>Resto do Mundo</b>: mais Ouro e alguns Especiais. <b>Europa</b>: caro, só Ouro, Especial e Ícone.</li><li>A nacionalidade do jogador (bolinha colorida) é o que conta para a convocação, não o mercado onde você o achou.</li></ul></div>'+
+    '<h4>O que muda sozinho</h4><ul><li><b>Ordem dos turnos</b>: quem começa gira a cada rodada (está no topo da tela).</li><li><b>Vitrines dos mercados</b>: no fim de cada rodada a carta marcada “sai na próxima” volta ao monte e entra uma nova; nunca há mais de 1 goleiro por vitrine.</li><li><b>Técnicos</b>: quando um é contratado, outro aparece no lugar.</li><li><b>Anúncio de rival</b>: carta encalhada baixa de preço e, depois de um tempo, é retirada.</li><li><b>Retirar</b> o seu anúncio devolve a carta ao monte; ela não volta para o seu time.</li></ul>'+
+    '<h4>Ações livres</h4><ul><li><b>Treinar</b>: '+c.treinoCost+' moedas, +1★ em um jogador (1 por turno, '+c.maxTreino+' por partida, Ícone não treina).</li><li><b>Negociar</b>: os reservas dos rivais ficam à vista (posição e seleção). Peça para ver um deles (1 por turno): o dono mostra a carta só para você e diz o preço. Dar um jogador seu em troca abaixa o preço.</li><li><b>Oferecer um reserva</b> aos rivais (1 por turno) ou vender ao banco pela metade do preço.</li><li>Mexer no banco: escalar um reserva no lugar de um titular.</li></ul>'+
+    '<h4>Pontuação — 4 linhas</h4><ul><li><b>Estrelas</b> dos 11 titulares.</li><li><b>Técnico</b>: bônus pelo estilo do elenco.</li><li><b>Seleções</b>: quem tem mais titulares daquela seleção ganha +'+c.convPts+' (empate divide). A contagem de todos fica aberta no topo da tela.</li><li><b>Vagas vazias</b>: −'+c.emptyPen+' cada.</li><li>Empate: vence quem tem mais estrelas; depois, mais moedas.</li></ul>'+
+    '<h4>Mercados</h4><ul><li><b>Brasil</b>: barato, quase tudo Bronze e Prata (raramente um Ouro). <b>América do Sul</b>: mistura, com Ouro. <b>Resto do Mundo</b>: mais Ouro e alguns Especiais. <b>Europa</b>: caro, só Ouro, Especial e Ícone.</li><li>A nacionalidade do jogador (bolinha colorida) é o que conta para a convocação, não o mercado onde você o achou.</li></ul></div>'+
     '<div class="act"><button class="m7b" onclick="M7.close()">Entendi</button></div>');
   }
 
@@ -8110,8 +8435,8 @@ const M7 = (function(){
     },30);
   }
 
-  return {open,start,back,setOpt,setRivals,setEnd,resetOpt,buy,buyOk,scout,scKeep,scList,scClaim,scPrice,scOk,sponsor,tec,tecOk,
-    buyShop,buyShopOk,retract,cardMenu,train,sell:sellC,swap,end,nego,ngPos,ngPick,ngGive,ngNo,ngOk,offer,offerOk,revNext,rules,tests,clearHist,sim,
+  return {open,start,back,setOpt,setRivals,setSimple,setEnd,resetOpt,buy,buyOk,scout,scKeep,scList,scClaim,scPrice,scOk,sponsor,tec,tecOk,
+    buyShop,buyShopOk,doubt,hint,hintDo,go,logAll,adPrice,scReplace,retract,cardMenu,train,sell:sellC,swap,end,nego,ngPeek,ngGive,ngNo,ngOk,offer,offerOk,revNext,rules,tests,clearHist,sim,
     close:closeModal,_state:()=>G};
 })();
 
