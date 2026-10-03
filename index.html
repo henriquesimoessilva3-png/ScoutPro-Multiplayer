@@ -1772,6 +1772,204 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
   height:100vh;overflow:hidden;
   flex-direction:column;
 }
+
+/* ═══════════════════════════════════════════════════
+   MODO 06 — JANELA SECRETA
+═══════════════════════════════════════════════════ */
+#mode7{background:radial-gradient(ellipse at 70% 0%,#10203f,var(--bg) 60%)}
+#mode7 .game-header{flex-wrap:wrap}
+.m7hbtn{background:none;border:1px solid var(--border);color:var(--text2);padding:.28rem .6rem;border-radius:5px;cursor:pointer;font-size:.72rem}
+.m7hbtn:hover{color:var(--accent);border-color:var(--accent)}
+.m7{flex:1;overflow-y:auto;overflow-x:hidden;padding:.7rem .8rem 5.2rem;-webkit-overflow-scrolling:touch}
+.m7 h3{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin:0 0 .45rem}
+.m7panel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.65rem .7rem;margin-bottom:.7rem}
+
+/* setup */
+.m7setup{max-width:760px;margin:0 auto}
+.m7hero{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;line-height:1;text-transform:uppercase;letter-spacing:.03em}
+.m7hero span{color:var(--gold)}
+.m7lead{color:var(--text2);font-size:.86rem;line-height:1.5;margin:.5rem 0 .9rem}
+.m7opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem}
+.m7opt{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.5rem .6rem}
+.m7opt label{display:block;font-size:.66rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem}
+.m7step{display:flex;align-items:center;gap:.4rem}
+.m7step button{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:1rem;cursor:pointer}
+.m7step b{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:800;min-width:2ch;text-align:center;color:var(--gold)}
+.m7tog{display:flex;gap:.35rem}
+.m7tog button{flex:1;padding:.35rem .3rem;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:.72rem;cursor:pointer}
+.m7tog button.on{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,.08)}
+.m7btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.m7b{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:.55rem 1rem;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.m7b.sec{background:var(--bg3);border:1px solid var(--border);color:var(--text)}
+.m7b.gold{background:linear-gradient(135deg,#f5c542,#e08a00);color:#1a1000}
+.m7b:disabled{opacity:.4;cursor:not-allowed}
+.m7b.sm{padding:.35rem .6rem;font-size:.74rem}
+
+/* barra de status */
+.m7top{display:flex;gap:.5rem;flex-wrap:wrap;align-items:stretch;margin-bottom:.7rem}
+.m7stat{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.35rem .65rem;min-width:84px}
+.m7stat small{display:block;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2)}
+.m7stat b{font-family:'Barlow Condensed',sans-serif;font-size:1.45rem;font-weight:800;line-height:1.1}
+.m7stat b.gold{color:var(--gold)}
+.m7convs{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
+.m7conv{border-radius:8px;padding:.3rem .55rem;font-size:.72rem;border:1px solid;background:rgba(255,255,255,.03);line-height:1.25}
+.m7conv b{font-family:'Barlow Condensed',sans-serif;font-size:1rem}
+
+.m7grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:.7rem;align-items:start}
+@media(max-width:900px){.m7grid{grid-template-columns:1fr}}
+
+/* mercados */
+.m7regs{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+@media(max-width:560px){.m7regs{grid-template-columns:1fr}}
+.m7reg{border:1px solid var(--border);border-top:3px solid var(--rc);border-radius:9px;background:var(--bg3);padding:.5rem}
+.m7reg.here{box-shadow:0 0 0 1px var(--rc) inset}
+.m7regh{display:flex;align-items:center;gap:.4rem;margin-bottom:.4rem}
+.m7regh .nm{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;text-transform:uppercase;letter-spacing:.05em;color:var(--rc)}
+.m7regh .tr{margin-left:auto;font-size:.68rem;color:var(--text2);white-space:nowrap}
+.m7regh .tr b{color:var(--gold)}
+.m7pawns{font-size:.62rem;color:var(--text2);min-height:.9rem;margin-bottom:.3rem}
+.m7vit{display:flex;gap:.3rem;justify-content:space-between}
+.m7olh{margin-top:.45rem;width:100%;background:rgba(255,255,255,.04);border:1px dashed var(--rc);color:var(--text);border-radius:7px;padding:.4rem;font-size:.74rem;cursor:pointer}
+.m7olh b{color:var(--gold)}
+.m7olh:disabled{opacity:.4;cursor:not-allowed}
+
+/* cartas */
+.m7c{position:relative;width:86px;flex:0 0 auto;border-radius:8px;padding:.3rem .32rem .35rem;cursor:default;color:#10131c;display:flex;flex-direction:column;min-height:112px;border:2px solid rgba(0,0,0,.25);box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.m7c.click{cursor:pointer;transition:transform .12s}
+.m7c.click:hover{transform:translateY(-3px)}
+.m7c.bronze{background:linear-gradient(160deg,#8a5a34,#c98b57 55%,#e2ad7c)}
+.m7c.prata{background:linear-gradient(160deg,#8d97a5,#cdd5df 55%,#eef2f6)}
+.m7c.ouro{background:linear-gradient(160deg,#a36e00,#e0a416 50%,#f7d458)}
+.m7c.especial{background:linear-gradient(160deg,#3a1d8a,#7c4ff0 55%,#b79cff);color:#fff}
+.m7c.icone{background:linear-gradient(160deg,#9fc4dc,#e6f3fb 50%,#b5d2e4);box-shadow:0 0 10px rgba(180,220,255,.55)}
+.m7c .st{font-size:.62rem;letter-spacing:-.06em;line-height:1.25;white-space:nowrap;padding-right:1.9rem}
+.m7c .st i{font-style:normal;color:#0a6d2c;font-weight:800;letter-spacing:0;margin-left:2px;font-size:.62rem}
+.m7c.especial .st i{color:#aaffcb}
+.m7c .ps{position:absolute;top:.25rem;right:.3rem;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;background:rgba(0,0,0,.55);color:#fff;border-radius:4px;padding:0 .28rem}
+.m7c .nm{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.8rem;line-height:1.02;margin-top:.3rem;text-transform:uppercase;overflow-wrap:anywhere}
+.m7c .nm.lg{font-size:.66rem}
+.m7c.sm .nm.lg{font-size:.54rem}
+.m7c .nt{font-size:.58rem;opacity:.85;margin-top:.15rem;display:flex;align-items:center;gap:.2rem}
+.m7dot{display:inline-block;width:7px;height:7px;border-radius:50%;border:1px solid rgba(0,0,0,.4);flex:0 0 auto}
+.m7c .rr{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;opacity:.75;margin-top:auto;padding-top:.2rem}
+.m7c .pr{position:absolute;bottom:-.5rem;right:-.3rem;background:var(--gold);color:#1a1000;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.82rem;border-radius:20px;padding:.05rem .4rem;border:2px solid #1a1000}
+.m7c.no{opacity:.45}
+.m7c.sm{width:66px;min-height:88px;padding:.22rem .25rem}
+.m7c.sm .nm{font-size:.66rem}
+.m7c.sm .st{font-size:.5rem;padding-right:1.6rem}
+.m7c.sm .ps{font-size:.6rem;top:.18rem;right:.2rem;padding:0 .2rem}
+.m7c.sm .st i{font-size:.52rem}
+.m7c.sm .nt{font-size:.5rem}
+.m7c.sm .rr{display:none}
+.m7bk{width:30px;height:42px;border-radius:5px;border:2px solid rgba(255,255,255,.25);display:inline-flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.6rem;color:#fff;background:repeating-linear-gradient(45deg,var(--rc),var(--rc) 4px,rgba(0,0,0,.25) 4px,rgba(0,0,0,.25) 8px);text-shadow:0 1px 2px #000;flex:0 0 auto}
+.m7bk.lg{width:66px;height:88px;font-size:1rem;border-radius:8px}
+.m7bk.empty{background:none;border:2px dashed var(--border);color:var(--border);text-shadow:none}
+
+/* campo */
+.m7pitch{background:linear-gradient(180deg,#0e3a22,#0b2c1a);border:1px solid #1d5c38;border-radius:10px;padding:.5rem .3rem;position:relative}
+.m7row{display:flex;justify-content:center;gap:.3rem;margin:.3rem 0;align-items:flex-start}
+.m7rowl{font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.45);text-align:center;text-transform:uppercase}
+.m7slot{width:66px;min-height:88px;border:2px dashed rgba(255,255,255,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;flex:0 0 auto}
+.m7side{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.55rem}
+.m7box{flex:1;min-width:150px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.45rem}
+.m7box .cards{display:flex;gap:.3rem;flex-wrap:wrap;min-height:40px;align-items:flex-start}
+.m7tec{border-radius:8px;border:1px solid var(--gold);background:rgba(245,197,66,.07);padding:.4rem .5rem;font-size:.72rem;line-height:1.3}
+.m7tec b{font-family:'Barlow Condensed',sans-serif;font-size:.95rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);display:block}
+.m7tec.buy{cursor:pointer}
+.m7tec.buy:hover{background:rgba(245,197,66,.16)}
+.m7tec .cst{float:right;color:var(--gold);font-weight:700}
+.m7partial{display:flex;gap:.6rem;flex-wrap:wrap;font-size:.72rem;color:var(--text2);margin-top:.5rem}
+.m7partial b{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;color:var(--text)}
+.m7partial .tot b{color:var(--gold);font-size:1.5rem}
+
+/* rivais */
+.m7rival{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.45rem .5rem;margin-bottom:.45rem}
+.m7rival.turn{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.m7rh{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--text2);flex-wrap:wrap}
+.m7rh .n{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.95rem;color:var(--text);text-transform:uppercase}
+.m7rh .co b{color:var(--gold)}
+.m7rb{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.35rem;align-items:flex-end}
+.m7rb .grp{display:flex;gap:2px;align-items:flex-end}
+.m7rb .grp::before{content:attr(data-l);font-size:.5rem;color:var(--text2);writing-mode:vertical-rl;transform:rotate(180deg);margin-right:1px;letter-spacing:.08em}
+.m7shop{margin-top:.4rem;display:flex;align-items:center;gap:.5rem;background:rgba(245,197,66,.06);border:1px dashed var(--gold);border-radius:7px;padding:.3rem .45rem;font-size:.72rem}
+.m7shop q{font-style:italic;color:var(--text)}
+
+/* log e barra de ação */
+.m7log{max-height:150px;overflow-y:auto;font-size:.7rem;line-height:1.45;color:var(--text2)}
+.m7log div{padding:.1rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.m7log div.me{color:var(--text)}
+.m7log div i{font-style:normal;color:var(--accent);font-weight:600;margin-right:.3rem}
+.m7bar{position:absolute;left:0;right:0;bottom:0;background:rgba(13,17,32,.96);border-top:1px solid var(--border);padding:.5rem .8rem;display:flex;gap:.5rem;align-items:center;z-index:20;flex-wrap:wrap}
+#mode7{position:relative}
+.m7bar .msg{flex:1;min-width:160px;font-size:.8rem}
+.m7bar .msg b{color:var(--gold)}
+.m7pulse{animation:m7p 1.1s infinite}
+@keyframes m7p{50%{box-shadow:0 0 0 6px rgba(0,229,255,.18)}}
+
+/* modal */
+.m7ov{position:absolute;inset:0;background:rgba(3,5,10,.82);z-index:60;display:none;align-items:center;justify-content:center;padding:.8rem}
+.m7ov.show{display:flex}
+.m7md{background:var(--bg2);border:1px solid var(--border);border-radius:12px;max-width:640px;width:100%;max-height:92%;overflow-y:auto;padding:1rem}
+.m7md.wide{max-width:980px}
+.m7md h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.35rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem}
+.m7md p{font-size:.84rem;line-height:1.5;color:var(--text2);margin-bottom:.6rem}
+.m7md p b{color:var(--text)}
+.m7md .rowc{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin:.7rem 0 1rem}
+.m7md .act{display:flex;gap:.5rem;justify-content:flex-end;flex-wrap:wrap;margin-top:.8rem;position:sticky;bottom:-1rem;background:var(--bg2);padding:.6rem 0 1rem;margin-bottom:-1rem}
+.m7pick{outline:3px solid var(--accent);outline-offset:2px}
+.m7pickg{outline:3px solid var(--gold);outline-offset:2px}
+.m7frase{font-size:.78rem;font-style:italic;color:var(--text);background:var(--bg3);border-left:3px solid var(--gold);padding:.4rem .6rem;border-radius:0 6px 6px 0;margin:.5rem 0}
+.m7rules li{font-size:.84rem;line-height:1.5;color:var(--text2);margin:.3rem 0 .3rem 1.1rem}
+.m7rules li b{color:var(--text)}
+.m7rules h4{font-family:'Barlow Condensed',sans-serif;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:.8rem 0 .2rem}
+.m7tbl{width:100%;border-collapse:collapse;font-size:.76rem}
+.m7tbl th,.m7tbl td{padding:.3rem .4rem;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.m7tbl th:first-child,.m7tbl td:first-child{text-align:left}
+.m7tbl th{color:var(--text2);font-weight:600;font-size:.64rem;text-transform:uppercase;letter-spacing:.06em}
+.m7tbl td b{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem}
+.m7tblw{overflow-x:auto}
+.m7kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.45rem;margin:.6rem 0}
+.m7kpi{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.45rem .55rem}
+.m7kpi small{display:block;font-size:.6rem;color:var(--text2);text-transform:uppercase;letter-spacing:.07em}
+.m7kpi b{font-family:'Barlow Condensed',sans-serif;font-size:1.7rem;font-weight:800;color:var(--gold);line-height:1.1}
+.m7sel{background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:.35rem .45rem;font-size:.8rem}
+.m7chips{display:flex;gap:.35rem;flex-wrap:wrap;margin:.4rem 0}
+.m7chip{border:1px solid var(--border);background:var(--bg3);color:var(--text);border-radius:20px;padding:.3rem .7rem;font-size:.76rem;cursor:pointer}
+.m7chip.on{border-color:var(--accent);color:var(--accent)}
+.m7chip:disabled{opacity:.4;cursor:not-allowed}
+
+/* revelação */
+.m7rev{display:grid;gap:.5rem;grid-template-columns:repeat(var(--n),minmax(0,1fr))}
+@media(max-width:700px){.m7rev{grid-template-columns:1fr 1fr}}
+.m7rc{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.5rem;text-align:center}
+.m7rc.win{border-color:var(--gold);box-shadow:0 0 18px rgba(245,197,66,.35)}
+.m7rc .n{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:.95rem}
+.m7rc .tot{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.6rem;color:var(--gold);line-height:1}
+.m7rc .ln{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text2);padding:.12rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.m7rc .ln b{color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:.95rem}
+.m7rc .cs{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;margin:.3rem 0}
+.m7toast{position:absolute;left:50%;bottom:64px;transform:translateX(-50%) translateY(20px);background:var(--bg2);border:1px solid var(--gold);color:var(--gold);border-radius:8px;padding:.45rem .9rem;font-size:.8rem;z-index:80;opacity:0;transition:.25s;pointer-events:none;max-width:92%;text-align:center}
+.m7toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:560px){
+  .m7c{width:74px;min-height:104px}
+  .m7c.sm,.m7slot{width:58px;min-height:82px}
+  .m7hero{font-size:1.5rem}
+  .m7stat b{font-size:1.2rem}
+  .m7{padding-bottom:7rem}
+}
+
+.m7offers{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.55rem}
+.m7offers .m7shop{flex:1;min-width:230px;margin-top:0}
+@media(max-width:560px){
+  #mode7 .game-header{gap:.4rem;padding:.4rem .5rem}
+  .m7stat{min-width:0;flex:1}
+  .m7conv{font-size:.66rem;padding:.2rem .4rem}
+  .m7bar{padding:.4rem .5rem}
+  .m7bar .msg{font-size:.72rem}
+}
+/* menu com 6 modos: permite rolar em telas baixas (celular) */
+#menu{overflow-y:auto;justify-content:flex-start}
+#menu .menu-inner{margin:auto 0}
 </style>
 </head>
 <body>
@@ -1811,6 +2009,12 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
         <div class="mode-title">Scout Catan</div>
         <div class="mode-desc">Tabuleiro hexagonal! Colete tokens por posição, faça upgrades e contrate jogadores.</div>
         <div class="mode-tag">⬡ Catan · vs IA</div>
+      </div>
+      <div class="mode-card" onclick="M7.open()">
+        <div class="mode-num">06</div>
+        <div class="mode-title">Janela Secreta</div>
+        <div class="mode-desc">Monte seu 11 em segredo: olheiro, blefe na vitrine, técnico, convocação e negociação. Revelação no fim.</div>
+        <div class="mode-tag">🕵️ Novo · Teste · vs IA</div>
       </div>
     </div>
   </div>
@@ -2212,6 +2416,20 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
     <button class="btn" onclick="goMenu()">Voltar ao Menu</button>
   </div>
 </div>
+<div id="mode7" class="screen">
+  <div class="game-header">
+    <button class="back-btn" onclick="M7.back()">← Menu</button>
+    <div class="game-title">Janela Secreta</div>
+    <button class="m7hbtn" onclick="M7.rules()">❓ Regras</button>
+    <button class="m7hbtn" onclick="M7.tests()">📊 Testes</button>
+    <div class="badge" id="m7badge">Teste v0.1</div>
+  </div>
+  <div class="m7" id="m7body"></div>
+  <div class="m7bar" id="m7bar" style="display:none"></div>
+  <div class="m7ov" id="m7ov"><div class="m7md" id="m7md"></div></div>
+  <div class="m7toast" id="m7toast"></div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <!-- ═══ MODE 4 — SCOUT CATAN ═══ -->
@@ -6977,6 +7195,875 @@ function startMode5(){
   document.getElementById('mode5').classList.add('active');
   setTimeout(()=>{ if(window._sc_startGame) window._sc_startGame(); }, 50);
 }
+
+/* ═══════════════════════════════════════════════════
+   MODO 06 — JANELA SECRETA (montagem escondida) — motor
+   Regras de teste v0.1 · sem DOM (roda também em simulação)
+═══════════════════════════════════════════════════ */
+const SP7 = (function(){
+  const DB = [{"id":1,"n":"João Brasileiro","r":"icone","p":"goleiro","nat":"Brasil","nr":"br","f":"A lenda que transformou defesas em eternidade","m":"eu"},{"id":2,"n":"Jay Jay Millá","r":"icone","p":"defesa","nat":"Camarões","nr":"rm","f":"Muralha que virou lenda.","m":"eu"},{"id":3,"n":"Pepê","r":"icone","p":"meio","nat":"Brasil","nr":"br","f":"Quando a bola chega, o destino já foi decidido","m":"eu"},{"id":4,"n":"Elisabeto Simões","r":"icone","p":"ataque","nat":"Portugal","nr":"eu","f":"Elegância que decide finais.","m":"eu"},{"id":5,"n":"Lucinho","r":"icone","p":"ataque","nat":"Brasil","nr":"br","f":"Quando a bola chega, o destino já foi decidido","m":"eu"},{"id":6,"n":"Felipinho","r":"especial","p":"goleiro","nat":"Polônia","nr":"eu","f":"Quando ele está no gol, um dos placares quase nunca sai do zero","m":"eu"},{"id":7,"n":"Petr Catiuscko","r":"especial","p":"goleiro","nat":"Tcheca","nr":"eu","f":"Reflexo de campeão, mentalidade de aço","m":"rm"},{"id":8,"n":"Elias Roseiro","r":"especial","p":"goleiro","nat":"Portugal","nr":"eu","f":"Especialista em transformar perigo em segurança","m":"eu"},{"id":9,"n":"Julito Júnior","r":"especial","p":"defesa","nat":"Brasil","nr":"br","f":"Não passa ninguém — e se passar, ele busca","m":"rm"},{"id":10,"n":"Nando","r":"especial","p":"defesa","nat":"Espanha","nr":"eu","f":"Antecipação perfeita, imposição absoluta","m":"eu"},{"id":11,"n":"Rafinha Hellmeister","r":"especial","p":"meio","nat":"Alemanha","nr":"eu","f":"Liga defesa e ataque com classe e inteligência","m":"eu"},{"id":12,"n":"Karippe Răducioiu","r":"especial","p":"meio","nat":"Romenia","nr":"eu","f":"Cérebro do time, dono do ritmo do jogo","m":"rm"},{"id":13,"n":"Lêdo","r":"especial","p":"meio","nat":"Letonia","nr":"eu","f":"Visão rara, passe preciso, liderança silenciosa","m":"as"},{"id":14,"n":"Lucas Avellar","r":"especial","p":"ataque","nat":"Grécia","nr":"eu","f":"Um segundo de espaço é tudo o que ele precisa","m":"eu"},{"id":15,"n":"Camilo Alberto","r":"especial","p":"ataque","nat":"Argentina","nr":"as","f":"Frio na decisão, letal na finalização","m":"eu"},{"id":16,"n":"Gianluigi Cassini","r":"ouro","p":"goleiro","nat":"Itália","nr":"eu","f":"\"Goleiro Cadeado:\" Trancou o gol e jogou a chave fora. Hoje ninguém entra.","m":"eu"},{"id":17,"n":"Moussa Babacar","r":"ouro","p":"goleiro","nat":"Senegal","nr":"rm","f":"\"Goleiro Wi-Fi 5G:\" Pega em todo lugar, não cai nunca e a conexão com a zaga é perfeita.","m":"rm"},{"id":18,"n":"Ivan Petrelenko","r":"ouro","p":"goleiro","nat":"Rússia","nr":"eu","f":"Onde ele pisa é solo sagrado, não passa nada.","m":"br"},{"id":19,"n":"Karim Berrada","r":"ouro","p":"goleiro","nat":"Marrocos","nr":"rm","f":"\"Mãos de Cola:\" A bola gruda na luva dele","m":"rm"},{"id":20,"n":"Benjamín Rodríguez","r":"ouro","p":"goleiro","nat":"Chile","nr":"as","f":"Confiança que começa lá atrás","m":"as"},{"id":21,"n":"Noah McKenzie","r":"ouro","p":"goleiro","nat":"Canadá","nr":"rm","f":"Regular, atento e decisivo quando necessário","m":"as"},{"id":22,"n":"Bence Kovács","r":"ouro","p":"goleiro","nat":"Hungria","nr":"eu","f":"Seguro nas mãos e firme nas decisões","m":"eu"},{"id":23,"n":"Zé Aparecido","r":"ouro","p":"defesa","nat":"Angola","nr":"rm","f":"\"Ministro da Defesa:\" Tem autoridade máxima na área.","m":"rm"},{"id":24,"n":"Lodi Durand","r":"ouro","p":"defesa","nat":"Holanda","nr":"eu","f":"\"O Android:\" Programado para jogar bola. Não cansa, não reclama e executa tudo com perfeição robótica.","m":"as"},{"id":25,"n":"Kim Min-jun","r":"ouro","p":"defesa","nat":"Coreia do Sul","nr":"rm","f":"\"Zagueiro GPS:\" Antecipa a rota do atacante antes mesmo dele pensar","m":"br"},{"id":26,"n":"Lozano García","r":"ouro","p":"defesa","nat":"México","nr":"rm","f":"\"Harry Potter da Várzea:\" O passe dele é bruxaria pura. A bola faz curva que a física não explica.","m":"rm"},{"id":27,"n":"Kacper Nowak","r":"ouro","p":"defesa","nat":"Polônia","nr":"eu","f":"\"Zagueiro Condomínio Fechado:\" Segurança 24 horas, ninguém passa sem autorização.","m":"eu"},{"id":28,"n":"Luuk Visser","r":"ouro","p":"defesa","nat":"Holanda","nr":"eu","f":"\"Lateral Pulmão de Aço:\" Parece que tem dois corações. Sobe e desce o jogo todo e nem suou.","m":"as"},{"id":29,"n":"Mathis Mertens","r":"ouro","p":"defesa","nat":"Bélgica","nr":"eu","f":"\"Lateral Arqueiro:\" O cruzamento dele é uma flechada no coração da área.","m":"eu"},{"id":30,"n":"Martínez Navarro","r":"ouro","p":"defesa","nat":"Espanha","nr":"eu","f":"\"Rei do Metro Quadrado:\" Dentro da área dele, ele cobra aluguel, IPTU e condomínio. Ninguém entra de graça.","m":"rm"},{"id":31,"n":"Zé Guimarães","r":"ouro","p":"meio","nat":"Portugal","nr":"eu","f":"\"O Mágico da Cartola:\" Acha espaço de onde não tem e acerta passes impossíveis","m":"as"},{"id":32,"n":"Dmytro Shevchenko","r":"ouro","p":"meio","nat":"Ucrânia","nr":"eu","f":"\"Meia Terno e Gravata:\" Joga elegante, cabeça erguida, não suja o calção.","m":"eu"},{"id":33,"n":"Samuel Aboubakar","r":"ouro","p":"meio","nat":"Camarões","nr":"rm","f":"\"Motor V8:\" Potência pura. Acelera na subida e traciona na defesa.","m":"rm"},{"id":34,"n":"Ti-jun Nim","r":"ouro","p":"meio","nat":"Vietna","nr":"rm","f":"\"O Drone:\" Vê o jogo de cima. Enxerga espaços que ninguém aqui no chão conseguiu ver.","m":"rm"},{"id":35,"n":"Michael Johnson","r":"ouro","p":"meio","nat":"EUA","nr":"rm","f":"\"Capitão América:\" O escudo dele protege o time todo. Liderança nata.","m":"br"},{"id":36,"n":"Harry Collins","r":"ouro","p":"meio","nat":"Inglaterra","nr":"eu","f":"Joga de Terno e Gravata:\" Elegância pura. Sai do jogo cheiroso.","m":"as"},{"id":37,"n":"Mamadou Diop","r":"ouro","p":"meio","nat":"Senegal","nr":"rm","f":"\"Nasceu com a 10 tatuada nas costas","m":"eu"},{"id":38,"n":"Mafuso Quizumba","r":"ouro","p":"ataque","nat":"Gana","nr":"rm","f":"\"O Raio:\" Você só ouve o barulho depois que ele já passou.","m":"rm"},{"id":39,"n":"Andrés García","r":"ouro","p":"ataque","nat":"Colombia","nr":"as","f":"\"O Ilusionista:\" Esconde a bola e faz ela aparecer dentro do gol. O zagueiro tá procurando até agora.","m":"as"},{"id":40,"n":"Matías Pereira","r":"ouro","p":"ataque","nat":"Uruguai","nr":"as","f":"\"O Fantasma:\" Passa por dentro da zaga e ninguém consegue tocar nele.","m":"rm"},{"id":41,"n":"Thomas Dubois","r":"ouro","p":"ataque","nat":"França","nr":"eu","f":"\"O Trem-Bala:\" Quando arranca, sai da frente que é atropelamento certo. Ninguém pega na corrida.","m":"eu"},{"id":42,"n":"Lautaro Gómez","r":"ouro","p":"ataque","nat":"Argentina","nr":"as","f":"\"O Homem-Gol:\" O apelido já é o sobrenome. A bola procura ele na área.","m":"as"},{"id":43,"n":"Marko Božić","r":"ouro","p":"ataque","nat":"Croácia","nr":"eu","f":"\"O Tanque de Guerra:\" Passa por cima de buraco, lama, zagueiro... nada derruba esse monstro.","m":"eu"},{"id":44,"n":"Giovanni Romano","r":"ouro","p":"ataque","nat":"Itália","nr":"eu","f":"\"O Sniper:\" Ele não chuta, ele abate o alvo. Onde ele mira, a bola entra.","m":"rm"},{"id":45,"n":"Rachid Benali","r":"prata","p":"goleiro","nat":"Argélia","nr":"rm","f":"Goleiro \"Enfeite de Estante\": Fica ali parado, paradinho... só pegando poeira. Se a bola for no canto, ele só olha.","m":"as"},{"id":46,"n":"Eli Levi","r":"prata","p":"goleiro","nat":"Israel","nr":"rm","f":"Goleiro \"Sabonete Líquido\": A bola chega e escorrega da mão dele com uma facilidade incrível.","m":"rm"},{"id":47,"n":"Yuki Tanaka","r":"prata","p":"goleiro","nat":"Japao","nr":"rm","f":"Goleiro \"Chá de Bebê\": É uma festa, todo mundo ganha presente e sai feliz","m":"br"},{"id":48,"n":"Gilmar Paçoca","r":"prata","p":"goleiro","nat":"Brasil","nr":"br","f":"Goleiro \"Tapete de Bem-Vindo\": Fica estendido no chão e é só o atacante fazer o gol.","m":"br"},{"id":49,"n":"Berk Demir","r":"prata","p":"goleiro","nat":"Turquia","nr":"eu","f":"Goleiro \"Garçom de Rodízio\": Não deixa o atacante com fome. Toda hora serve um golzinho.","m":"as"},{"id":50,"n":"Márcio Tavares","r":"prata","p":"defesa","nat":"Cabo Verde","nr":"rm","f":"Zagueiro \"Mordomo\": \"Pois não, senhor atacante? Gostaria de chutar no canto direito ou esquerdo?\"","m":"br"},{"id":51,"n":"Majed Al Kaabi","r":"prata","p":"defesa","nat":"Emirados","nr":"rm","f":"Zagueiro \"Gelatina\": Treme todo quando vê o atacante vindo. Não tem consistência.","m":"rm"},{"id":52,"n":"Diego Pizarro","r":"prata","p":"defesa","nat":"Chile","nr":"as","f":"Zagueiro \"Algodão Doce\": Parece grande, faz volume, mas quando o atacante encosta, ele desmancha","m":"as"},{"id":53,"n":"João Matola","r":"prata","p":"defesa","nat":"Moçambique","nr":"rm","f":"Zagueiro \"Ursinho de Pelúcia\": Fofinho e bonitinho, não assusta ninguém","m":"br"},{"id":54,"n":"Daan Van der Lan","r":"prata","p":"defesa","nat":"Holanda","nr":"eu","f":"Zagueiro \"Manteiga de Garrafa\": Derrete rapidinho no calor do jogo.","m":"as"},{"id":55,"n":"Vikram Sharma","r":"prata","p":"meio","nat":"India","nr":"rm","f":"Meia \"Rotatória\": A bola chega nele e fica girando, girando, girando... e não sai do mesmo lugar.","m":"br"},{"id":56,"n":"Karim Konaté","r":"prata","p":"meio","nat":"Burkina Faso","nr":"rm","f":"Meia Vagalume: Acende uma vez no jogo, depois some","m":"as"},{"id":57,"n":"Junior Mbemba","r":"prata","p":"meio","nat":"Congo","nr":"rm","f":"Meia \"Almofada de Pescoço\": Só serve para o adversário apoiar e ficar confortável","m":"rm"},{"id":58,"n":"Luis Fígado","r":"prata","p":"meio","nat":"Portugal","nr":"eu","f":"Meia \"Gelo no Sol\": Começa inteiro, mas com 15 minutos já derreteu","m":"br"},{"id":59,"n":"Mark Robertson","r":"prata","p":"meio","nat":"Austrilia","nr":"rm","f":"Meia \"Chá de Pera\": Dizem que é bom para criança porque é levinho, mas no jogo de adulto não faz mal a ninguem","m":"as"},{"id":60,"n":"Andrei Morozov","r":"prata","p":"ataque","nat":"Belarus","nr":"eu","f":"Atacante \"Coveiro\": É o famoso cemitério de jogadas","m":"br"},{"id":61,"n":"Jean Mbanga","r":"prata","p":"ataque","nat":"Camarões","nr":"rm","f":"Atacante \"Bolha de Sabão\": É bonito de ver flutuando, mas se encostar, estoura e some","m":"rm"},{"id":62,"n":"Carlos Villa","r":"prata","p":"ataque","nat":"Paraguai","nr":"as","f":"Atacante \"Picolé de Chuchu\": Insosso. Não faz gol, nem marca. Ninguém sabe porque está ali","m":"as"},{"id":63,"n":"Zé Beleza","r":"prata","p":"ataque","nat":"Brasil","nr":"br","f":"Atacante \"Água de Salsicha\": ninguém sabe exatamente para que serve.","m":"br"},{"id":64,"n":"Jun Liang","r":"prata","p":"ataque","nat":"China","nr":"rm","f":"Atacante \"Bomba de Chocolate\": Parece perigoso pelo nome, mas no fundo é doce e mole.","m":"rm"},{"id":65,"n":"Ardit Krasniqi","r":"bronze","p":"goleiro","nat":"Albania","nr":"eu","f":"Goleiro \"Telhado com Goteira\": Pingou na área, ele deixa passar.","m":"br"},{"id":66,"n":"Davit Beridze","r":"bronze","p":"goleiro","nat":"Georgia","nr":"eu","f":"Goleiro \"Mão de Quiabo\": Tudo que pega escorrega.","m":"br"},{"id":67,"n":"Karim Hassan","r":"bronze","p":"goleiro","nat":"Egito","nr":"rm","f":"Goleiro Wi-Fi: Só funciona em casa; fora de casa não pega nada","m":"rm"},{"id":68,"n":"Stavros Nicolaou","r":"bronze","p":"goleiro","nat":"Chipre","nr":"eu","f":"Goleiro Matrix\": Quando a bola vem na direção dele, ele desvia para ela não bater nele.","m":"br"},{"id":69,"n":"Chinedu Eze","r":"bronze","p":"goleiro","nat":"Nigéria","nr":"rm","f":"Mãos de manteiga versão premium; Sai do gol… mas o gol não sai dele","m":"br"},{"id":70,"n":"Kevin Córdoba","r":"bronze","p":"goleiro","nat":"Panamá","nr":"rm","f":"Goleiro Mão de Alface: A bola bate e escorrega","m":"as"},{"id":71,"n":"Renzo Colque","r":"bronze","p":"goleiro","nat":"Bolivia","nr":"as","f":"Goleiro \"Holograma\": Parece que está lá no gol, mas a bola passa por dentro dele","m":"as"},{"id":72,"n":"Torrentillo","r":"bronze","p":"goleiro","nat":"Chile","nr":"as","f":"Goleiro \"Antivírus Grátis\": Diz que protege, faz barulho, manda notificação, mas deixa passar qualquer ameaça básica","m":"as"},{"id":73,"n":"Aleksandr Morozov","r":"bronze","p":"goleiro","nat":"Russia","nr":"eu","f":"Goleiro \"Modo Avião\": Está em campo, mas totalmente desconectado do mundo real","m":"br"},{"id":74,"n":"Arman Petrosyan","r":"bronze","p":"defesa","nat":"Armênia","nr":"eu","f":"Lateral Saci: Só tem uma perna (a outra é só para subir no ônibus).","m":"br"},{"id":75,"n":"Luis Choque","r":"bronze","p":"defesa","nat":"Bolivia","nr":"as","f":"\"O Mágico de Oz\": Falta tudo nele: falta coragem (Leão), falta coração/vontade (Homem de Lata) e falta cérebro (Espantalho).","m":"as"},{"id":76,"n":"Sekou Bangoura","r":"bronze","p":"defesa","nat":"Guiné","nr":"rm","f":"Lateral \"Bateria Viciada\": Com 10 minutos de jogo já entra no \"modo economia de energia\" e não corre mais.","m":"br"},{"id":77,"n":"Petar Ivanov","r":"bronze","p":"defesa","nat":"Bulgária","nr":"eu","f":"Zagueiro sopa de gesso - mais duro que salame de colônia","m":"br"},{"id":78,"n":"Vannak Chea","r":"bronze","p":"defesa","nat":"Camboja","nr":"rm","f":"\"O Jogador 100\": sem domínio, sem chute, sem velocidade.","m":"rm"},{"id":79,"n":"Timur Bekov","r":"bronze","p":"defesa","nat":"Cazaquistao","nr":"rm","f":"Lateral \"Fone de Ouvido com Fio\": Passa o jogo todo enrolado.","m":"br"},{"id":80,"n":"Hakim Idrissi","r":"bronze","p":"defesa","nat":"Marrocos","nr":"rm","f":"Lateral cachumba - quando desce é um ... perigo para o seu time","m":"as"},{"id":81,"n":"Yorman Figueroa","r":"bronze","p":"defesa","nat":"Venezuela","nr":"as","f":"”Zagueiro Cheque Especial\": Você usa ele por desespero, mas sabe que a consequência vai ser ruim depois","m":"as"},{"id":82,"n":"Hakim Yusof","r":"bronze","p":"defesa","nat":"Brunei","nr":"rm","f":"Lateral Sessão da Tarde: Dá um sono ver ele jogar","m":"br"},{"id":83,"n":"Kabelo Moagi","r":"bronze","p":"meio","nat":"Botsuana","nr":"rm","f":"Camisa 10 \"Wi-Fi de Rodoviária\": Conecta, desconecta, é lento e você nunca pode confiar.","m":"br"},{"id":84,"n":"Mika Virtanen","r":"bronze","p":"meio","nat":"Finlandia","nr":"eu","f":"Volante Refri de 3 litros - quando passa o meio, perde o gás","m":"br"},{"id":85,"n":"Andrés Caicedo","r":"bronze","p":"meio","nat":"Equador","nr":"as","f":"\"Fiscal de Obra\": Fica no meio campo apontando, gritando, mandando todo mundo trabalhar, mas ele mesmo não faz nada","m":"as"},{"id":86,"n":"Ryan Campbell","r":"bronze","p":"meio","nat":"Canadá","nr":"rm","f":"O Inimigo da Bola\": Eles brigaram na infância e nunca mais fizeram as pazes","m":"rm"},{"id":87,"n":"Tomas Kral","r":"bronze","p":"meio","nat":"Eslovaquia","nr":"eu","f":"Volante Caçamba: Só joga para trás.","m":"br"},{"id":88,"n":"Mantas Petrauskas","r":"bronze","p":"meio","nat":"Lituania","nr":"eu","f":"\"O Matemático do Caos\": Ele soma erros, subtrai a paciência da torcida e divide o vestiário.","m":"as"},{"id":89,"n":"Marko Vukovic","r":"bronze","p":"meio","nat":"Montenegro","nr":"eu","f":"Conhecido como Cone Kross: lembra o craque alemao, mas só joga parado","m":"br"},{"id":90,"n":"Liridon Berisha","r":"bronze","p":"meio","nat":"Kosovo","nr":"eu","f":"Jogador \"Enfeite de Natal\": Só aparece uma vez por ano, brilha um pouco e depois so ano que vem.","m":"br"},{"id":91,"n":"Tae Hyun Lee","r":"bronze","p":"meio","nat":"Coreia do Sul","nr":"rm","f":"O Camisa 100... noção\": Acha que joga muito, tenta drible de efeito na pequena área e entrega o ouro","m":"as"},{"id":92,"n":"Ivadinho","r":"bronze","p":"ataque","nat":"Brasil","nr":"br","f":"Atacante Soldado de Guerra: Vai, mas não sabe se volta","m":"br"},{"id":93,"n":"Jairo Martina","r":"bronze","p":"ataque","nat":"Curaçao","nr":"rm","f":"Doutor da bola: já é quase formado em medicina, de tanto tempo que passa no departamento medico","m":"rm"},{"id":94,"n":"Alejandro Torres","r":"bronze","p":"ataque","nat":"Cuba","nr":"rm","f":"Jogador \"Carro de Leilão\": Parece inteiro por fora, mas por dentro está todo batido e o motor não aguenta 90 minutos.","m":"br"},{"id":95,"n":"José Ureña","r":"bronze","p":"ataque","nat":"Costa Rica","nr":"rm","f":"\"Juiz sem Apito\": Passa mais tempo reclamando da falta que não foi do que jogando bola","m":"as"},{"id":96,"n":"Liam Murphy","r":"bronze","p":"ataque","nat":"Irlanda","nr":"eu","f":"Atacante \"Sushi de Posto\": Tem uma cara duvidosa e a chance de dar dor de barriga no time é de 100%.","m":"br"},{"id":97,"n":"Tiaguinho Pedalada","r":"bronze","p":"ataque","nat":"Brasil","nr":"br","f":"Atacante triatleta - corre, pedala e nada","m":"br"},{"id":98,"n":"Rodrigo Ocampos","r":"bronze","p":"ataque","nat":"Paraguai","nr":"as","f":"Atacante vitamina C: não faz mal para ninguem","m":"as"},{"id":99,"n":"Iker Valero","r":"bronze","p":"ataque","nat":"Espanha","nr":"eu","f":"\"O 007\": 0 gols, 0 assistências, 7 perdas de bola.","m":"br"}];
+  const REG = {
+    br:{n:'Brasil',f:'🇧🇷',c:'#22b35e'},
+    as:{n:'América do Sul',f:'🌎',c:'#3b8cf0'},
+    eu:{n:'Europa',f:'🇪🇺',c:'#9a6bff'},
+    rm:{n:'Resto do Mundo',f:'🌏',c:'#f2902a'}
+  };
+  const RORD = ['br','as','eu','rm'];
+  const TRAVEL = {br:{as:1,eu:3,rm:3},as:{br:1,eu:2,rm:3},eu:{br:3,as:2,rm:2},rm:{br:3,as:3,eu:2}};
+  const STARS = {bronze:1,prata:2,ouro:3,especial:4,icone:5};
+  const RNAME = {bronze:'Bronze',prata:'Prata',ouro:'Ouro',especial:'Especial',icone:'Ícone'};
+  const RORDER = ['bronze','prata','ouro','especial','icone'];
+  const FORM = {goleiro:1,defesa:4,meio:3,ataque:3};
+  const POS = ['goleiro','defesa','meio','ataque'];
+  const PSHORT = {goleiro:'GOL',defesa:'DEF',meio:'MEI',ataque:'ATA'};
+
+  const DEFAULTS = {
+    startCoins:6, income:3, sponsor:4, emptyPen:2, maxRounds:10, endOn11:false, rotate:true,
+    benchMax:3, tecCost:4, treinoCost:3, maxTreino:3, convPts:4, firstBonus:0,
+    price:{bronze:1,prata:2,ouro:4,especial:6,icone:8},
+    olheiro:{br:2,as:3,rm:3,eu:6}
+  };
+
+  /* Técnicos: bônus aditivo por carta (pc) ou por conjunto (set) */
+  const TECS = [
+    {id:'formador', n:'Formador', d:'+1 por titular Bronze ou Prata (máx. 5)', max:5,
+      pc:c=>(c.r==='bronze'||c.r==='prata')?1:0},
+    {id:'retranqueiro', n:'Retranqueiro', d:'+1 por goleiro ou defensor titular com 3★ ou mais (máx. 5)', max:5,
+      pc:c=>((c.p==='goleiro'||c.p==='defesa')&&stars(c)>=3)?1:0},
+    {id:'ofensivo', n:'Ofensivo', d:'+1 por meia ou atacante titular com 3★ ou mais (máx. 5)', max:5,
+      pc:c=>((c.p==='meio'||c.p==='ataque')&&stars(c)>=3)?1:0},
+    {id:'galactico', n:'Galáctico', d:'+2 por titular Ícone e +1 por titular Especial (máx. 5)', max:5,
+      pc:c=>c.r==='icone'?2:c.r==='especial'?1:0},
+    {id:'caseiro', n:'Caseiro', d:'+2 por titular brasileiro (máx. 6)', max:6,
+      pc:c=>c.nr==='br'?2:0},
+    {id:'paizao', n:'Paizão', d:'+2 por titular treinado (máx. 6)', max:6,
+      pc:c=>c.tr?2:0},
+    {id:'globetrotter', n:'Globetrotter', d:'+5 com titulares das 4 regiões; +2 com 3 regiões', max:5,
+      set:p=>{const s=new Set(titulares(p).map(c=>c.nr));return s.size>=4?5:s.size===3?2:0}},
+    {id:'hermano', n:'Hermano', d:'+2 por titular da América do Sul, sem contar o Brasil (máx. 6)', max:6,
+      pc:c=>c.nr==='as'?2:0}
+  ];
+
+  const STYLES = {
+    equilibrado:{n:'Equilibrado', lam:.45, emptyW:1.0, starW:1.0, lie:.30},
+    apressado:  {n:'Apressado',   lam:.40, emptyW:2.2, starW:.8,  lie:.45},
+    galactico:  {n:'Estrelas',    lam:.32, emptyW:.5,  starW:1.3, lie:.20}
+  };
+
+  function stars(c){return STARS[c.r]+(c.tr?1:0)}
+  function titulares(p){return POS.flatMap(k=>p.field[k])}
+  function emptySlots(p){return POS.reduce((s,k)=>s+(FORM[k]-p.field[k].length),0)}
+  function isFull(p){return emptySlots(p)===0}
+  function shuf(a,rng){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|rng()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b}
+
+  function newGame(opts){
+    opts=opts||{};
+    const rng=opts.rng||Math.random;
+    const cfg=Object.assign({},DEFAULTS,opts.cfg||{});
+    cfg.price=Object.assign({},DEFAULTS.price,(opts.cfg||{}).price||{});
+    cfg.olheiro=Object.assign({},DEFAULTS.olheiro,(opts.cfg||{}).olheiro||{});
+    const n=opts.players||3;
+    const G={cfg,rng,round:1,turn:0,order:[],endBy:null,over:false,log:[],decks:{},vit:{},acted:false,
+      tecDeck:shuf(TECS.map(t=>t.id),rng),tecOpen:[],conv:shuf(RORD,rng).slice(0,(opts.players||3)===2?2:3),players:[],pending:null,stats:{actions:{}}};
+    RORD.forEach(r=>{G.decks[r]=shuf(DB.filter(c=>c.m===r).map(c=>Object.assign({},c,{tr:0})),rng)});
+    const styleKeys=Object.keys(STYLES);
+    for(let i=0;i<n;i++){
+      const human=!!opts.human&&i===0;
+      G.players.push({id:i,name:human?'Você':'IA '+(opts.human?i:i+1),human,coins:cfg.startCoins,reg:'br',
+        field:{goleiro:[],defesa:[],meio:[],ataque:[]},bench:[],tec:null,treinos:0,shop:null,
+        trust:{},style:(opts.styles&&opts.styles[i])||styleKeys[(opts.human?i+2:i)%styleKeys.length],negUsed:false,spent:0});
+    }
+    /* início: cada um recebe 1 Bronze por setor (4 cartas) */
+    G.players.forEach(p=>{
+      POS.forEach(k=>{
+        /* tira do monte que tiver mais Bronze daquela posição, para não esvaziar o Brasil */
+        const nb=r=>G.decks[r].filter(c=>c.r==='bronze'&&c.p===k).length;
+        const src=['br','as','rm'].sort((x,y)=>nb(y)-nb(x))[0];
+        const d=G.decks[src];const ix=d.findIndex(c=>c.r==='bronze'&&c.p===k);
+        if(ix>=0){p.field[k].push(d.splice(ix,1)[0])}
+      });
+    });
+    RORD.forEach(r=>{G.vit[r]=[];refill(G,r)});
+    G.tecOpen=[G.tecDeck.pop(),G.tecDeck.pop()];
+    G.order=G.players.map(p=>p.id);
+    startTurn(G);
+    return G;
+  }
+  function refill(G,r){while(G.vit[r].length<3&&G.decks[r].length)G.vit[r].push(G.decks[r].shift())}
+  function cur(G){return G.players[G.order[G.turn]]}
+  function L(G,msg,who){G.log.push({r:G.round,who:who==null?-1:who,msg})}
+  function count(G,k){G.stats.actions[k]=(G.stats.actions[k]||0)+1}
+
+  function startTurn(G){
+    const p=cur(G);p.coins+=G.cfg.income;p.negUsed=false;p.trained=false;G.acted=false;G.pending=null;
+  }
+  function endTurn(G){
+    if(G.over)return;
+    G.turn++;
+    if(G.turn>=G.players.length){
+      G.turn=0;
+      if((G.cfg.endOn11&&G.endBy!=null)||G.round>=G.cfg.maxRounds){G.over=true;L(G,'Fim da janela! Hora de revelar os times.');return}
+      G.round++;
+      if(G.cfg.rotate)G.order.push(G.order.shift());
+    }
+    startTurn(G);
+  }
+  function checkFull(G,p){
+    if(G.endBy==null&&isFull(p)){G.endBy=p.id;L(G,p.name+' completou os 11!'+(G.cfg.endOn11?' A rodada termina e todos revelam.':''),p.id)}
+  }
+
+  /* valor de uma carta para um jogador (estrelas + bônus de técnico por carta) */
+  function tecDef(id){return TECS.find(t=>t.id===id)}
+  function cardVal(p,c){const t=p.tec&&tecDef(p.tec);return stars(c)+((t&&t.pc)?t.pc(c):0)}
+  function worstIn(p,k){let w=null;p.field[k].forEach(c=>{if(!w||cardVal(p,c)<cardVal(p,w))w=c});return w}
+
+  /* coloca a carta: vaga livre → titular; senão troca o pior se for melhor; senão banco */
+  function place(G,p,c){
+    const k=c.p;
+    if(p.field[k].length<FORM[k]){p.field[k].push(c);checkFull(G,p);return 'titular'}
+    const w=worstIn(p,k);
+    if(cardVal(p,c)>cardVal(p,w)){p.field[k][p.field[k].indexOf(w)]=c;toBench(G,p,w);return 'titular'}
+    toBench(G,p,c);return 'banco';
+  }
+  function saleValue(G,c){return Math.max(1,Math.floor(G.cfg.price[c.r]/2))}
+  function toBench(G,p,c){
+    p.bench.push(c);
+    while(p.bench.length>G.cfg.benchMax){
+      let w=p.bench[0];p.bench.forEach(x=>{if(stars(x)<stars(w))w=x});
+      p.bench.splice(p.bench.indexOf(w),1);p.coins+=saleValue(G,w);G.decks[w.m].push(w);
+      L(G,p.name+' vendeu um reserva ao banco (+'+saleValue(G,w)+').',p.id);
+    }
+  }
+  function travelCost(p,r){return p.reg===r?0:TRAVEL[p.reg][r]}
+  function pay(p,n){p.coins-=n;p.spent+=n}
+
+  /* ── AÇÕES PRINCIPAIS (1 por turno) ── */
+  function actBuyVit(G,p,r,idx){
+    if(G.acted)return {ok:false,msg:'Você já fez sua ação.'};
+    const c=G.vit[r][idx];if(!c)return {ok:false,msg:'Carta indisponível.'};
+    const cost=travelCost(p,r)+G.cfg.price[c.r];
+    if(p.coins<cost)return {ok:false,msg:'Moedas insuficientes ('+cost+').'};
+    pay(p,cost);p.reg=r;G.vit[r].splice(idx,1);refill(G,r);count(G,'reg_'+r);
+    const where=place(G,p,c);G.acted=true;count(G,'vitrine');
+    L(G,p.name+' contratou na vitrine d'+artigo(r)+' '+REG[r].n+': '+PSHORT[c.p]+' '+RNAME[c.r]+' (todos viram).',p.id);
+    return {ok:true,card:c,where};
+  }
+  function artigo(r){return r==='br'?'o':r==='rm'?'o':'a'}
+  function actScout(G,p,r){
+    if(G.acted)return {ok:false,msg:'Você já fez sua ação.'};
+    if(!G.decks[r].length)return {ok:false,msg:'Monte vazio.'};
+    const cost=travelCost(p,r)+G.cfg.olheiro[r];
+    if(p.coins<cost)return {ok:false,msg:'Moedas insuficientes ('+cost+').'};
+    pay(p,cost);p.reg=r;count(G,'reg_'+r);
+    const cards=G.decks[r].splice(0,3);
+    G.pending={type:'scout',r,cards};G.acted=true;count(G,'olheiro');
+    return {ok:true,cards};
+  }
+  /* keep: índice que fica; list: índice que vai para a vitrine própria (ou null); claim: raridade declarada; price */
+  function resolveScout(G,p,keep,list,claim,price){
+    const pd=G.pending;if(!pd||pd.type!=='scout')return {ok:false};
+    const kept=pd.cards[keep];
+    let listed=null;
+    if(list!=null&&list!==keep&&pd.cards[list]&&!p.shop){
+      listed=pd.cards[list];p.shop={card:listed,claim:claim||listed.r,price:Math.max(1,price|0)};
+    }
+    pd.cards.forEach(c=>{if(c!==kept&&c!==listed)G.decks[pd.r].push(c)});
+    G.pending=null;
+    const where=place(G,p,kept);
+    L(G,p.name+' usou o olheiro n'+artigo(pd.r)+' '+REG[pd.r].n+' e ficou com 1 '+PSHORT[kept.p]+' (fechado).',p.id);
+    if(listed)L(G,p.name+' pôs um '+PSHORT[listed.p]+' na vitrine por '+p.shop.price+' moedas: “é '+RNAME[p.shop.claim]+'”.',p.id);
+    return {ok:true,card:kept,where};
+  }
+  function actSponsor(G,p){
+    if(G.acted)return {ok:false,msg:'Você já fez sua ação.'};
+    p.coins+=G.cfg.sponsor;G.acted=true;count(G,'patrocinio');
+    L(G,p.name+' fechou patrocínio (+'+G.cfg.sponsor+').',p.id);return {ok:true};
+  }
+  function actTec(G,p,idx){
+    if(G.acted)return {ok:false,msg:'Você já fez sua ação.'};
+    if(p.tec)return {ok:false,msg:'Você já tem técnico.'};
+    const id=G.tecOpen[idx];if(!id)return {ok:false,msg:'Indisponível.'};
+    if(p.coins<G.cfg.tecCost)return {ok:false,msg:'Moedas insuficientes ('+G.cfg.tecCost+').'};
+    pay(p,G.cfg.tecCost);p.tec=id;G.tecOpen.splice(idx,1);
+    if(G.tecDeck.length)G.tecOpen.push(G.tecDeck.pop());
+    G.acted=true;count(G,'tecnico');
+    L(G,p.name+' contratou o técnico '+tecDef(id).n+'.',p.id);return {ok:true};
+  }
+  function canTrain(G,p,c){return c&&!c.tr&&c.r!=='icone'&&p.treinos<G.cfg.maxTreino}
+  function actTreino(G,p,cardId){
+    if(p.trained)return {ok:false,msg:'Só 1 treino por turno.'};
+    const c=titulares(p).concat(p.bench).find(x=>x.id===cardId);
+    if(!canTrain(G,p,c))return {ok:false,msg:'Não dá para treinar esse jogador.'};
+    if(p.coins<G.cfg.treinoCost)return {ok:false,msg:'Moedas insuficientes ('+G.cfg.treinoCost+').'};
+    pay(p,G.cfg.treinoCost);c.tr=1;p.treinos++;p.trained=true;count(G,'treino');
+    L(G,p.name+' treinou um jogador (+1★).',p.id);return {ok:true,card:c};
+  }
+  function actBuyShop(G,p,sellerId){
+    if(G.acted)return {ok:false,msg:'Você já fez sua ação.'};
+    const s=G.players[sellerId];if(!s||!s.shop||s===p)return {ok:false,msg:'Indisponível.'};
+    const sh=s.shop;
+    if(p.coins<sh.price)return {ok:false,msg:'Moedas insuficientes ('+sh.price+').'};
+    pay(p,sh.price);s.coins+=sh.price;s.shop=null;
+    const honest=RORDER.indexOf(sh.card.r)>=RORDER.indexOf(sh.claim);
+    const t=p.trust[sellerId]==null?.6:p.trust[sellerId];
+    p.trust[sellerId]=honest?Math.min(.95,t+.15):t*.45;
+    const where=place(G,p,sh.card);G.acted=true;count(G,'vitrine_rival');
+    if(!honest)count(G,'blefe_pegou');
+    L(G,p.name+' comprou da vitrine de '+s.name+' por '+sh.price+' — '+(honest?'o relatório era verdadeiro.':'era blefe!'),p.id);
+    return {ok:true,card:sh.card,claim:sh.claim,honest,where};
+  }
+
+  /* ── AÇÕES LIVRES ── */
+  function sell(G,p,cardId){
+    const i=p.bench.findIndex(c=>c.id===cardId);if(i<0)return {ok:false};
+    const c=p.bench.splice(i,1)[0];const v=saleValue(G,c);p.coins+=v;G.decks[c.m].push(c);
+    L(G,p.name+' vendeu um reserva ao banco (+'+v+').',p.id);return {ok:true,v};
+  }
+  function swap(G,p,benchId,fieldId){
+    const b=p.bench.find(c=>c.id===benchId);if(!b)return {ok:false};
+    const k=b.p;
+    if(fieldId==null){
+      if(p.field[k].length>=FORM[k])return {ok:false};
+      p.bench.splice(p.bench.indexOf(b),1);p.field[k].push(b);checkFull(G,p);return {ok:true};
+    }
+    const i=p.field[k].findIndex(c=>c.id===fieldId);if(i<0)return {ok:false};
+    const f=p.field[k][i];p.field[k][i]=b;p.bench[p.bench.indexOf(b)]=f;return {ok:true};
+  }
+  function retractShop(G,p){
+    if(!p.shop)return {ok:false};
+    const c=p.shop.card;p.shop=null;place(G,p,c);return {ok:true};
+  }
+
+  /* ── PONTUAÇÃO ── */
+  function convCount(p,r){return titulares(p).filter(c=>c.nr===r).length}
+  function convPoints(G){
+    const pts=G.players.map(()=>0);const detail=[];
+    G.conv.forEach(r=>{
+      const cs=G.players.map(p=>convCount(p,r));const mx=Math.max(...cs);
+      const win=mx>0?cs.map((c,i)=>c===mx?i:-1).filter(i=>i>=0):[];
+      const each=win.length===1?G.cfg.convPts:win.length>1?Math.floor(G.cfg.convPts/2):0;
+      win.forEach(i=>pts[i]+=each);detail.push({r,counts:cs,win,each});
+    });
+    return {pts,detail};
+  }
+  function tecPoints(p){
+    if(!p.tec)return 0;const t=tecDef(p.tec);
+    const v=t.set?t.set(p):titulares(p).reduce((s,c)=>s+t.pc(c),0);
+    return Math.min(t.max,v);
+  }
+  function score(G){
+    const cv=convPoints(G);
+    return G.players.map((p,i)=>{
+      const st=titulares(p).reduce((s,c)=>s+stars(c),0);
+      const bySector={};POS.forEach(k=>bySector[k]=p.field[k].reduce((s,c)=>s+stars(c),0));
+      const tec=tecPoints(p),conv=cv.pts[i],emp=-G.cfg.emptyPen*emptySlots(p),first=(G.endBy===p.id?G.cfg.firstBonus:0);
+      return {id:p.id,name:p.name,stars:st,bySector,tec,conv,empty:emp,first,total:st+tec+conv+emp+first,coins:p.coins};
+    });
+  }
+  function ranking(G){
+    return score(G).sort((a,b)=>b.total-a.total||b.stars-a.stars||b.coins-a.coins);
+  }
+
+  /* ── IA ── */
+  function turnsLeft(G){return (G.cfg.endOn11&&G.endBy!=null)?1:Math.max(1,G.cfg.maxRounds-G.round+1)}
+  function urgency(G,p,st){const e=emptySlots(p),t=turnsLeft(G);return e>=t?2.6:e>=t-1?1.6:st.emptyW}
+  function gainIfAdd(G,p,c,st){
+    const k=c.p,v=(cardVal(p,c)-stars(c))+stars(c)*st.starW;
+    if(p.field[k].length<FORM[k])return v+G.cfg.emptyPen*urgency(G,p,st);
+    const w=worstIn(p,k);const wv=(cardVal(p,w)-stars(w))+stars(w)*st.starW;
+    return v>wv?v-wv:0.05;
+  }
+  function convBias(G,p,c){return G.conv.indexOf(c.nr)>=0?0.45:0}
+  function aiOptions(G,p){
+    const st=STYLES[p.style]||STYLES.equilibrado;
+    const last=turnsLeft(G)<=1;
+    const lam=last?0.02:st.lam;
+    const opts=[];
+    RORD.forEach(r=>{
+      const tc=travelCost(p,r);if(p.coins<tc)return;
+      G.vit[r].forEach((c,i)=>{
+        const cost=tc+G.cfg.price[c.r];if(cost>p.coins)return;
+        opts.push({t:'vit',r,i,u:gainIfAdd(G,p,c,st)+convBias(G,p,c)-lam*cost});
+      });
+      const oc=tc+G.cfg.olheiro[r];
+      if(oc<=p.coins&&G.decks[r].length){
+        /* expectativa: melhor de 3 em amostras do monte (a IA conhece a composição, não a ordem) */
+        let e=0;const d=G.decks[r],N=6;
+        for(let s=0;s<N;s++){let b=0;for(let j=0;j<Math.min(3,d.length);j++){const c=d[0|G.rng()*d.length];b=Math.max(b,gainIfAdd(G,p,c,st))}e+=b}
+        opts.push({t:'olh',r,u:e/N+0.25-lam*oc});
+      }
+    });
+    G.players.forEach(s=>{
+      if(s===p||!s.shop||s.shop.price>p.coins)return;
+      const tr=p.trust[s.id]==null?.6:p.trust[s.id];
+      const est=tr*STARS[s.shop.claim]+(1-tr)*1.2;
+      const k=s.shop.card.p;let g;
+      if(p.field[k].length<FORM[k])g=est*st.starW+G.cfg.emptyPen*urgency(G,p,st);
+      else{const w=worstIn(p,k);g=Math.max(0,est-stars(w))*st.starW}
+      opts.push({t:'shop',s:s.id,u:g-lam*s.shop.price});
+    });
+    if(!p.tec&&p.coins>=G.cfg.tecCost){
+      G.tecOpen.forEach((id,i)=>{
+        const t=tecDef(id);const save=p.tec;p.tec=id;const now=tecPoints(p);p.tec=save;
+        const future=last?0:Math.min(t.max-now,1.0+emptySlots(p)*0.22);
+        opts.push({t:'tec',i,u:now+future-lam*G.cfg.tecCost});
+      });
+    }
+    opts.push({t:'spons',u:last?-5:lam*G.cfg.sponsor-0.75});
+    opts.sort((a,b)=>b.u-a.u);
+    return opts;
+  }
+  /* escolha de relatório/blefe da IA para a carta que sobra */
+  function aiListing(G,p,c){
+    const st=STYLES[p.style]||STYLES.equilibrado;
+    let ci=RORDER.indexOf(c.r);
+    if(G.rng()<st.lie)ci=Math.min(4,ci+1+(G.rng()<.3?1:0));
+    const claim=RORDER[ci];
+    return {claim,price:Math.max(1,G.cfg.price[claim]-1)};
+  }
+  /* treino (ação livre): sobra de moedas vira +1★ */
+  function aiTrain(G,p,st){
+    if(p.trained||p.treinos>=G.cfg.maxTreino||p.coins<G.cfg.treinoCost)return;
+    const last=turnsLeft(G)<=1;
+    const reserve=last?0:Math.max(2,emptySlots(p)*1.5);
+    if(p.coins-G.cfg.treinoCost<reserve&&p.tec!=='paizao')return;
+    const cs=titulares(p).filter(x=>canTrain(G,p,x)).sort((a,b)=>stars(b)-stars(a));
+    if(cs[0])actTreino(G,p,cs[0].id);
+  }
+  function aiTurn(G){
+    const p=cur(G);const st=STYLES[p.style]||STYLES.equilibrado;
+    const o=aiOptions(G,p)[0];let res={t:o.t};
+    if(o.t==='vit')res=Object.assign(res,actBuyVit(G,p,o.r,o.i));
+    else if(o.t==='olh'){
+      const sc=actScout(G,p,o.r);
+      let keep=0,bg=-1;sc.cards.forEach((c,i)=>{const g=gainIfAdd(G,p,c,st)+convBias(G,p,c)+stars(c)*0.01;if(g>bg){bg=g;keep=i}});
+      let list=null,li=null;
+      if(!p.shop&&sc.cards.length>1){
+        let bi=-1,bs=-1;sc.cards.forEach((c,i)=>{if(i!==keep&&stars(c)>bs){bs=stars(c);bi=i}});
+        list=bi;li=aiListing(G,p,sc.cards[bi]);
+      }
+      res=Object.assign(res,resolveScout(G,p,keep,list,li&&li.claim,li&&li.price));
+    }
+    else if(o.t==='shop')res=Object.assign(res,actBuyShop(G,p,o.s));
+    else if(o.t==='tec')res=Object.assign(res,actTec(G,p,o.i));
+    else res=Object.assign(res,actSponsor(G,p));
+    aiTrain(G,p,st);
+    /* vitrine encalhada: baixa o preço */
+    if(p.shop&&p.shop.price>1&&G.rng()<.35)p.shop.price--;
+    return res;
+  }
+
+  /* ── NEGOCIAÇÃO (cartas mostradas só entre os dois) ── */
+  /* o que a IA aceita liberar de uma posição: melhor reserva daquela posição */
+  function aiRelease(G,ai,pos){
+    const c=ai.bench.filter(x=>x.p===pos).sort((a,b)=>stars(b)-stars(a))[0];
+    return c||null;
+  }
+  /* cotação: humano recebe `want` (da IA) e entrega `give` (ou null). Retorna moedas que o humano paga (>0) ou recebe (<0) */
+  function quote(G,ai,want,give){
+    const st=STYLES[ai.style]||STYLES.equilibrado;
+    const ask=G.cfg.price[want.r]+1+(want.tr?1:0);
+    let credit=0;
+    if(give){const g=gainIfAdd(G,ai,give,st);credit=Math.min(G.cfg.price[give.r]+1,Math.round(g/Math.max(.3,st.lam)*.8))}
+    return ask-credit;
+  }
+  function doTrade(G,hu,ai,want,give,coins){
+    if(coins>0&&hu.coins<coins)return {ok:false,msg:'Moedas insuficientes.'};
+    if(coins<0&&ai.coins<-coins)coins=-ai.coins;
+    ai.bench.splice(ai.bench.indexOf(want),1);
+    if(give){
+      let i=hu.bench.indexOf(give);
+      if(i>=0)hu.bench.splice(i,1);else{const k=give.p;hu.field[k].splice(hu.field[k].indexOf(give),1)}
+      place(G,ai,give);
+    }
+    hu.coins-=coins;ai.coins+=coins;hu.negUsed=true;
+    const where=place(G,hu,want);count(G,'troca');
+    L(G,hu.name+' e '+ai.name+' fecharam negócio: '+PSHORT[want.p]+(give?' por '+PSHORT[give.p]:'')+(coins?(' e '+Math.abs(coins)+(Math.abs(coins)===1?' moeda':' moedas')):'')+'.',hu.id);
+    return {ok:true,where};
+  }
+  /* proposta da IA ao humano: quer um reserva do humano de posição que lhe falta */
+  function aiProposal(G,ai,hu){
+    const st=STYLES[ai.style]||STYLES.equilibrado;
+    let best=null;
+    hu.bench.forEach(c=>{
+      const g=gainIfAdd(G,ai,c,st);
+      if(g>=1.5){const offer=Math.min(ai.coins,G.cfg.price[c.r]);if(offer>=1&&(!best||g>best.g))best={card:c,offer,g}}
+    });
+    return best;
+  }
+  function acceptProposal(G,ai,hu,pr){
+    const i=hu.bench.indexOf(pr.card);if(i<0)return {ok:false};
+    hu.bench.splice(i,1);hu.coins+=pr.offer;ai.coins-=pr.offer;place(G,ai,pr.card);count(G,'troca');
+    L(G,ai.name+' comprou um reserva de '+hu.name+' por '+pr.offer+' moedas.',ai.id);return {ok:true};
+  }
+
+  /* ── SIMULAÇÃO IA × IA ── */
+  function simulate(n,opts){
+    opts=opts||{};const np=opts.players||4;
+    const A={n,rounds:0,byEnd:0,cap:0,total:0,stars:0,tec:0,conv:0,empty:0,first:0,coins:0,
+      styleWin:{},styleN:{},tecWin:{},tecN:{},firstWin:0,actions:{},margin:0,holes:0,seatWin:[]};
+    for(let g=0;g<n;g++){
+      const styles=[];const keys=Object.keys(STYLES);for(let i=0;i<np;i++)styles.push(keys[(i+g)%keys.length]);
+      const G=newGame({players:np,cfg:opts.cfg,styles});
+      let guard=0;while(!G.over&&guard++<2000){aiTurn(G);endTurn(G)}
+      const sc=score(G),rk=ranking(G);
+      A.rounds+=G.round;if(G.endBy!=null)A.byEnd++;else A.cap++;
+      sc.forEach(s=>{A.total+=s.total;A.stars+=s.stars;A.tec+=s.tec;A.conv+=s.conv;A.empty+=s.empty;A.first+=s.first;A.coins+=s.coins;if(s.empty<0)A.holes++});
+      const w=G.players[rk[0].id];
+      A.seatWin[w.id]=(A.seatWin[w.id]||0)+1;
+      A.margin+=rk[0].total-rk[1].total;
+      G.players.forEach(p=>{A.styleN[p.style]=(A.styleN[p.style]||0)+1;const t=p.tec||'sem técnico';A.tecN[t]=(A.tecN[t]||0)+1});
+      A.styleWin[w.style]=(A.styleWin[w.style]||0)+1;A.tecWin[w.tec||'sem técnico']=(A.tecWin[w.tec||'sem técnico']||0)+1;
+      if(G.endBy===w.id)A.firstWin++;
+      Object.keys(G.stats.actions).forEach(k=>A.actions[k]=(A.actions[k]||0)+G.stats.actions[k]);
+      G.players.forEach(p=>titulares(p).forEach(c=>{A.actions['tit_'+c.r]=(A.actions['tit_'+c.r]||0)+1}));
+      RORD.forEach(r=>{if(!G.decks[r].length)A.actions['monte_vazio_'+r]=(A.actions['monte_vazio_'+r]||0)+1});
+    }
+    const tp=n*np;
+    return {partidas:n,jogadores:np,rodadasMedia:A.rounds/n,fimPor11:A.byEnd/n,fimPorLimite:A.cap/n,
+      pontosMedia:A.total/tp,estrelasMedia:A.stars/tp,tecnicoMedia:A.tec/tp,convMedia:A.conv/tp,vagasMedia:A.empty/tp,
+      bonusPct:(A.tec+A.conv+A.first)/Math.max(1,A.total),moedasSobra:A.coins/tp,timesComBuraco:A.holes/tp,
+      margemMedia:A.margin/n,quemFechouVenceu:A.firstWin/Math.max(1,A.byEnd),
+      estilo:Object.keys(A.styleN).map(k=>({k,n:STYLES[k].n,win:(A.styleWin[k]||0)/(A.styleN[k]/1),share:(A.styleWin[k]||0)/n})),
+      tecnico:Object.keys(A.tecN).map(k=>({k,n:k==='sem técnico'?k:tecDef(k).n,usos:A.tecN[k],winRate:(A.tecWin[k]||0)/A.tecN[k]})).sort((a,b)=>b.winRate-a.winRate),
+      acoes:A.actions,assento:A.seatWin.map(x=>(x||0)/n)};
+  }
+
+  return {DB,REG,RORD,TRAVEL,STARS,RNAME,RORDER,FORM,POS,PSHORT,DEFAULTS,TECS,STYLES,
+    stars,titulares,emptySlots,isFull,newGame,cur,startTurn,endTurn,travelCost,saleValue,
+    actBuyVit,actScout,resolveScout,actSponsor,actTec,actTreino,actBuyShop,canTrain,
+    sell,swap,retractShop,score,ranking,convPoints,convCount,tecPoints,tecDef,cardVal,
+    aiTurn,aiOptions,aiRelease,quote,doTrade,aiProposal,acceptProposal,simulate};
+})();
+
+/* ═══════════════════════════════════════════════════
+   MODO 06 — JANELA SECRETA — interface
+═══════════════════════════════════════════════════ */
+const M7 = (function(){
+  const E=SP7;
+  let G=null, me=null, t0=0, busy=false, sel={}, humanStats={};
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const mo=n=>n+(n===1?' moeda':' moedas');
+  const LSK='sp7_hist', LSC='sp7_cfg';
+  function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+  function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+  let opt=Object.assign({rivals:2,maxRounds:10,income:3,startCoins:6,emptyPen:2,convPts:4,endOn11:false},lsGet(LSC,{}));
+
+  function toast(m,d){const t=$('m7toast');t.innerHTML=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),d||2600)}
+  function modal(html,wide){$('m7md').className='m7md'+(wide?' wide':'');$('m7md').innerHTML=html;$('m7ov').classList.add('show');$('m7md').scrollTop=0}
+  function closeModal(){$('m7ov').classList.remove('show')}
+
+  /* ── componentes ── */
+  function starStr(c){let s='★'.repeat(E.STARS[c.r]);if(c.tr)s+='<i>+1</i>';return s}
+  function cardH(c,o){
+    o=o||{};
+    const cls=['m7c',c.r];if(o.sm)cls.push('sm');if(o.click)cls.push('click');if(o.no)cls.push('no');if(o.pick)cls.push(o.pick);
+    return '<div class="'+cls.join(' ')+'"'+(o.click?' onclick="'+o.click+'"':'')+' title="'+esc(c.f||'')+'">'+
+      '<div class="st">'+starStr(c)+'</div><div class="ps">'+E.PSHORT[c.p]+'</div>'+
+      '<div class="nm'+((c.n.length>13||c.n.split(/[\s-]/).some(w=>w.length>8))?' lg':'')+'">'+esc(c.n)+'</div>'+
+      '<div class="nt"><span class="m7dot" style="background:'+E.REG[c.nr].c+'"></span>'+esc(c.nat)+'</div>'+
+      '<div class="rr">'+E.RNAME[c.r]+'</div>'+
+      (o.price!=null?'<div class="pr">'+o.price+'</div>':'')+'</div>';
+  }
+  function backH(c,o){o=o||{};return '<span class="m7bk'+(o.lg?' lg':'')+'" style="--rc:'+E.REG[c.m].c+'" title="Veio do mercado: '+E.REG[c.m].n+'">'+E.PSHORT[c.p]+'</span>'}
+  function emptyBk(){return '<span class="m7bk empty">·</span>'}
+
+  /* ── SETUP ── */
+  function open(){
+    scr('mode7');G=null;$('m7bar').style.display='none';$('m7badge').textContent='Teste v0.1';closeModal();
+    renderSetup();
+  }
+  function stepper(k,min,max,lbl){
+    return '<div class="m7opt"><label>'+lbl+'</label><div class="m7step"><button onclick="M7.setOpt(\''+k+'\','+(-1)+','+min+','+max+')">−</button><b>'+opt[k]+'</b><button onclick="M7.setOpt(\''+k+'\',1,'+min+','+max+')">+</button></div></div>';
+  }
+  function renderSetup(){
+    $('m7body').innerHTML='<div class="m7setup">'+
+      '<div class="m7panel"><div class="m7hero">Janela <span>Secreta</span></div>'+
+      '<div class="m7lead">Você tem <b>'+opt.maxRounds+' rodadas</b> para viajar o mundo e montar seu 11. Ninguém vê o time de ninguém: só as costas das cartas. No fim, todos revelam setor por setor e vence a maior pontuação. Estrelas contam, mas técnico, convocação e treino decidem.</div>'+
+      '<div class="m7opts">'+
+        '<div class="m7opt"><label>Rivais (IA)</label><div class="m7tog">'+[1,2,3].map(n=>'<button class="'+(opt.rivals===n?'on':'')+'" onclick="M7.setRivals('+n+')">'+n+'</button>').join('')+'</div></div>'+
+      '</div>'+
+      '<div class="m7btns"><button class="m7b gold" onclick="M7.start()">Começar ▶</button><button class="m7b sec" onclick="M7.rules()">Como jogar</button><button class="m7b sec" onclick="M7.tests()">📊 Testes e simulação</button></div></div>'+
+      '<div class="m7panel"><h3>Laboratório de regras</h3><div class="m7lead" style="margin-top:0">Mude um número de cada vez, jogue ou simule, e compare. Os valores ficam salvos neste navegador.</div>'+
+      '<div class="m7opts">'+
+        stepper('maxRounds',6,16,'Rodadas')+stepper('income',1,6,'Renda por turno')+stepper('startCoins',0,15,'Moedas iniciais')+
+        stepper('emptyPen',0,5,'Punição por vaga vazia')+stepper('convPts',0,8,'Pontos da convocação')+
+        '<div class="m7opt"><label>Fim do jogo</label><div class="m7tog"><button class="'+(!opt.endOn11?'on':'')+'" onclick="M7.setEnd(false)">Nº de rodadas</button><button class="'+(opt.endOn11?'on':'')+'" onclick="M7.setEnd(true)">Ao completar 11</button></div></div>'+
+      '</div><div class="m7btns"><button class="m7b sec sm" onclick="M7.resetOpt()">Voltar ao padrão</button></div></div></div>';
+  }
+  function setOpt(k,d,min,max){opt[k]=Math.max(min,Math.min(max,opt[k]+d));lsSet(LSC,opt);renderSetup()}
+  function setRivals(n){opt.rivals=n;lsSet(LSC,opt);renderSetup()}
+  function setEnd(v){opt.endOn11=v;lsSet(LSC,opt);renderSetup()}
+  function resetOpt(){opt={rivals:opt.rivals,maxRounds:10,income:3,startCoins:6,emptyPen:2,convPts:4,endOn11:false};lsSet(LSC,opt);renderSetup()}
+  function cfgFromOpt(){return {maxRounds:opt.endOn11?Math.max(opt.maxRounds,16):opt.maxRounds,income:opt.income,startCoins:opt.startCoins,emptyPen:opt.emptyPen,convPts:opt.convPts,endOn11:opt.endOn11,firstBonus:opt.endOn11?0:0}}
+
+  function start(){
+    G=E.newGame({players:opt.rivals+1,human:true,cfg:cfgFromOpt()});
+    me=G.players[0];t0=Date.now();busy=false;humanStats={};
+    $('m7bar').style.display='flex';closeModal();
+    render();loop();
+  }
+  function back(){G=null;$('m7bar').style.display='none';closeModal();goMenu()}
+
+  /* ── LOOP ── */
+  async function loop(){
+    while(G&&!G.over){
+      const p=E.cur(G);
+      if(p.human){busy=false;render();toast('Sua vez! <b>+'+G.cfg.income+'</b> moedas de renda.');return}
+      busy=true;render();
+      const g=G;
+      await sleep(550);if(G!==g)return;
+      /* proposta da IA ao humano (ação livre) */
+      if(G.rng()<.45){
+        const pr=E.aiProposal(G,p,me);G._ref=G._ref||{};
+        const key=pr&&(p.id+'_'+pr.card.id);
+        if(pr&&!G._ref[key]){const ok=await askProposal(p,pr);if(G!==g)return;if(ok){E.acceptProposal(G,p,me,pr);hs('troca');render()}else G._ref[key]=1}
+      }
+      const res=E.aiTurn(G);
+      if(res.t==='shop'&&res.ok&&res.card&&G.log.length){
+        const last=G.log[G.log.length-1].msg;
+        if(last.indexOf('vitrine de Você')>=0)toast(esc(p.name)+' comprou da sua vitrine. '+(res.honest?'Seu relatório era verdadeiro.':'Seu blefe passou… mas agora ela desconfia de você.'),3600);
+      }
+      render();await sleep(420);if(G!==g)return;
+      E.endTurn(G);
+    }
+    if(G&&G.over){busy=true;render();reveal()}
+  }
+  function hs(k){humanStats[k]=(humanStats[k]||0)+1}
+  function askProposal(ai,pr){
+    return new Promise(res=>{
+      M7._prop=v=>{closeModal();res(v)};
+      modal('<h2>🤝 Proposta de '+esc(ai.name)+'</h2><p>“Preciso de um jogador nessa posição. Pago <b>'+mo(pr.offer)+'</b> pelo seu reserva.”</p>'+
+        '<div class="rowc">'+cardH(pr.card)+'</div>'+
+        '<div class="act"><button class="m7b sec" onclick="M7._prop(false)">Recusar</button><button class="m7b gold" onclick="M7._prop(true)">Vender por '+pr.offer+'</button></div>');
+    });
+  }
+
+  /* ── RENDER DO JOGO ── */
+  function myTurn(){return G&&!G.over&&E.cur(G)===me&&!busy}
+  function partial(){
+    const sc=E.score(G)[0];return sc;
+  }
+  function render(){
+    if(!G)return;
+    const p=E.cur(G),mine=myTurn();
+    $('m7badge').textContent='Rodada '+G.round+(G.cfg.endOn11?'':' / '+G.cfg.maxRounds);
+    let h='';
+    /* topo */
+    h+='<div class="m7top">'+
+      '<div class="m7stat"><small>Rodada</small><b>'+G.round+(G.cfg.endOn11?'':'<span style="font-size:.9rem;color:var(--text2)"> / '+G.cfg.maxRounds+'</span>')+'</b></div>'+
+      '<div class="m7stat"><small>Suas moedas</small><b class="gold">'+me.coins+'</b></div>'+
+      '<div class="m7stat"><small>Você está em</small><b style="font-size:1.05rem;color:'+E.REG[me.reg].c+'">'+E.REG[me.reg].f+' '+E.REG[me.reg].n+'</b></div>'+
+      '<div class="m7stat" style="flex:1"><small>Convocações abertas — mais titulares da região leva +'+G.cfg.convPts+'</small><div class="m7convs">'+
+        G.conv.map(r=>'<span class="m7conv" style="border-color:'+E.REG[r].c+';color:'+E.REG[r].c+'">'+E.REG[r].f+' Seleção · '+E.REG[r].n+' — você tem <b>'+E.convCount(me,r)+'</b></span>').join('')+
+      '</div></div></div>';
+    h+='<div class="m7grid"><div>';
+    /* mercados */
+    h+='<div class="m7panel"><h3>Mercados — vitrine aberta e olheiro</h3><div class="m7regs">';
+    E.RORD.forEach(r=>{
+      const R=E.REG[r],tc=E.travelCost(me,r),here=me.reg===r;
+      const pawns=G.players.filter(x=>x.reg===r).map(x=>x.human?'📍 Você':'✈ '+esc(x.name)).join(' · ');
+      h+='<div class="m7reg'+(here?' here':'')+'" style="--rc:'+R.c+'"><div class="m7regh"><span class="nm">'+R.f+' '+R.n+'</span><span class="tr">'+(here?'você está aqui':'viagem <b>'+tc+'</b>')+'</span></div>'+
+        '<div class="m7pawns">'+pawns+'</div><div class="m7vit">';
+      G.vit[r].forEach((c,i)=>{
+        const cost=tc+G.cfg.price[c.r],can=mine&&!G.acted&&me.coins>=cost;
+        h+=cardH(c,{price:cost,click:mine&&!G.acted?'M7.buy(\''+r+'\','+i+')':null,no:mine&&!G.acted&&!can});
+      });
+      if(!G.vit[r].length)h+='<span style="font-size:.7rem;color:var(--text2)">vitrine vazia</span>';
+      const oc=tc+G.cfg.olheiro[r];
+      h+='</div><button class="m7olh" '+((mine&&!G.acted&&me.coins>=oc&&G.decks[r].length)?'':'disabled')+' onclick="M7.scout(\''+r+'\')">🔭 Olheiro <b>'+oc+'</b> — vê 3 fechadas, fica com 1 · monte: '+G.decks[r].length+'</button></div>';
+    });
+    h+='</div></div>';
+    /* vestiário */
+    h+='<div class="m7panel"><h3>Vestiário e ofertas dos rivais — valem em qualquer região</h3><div class="m7side" style="margin-top:0">';
+    G.tecOpen.forEach((id,i)=>{
+      const t=E.tecDef(id),can=mine&&!G.acted&&!me.tec&&me.coins>=G.cfg.tecCost;
+      h+='<div class="m7box"><div class="m7tec'+(can?' buy':'')+'" '+(can?'onclick="M7.tec('+i+')"':'style="opacity:'+(me.tec?'.5':'.8')+'"')+'><span class="cst">'+G.cfg.tecCost+' moedas</span><b>🎓 '+t.n+'</b>'+t.d+'</div></div>';
+    });
+    h+='<div class="m7box" style="flex:0 1 190px"><button class="m7b sec" style="width:100%" '+(mine&&!G.acted?'':'disabled')+' onclick="M7.sponsor()">💰 Patrocínio +'+G.cfg.sponsor+'</button><div style="font-size:.66rem;color:var(--text2);margin-top:.35rem">Gasta sua ação do turno.</div></div>';
+    h+='</div>';
+    const offers=G.players.filter(x=>!x.human&&x.shop);
+    if(offers.length){
+      h+='<div class="m7offers">'+offers.map(x=>{const can=mine&&!G.acted&&me.coins>=x.shop.price;
+        return '<div class="m7shop">'+backH(x.shop.card)+'<span><b>'+esc(x.name)+'</b> anuncia: <q>'+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'</q> por <b style="color:var(--gold)">'+x.shop.price+'</b></span><button class="m7b sm" style="margin-left:auto" '+(can?'':'disabled')+' onclick="M7.buyShop('+x.id+')">Comprar às cegas</button></div>'}).join('')+'</div>';
+    }
+    h+='</div>';
+    /* log */
+    h+='<div class="m7panel"><h3>O que aconteceu</h3><div class="m7log">'+G.log.slice(-40).reverse().map(l=>'<div class="'+(l.who===0?'me':'')+'"><i>R'+l.r+'</i>'+esc(l.msg)+'</div>').join('')+'</div></div>';
+    h+='</div><div>';
+    /* meu time */
+    const sc=partial();
+    h+='<div class="m7panel"><h3>Seu time — só você vê</h3><div class="m7pitch">';
+    ['ataque','meio','defesa','goleiro'].forEach(k=>{
+      h+='<div class="m7rowl">'+({ataque:'Ataque',meio:'Meio',defesa:'Defesa',goleiro:'Goleiro'})[k]+'</div><div class="m7row">';
+      me.field[k].forEach(c=>{h+=cardH(c,{sm:1,click:'M7.cardMenu('+c.id+')'})});
+      for(let i=me.field[k].length;i<E.FORM[k];i++)h+='<div class="m7slot">vaga</div>';
+      h+='</div>';
+    });
+    h+='</div><div class="m7partial"><span>Estrelas <b>'+sc.stars+'</b></span><span>Técnico <b>+'+sc.tec+'</b></span><span>Convocação hoje <b>?</b></span><span>Vagas <b>'+sc.empty+'</b></span><span class="tot">Parcial <b>'+(sc.stars+sc.tec+sc.empty)+'</b></span></div>';
+    h+='<div class="m7side">'+
+      '<div class="m7box"><h3>Banco ('+me.bench.length+'/'+G.cfg.benchMax+')</h3><div class="cards">'+(me.bench.map(c=>cardH(c,{sm:1,click:'M7.cardMenu('+c.id+')'})).join('')||'<span style="font-size:.7rem;color:var(--text2)">vazio</span>')+'</div></div>'+
+      '<div class="m7box"><h3>Técnico</h3>'+(me.tec?'<div class="m7tec"><b>🎓 '+E.tecDef(me.tec).n+'</b>'+E.tecDef(me.tec).d+'</div>':'<span style="font-size:.7rem;color:var(--text2)">sem técnico — contrate no Vestiário</span>')+
+        '<h3 style="margin-top:.5rem">Treinos '+me.treinos+'/'+G.cfg.maxTreino+'</h3><span style="font-size:.7rem;color:var(--text2)">Clique em um jogador seu para treinar ('+G.cfg.treinoCost+' moedas, +1★, ação livre).</span></div>'+
+      '<div class="m7box"><h3>Sua vitrine</h3>'+(me.shop?'<div class="cards">'+cardH(me.shop.card,{sm:1})+'<div style="font-size:.7rem;line-height:1.4">Anunciado como<br><b style="color:var(--gold)">'+E.RNAME[me.shop.claim]+'</b> por <b style="color:var(--gold)">'+me.shop.price+'</b><br><button class="m7b sec sm" style="margin-top:.3rem" '+(mine?'':'disabled')+' onclick="M7.retract()">Recolher</button></div></div>':'<span style="font-size:.7rem;color:var(--text2)">vazia — o olheiro deixa você anunciar 1 carta fechada</span>')+'</div>'+
+      '</div></div>';
+    /* rivais */
+    h+='<div class="m7panel"><h3>Rivais — você só vê as costas (cor = mercado de origem)</h3>';
+    G.players.filter(x=>!x.human).forEach(x=>{
+      h+='<div class="m7rival'+(p===x&&!G.over?' turn':'')+'"><div class="m7rh"><span class="n">'+esc(x.name)+'</span><span class="co">moedas <b>'+x.coins+'</b></span><span>'+E.REG[x.reg].f+' '+E.REG[x.reg].n+'</span><span>'+(x.tec?'🎓 '+E.tecDef(x.tec).n:'sem técnico')+'</span><span>titulares '+E.titulares(x).length+'/11</span></div><div class="m7rb">';
+      ['goleiro','defesa','meio','ataque'].forEach(k=>{
+        h+='<span class="grp" data-l="'+E.PSHORT[k]+'">'+x.field[k].map(c=>backH(c)).join('');
+        for(let i=x.field[k].length;i<E.FORM[k];i++)h+=emptyBk();
+        h+='</span>';
+      });
+      h+='<span class="grp" data-l="banco">'+(x.bench.map(c=>backH(c)).join('')||emptyBk())+'</span></div>';
+      if(x.shop){
+        const can=mine&&!G.acted&&me.coins>=x.shop.price;
+        h+='<div class="m7shop">'+backH(x.shop.card)+'<span>Vitrine: <q>É um '+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'.</q> — <b style="color:var(--gold)">'+x.shop.price+' moedas</b></span></div>';
+      }
+      h+='</div>';
+    });
+    h+='</div></div></div>';
+    const body=$('m7body'),st=body.scrollTop;body.innerHTML=h;body.scrollTop=st;
+    /* barra */
+    let msg,btn='';
+    if(G.over)msg='Fim da janela.';
+    else if(!mine)msg='⏳ <b>'+esc(p.name)+'</b> está jogando…';
+    else if(!G.acted)msg='<b>Sua vez.</b> Faça 1 ação: contratar na vitrine, olheiro, técnico, comprar de um rival ou patrocínio. Negociar e treinar são livres.';
+    else msg='Ação feita. Negocie ou treine se quiser, e encerre o turno.';
+    if(mine)btn='<button class="m7b sec sm" '+(me.negUsed?'disabled':'')+' onclick="M7.nego()">🤝 Negociar</button><button class="m7b sm'+(G.acted?' m7pulse':'')+'" '+(G.acted?'':'disabled')+' onclick="M7.end()">Encerrar turno ➜</button>';
+    $('m7bar').innerHTML='<div class="msg">'+msg+'</div>'+btn;
+  }
+
+  /* ── AÇÕES DO HUMANO ── */
+  function afterPlace(c,where){toast('<b>'+esc(c.n)+'</b> ('+E.RNAME[c.r]+') foi para '+(where==='titular'?'o time titular':'o banco')+'.')}
+  function buy(r,i){
+    if(!myTurn()||G.acted)return;
+    const c=G.vit[r][i],tc=E.travelCost(me,r),cost=tc+G.cfg.price[c.r];
+    modal('<h2>Contratar na vitrine</h2><div class="rowc">'+cardH(c)+'</div>'+(c.f?'<div class="m7frase">'+esc(c.f)+'</div>':'')+
+      '<p>Preço <b>'+G.cfg.price[c.r]+'</b>'+(tc?' + viagem <b>'+tc+'</b>':'')+' = <b>'+cost+' moedas</b>. Você tem <b>'+me.coins+'</b>. Todos veem esta contratação.</p>'+
+      '<div class="act"><button class="m7b sec" onclick="M7.close()">Cancelar</button><button class="m7b gold" '+(me.coins>=cost?'':'disabled')+' onclick="M7.buyOk(\''+r+'\','+i+')">Contratar por '+cost+'</button></div>');
+  }
+  function buyOk(r,i){const res=E.actBuyVit(G,me,r,i);closeModal();if(!res.ok){toast(res.msg);return}hs('vitrine');afterPlace(res.card,res.where);render()}
+  function scout(r){
+    if(!myTurn()||G.acted)return;
+    const res=E.actScout(G,me,r);if(!res.ok){toast(res.msg);return}
+    hs('olheiro');sel={keep:null,list:null,claim:null,price:null};render();scoutModal();
+  }
+  function scoutModal(){
+    const pd=G.pending,cs=pd.cards;
+    let h='<h2>🔭 Relatório do olheiro — '+E.REG[pd.r].n+'</h2><p><b>1.</b> Escolha a carta que fica com você (ninguém vê).</p><div class="rowc">'+
+      cs.map((c,i)=>cardH(c,{click:'M7.scKeep('+i+')',pick:sel.keep===i?'m7pick':(sel.list===i?'m7pickg':'')})).join('')+'</div>';
+    if(sel.keep!=null&&cs.length>1){
+      h+='<p><b>2.</b> Quer anunciar outra na sua vitrine? Ela fica fechada e você diz o que quiser sobre ela. Se um rival comprar, as moedas são suas.'+(me.shop?' <b>Sua vitrine já está ocupada.</b>':'')+'</p>';
+      if(!me.shop){
+        h+='<div class="m7chips">'+cs.map((c,i)=>i===sel.keep?'':'<button class="m7chip'+(sel.list===i?' on':'')+'" onclick="M7.scList('+i+')">Anunciar '+esc(c.n)+'</button>').join('')+'<button class="m7chip'+(sel.list==null?' on':'')+'" onclick="M7.scList(null)">Não anunciar</button></div>';
+        if(sel.list!=null){
+          const real=cs[sel.list];
+          h+='<p style="margin-bottom:.2rem">Eu digo que é:</p><div class="m7chips">'+E.RORDER.map(r=>'<button class="m7chip'+(sel.claim===r?' on':'')+'" onclick="M7.scClaim(\''+r+'\')">'+E.RNAME[r]+(r===real.r?' (verdade)':'')+'</button>').join('')+'</div>'+
+            '<p style="margin-bottom:.2rem">Preço pedido:</p><div class="m7step"><button onclick="M7.scPrice(-1)">−</button><b>'+sel.price+'</b><button onclick="M7.scPrice(1)">+</button><span style="font-size:.72rem;color:var(--text2);margin-left:.5rem">tabela: Bronze 1 · Prata 2 · Ouro 4 · Especial 6 · Ícone 8</span></div>';
+        }
+      }
+    }
+    h+='<div class="act"><button class="m7b gold" '+(sel.keep==null?'disabled':'')+' onclick="M7.scOk()">Confirmar</button></div>';
+    modal(h);
+  }
+  function scKeep(i){sel.keep=i;if(sel.list===i){sel.list=null}scoutModal()}
+  function scList(i){sel.list=i;if(i!=null){const c=G.pending.cards[i];sel.claim=c.r;sel.price=Math.max(1,G.cfg.price[c.r]-1)}scoutModal()}
+  function scClaim(r){sel.claim=r;sel.price=Math.max(1,G.cfg.price[r]-1);scoutModal()}
+  function scPrice(d){sel.price=Math.max(1,Math.min(12,sel.price+d));scoutModal()}
+  function scOk(){
+    if(sel.keep==null)return;
+    const lied=sel.list!=null&&E.RORDER.indexOf(sel.claim)>E.RORDER.indexOf(G.pending.cards[sel.list].r);
+    const res=E.resolveScout(G,me,sel.keep,sel.list,sel.claim,sel.price);closeModal();
+    if(sel.list!=null){hs('anuncio');if(lied)hs('blefe')}
+    afterPlace(res.card,res.where);render();
+  }
+  function sponsor(){if(!myTurn())return;const r=E.actSponsor(G,me);if(!r.ok){toast(r.msg);return}hs('patrocinio');toast('Patrocínio fechado: <b>+'+G.cfg.sponsor+'</b> moedas.');render()}
+  function tec(i){
+    if(!myTurn()||G.acted)return;const t=E.tecDef(G.tecOpen[i]);
+    modal('<h2>🎓 Contratar técnico</h2><div class="m7tec" style="margin:.6rem 0"><b>'+t.n+'</b>'+t.d+'</div><p>Custa <b>'+G.cfg.tecCost+' moedas</b> e gasta a ação do turno. Você só pode ter <b>1 técnico</b> na partida, e todos veem qual é.</p>'+
+      '<div class="act"><button class="m7b sec" onclick="M7.close()">Cancelar</button><button class="m7b gold" onclick="M7.tecOk('+i+')">Contratar</button></div>');
+  }
+  function tecOk(i){const r=E.actTec(G,me,i);closeModal();if(!r.ok){toast(r.msg);return}hs('tecnico');render()}
+  function buyShop(id){
+    if(!myTurn()||G.acted)return;const s=G.players[id];
+    modal('<h2>Comprar às cegas</h2><div class="rowc">'+backH(s.shop.card,{lg:1})+'</div><p>'+esc(s.name)+' diz: <b>“É um '+E.PSHORT[s.shop.card.p]+' '+E.RNAME[s.shop.claim]+'.”</b> Pode ser verdade. Pode ser blefe. A posição é garantida; o resto, não.</p><p>Preço: <b>'+s.shop.price+' moedas</b>, pagas a '+esc(s.name)+'.</p>'+
+      '<div class="act"><button class="m7b sec" onclick="M7.close()">Desistir</button><button class="m7b gold" onclick="M7.buyShopOk('+id+')">Pagar '+s.shop.price+' e virar a carta</button></div>');
+  }
+  function buyShopOk(id){
+    const r=E.actBuyShop(G,me,id);if(!r.ok){closeModal();toast(r.msg);return}
+    hs('compra_cega');if(!r.honest)hs('cai_no_blefe');
+    modal('<h2>'+(r.honest?'✅ Era verdade!':'🃏 Era blefe!')+'</h2><div class="rowc">'+cardH(r.card)+'</div>'+(r.card.f?'<div class="m7frase">'+esc(r.card.f)+'</div>':'')+
+      '<p>Anunciado como <b>'+E.RNAME[r.claim]+'</b>. Veio um <b>'+E.RNAME[r.card.r]+'</b>, que foi para '+(r.where==='titular'?'o time titular':'o banco')+'.</p><div class="act"><button class="m7b" onclick="M7.close()">Ok</button></div>');
+    render();
+  }
+  function retract(){if(!myTurn())return;E.retractShop(G,me);render()}
+  function cardMenu(id){
+    if(!G||G.over)return;
+    const c=E.titulares(me).concat(me.bench).find(x=>x.id===id);if(!c)return;
+    const onBench=me.bench.indexOf(c)>=0,mine=myTurn();
+    let h='<h2>'+esc(c.n)+'</h2><div class="rowc">'+cardH(c)+'</div>'+(c.f?'<div class="m7frase">'+esc(c.f)+'</div>':'')+'<div class="m7chips">';
+    const canT=mine&&E.canTrain(G,me,c)&&!me.trained&&me.coins>=G.cfg.treinoCost;
+    h+='<button class="m7chip" '+(canT?'':'disabled')+' onclick="M7.train('+id+')">🏋️ Treinar +1★ ('+G.cfg.treinoCost+' moedas)</button>';
+    if(onBench){
+      h+='<button class="m7chip" '+(mine?'':'disabled')+' onclick="M7.sell('+id+')">Vender ao banco (+'+E.saleValue(G,c)+')</button>';
+      if(me.field[c.p].length<E.FORM[c.p])h+='<button class="m7chip" '+(mine?'':'disabled')+' onclick="M7.swap('+id+',null)">Escalar na vaga</button>';
+      h+='</div>';
+      if(me.field[c.p].length)h+='<p style="margin-bottom:.2rem">Escalar no lugar de:</p><div class="rowc">'+me.field[c.p].map(f=>cardH(f,{sm:1,click:mine?'M7.swap('+id+','+f.id+')':null})).join('')+'</div>';
+    }else h+='</div>';
+    if(c.r==='icone')h+='<p>Ícone não treina: já está no máximo.</p>';
+    h+='<div class="act"><button class="m7b sec" onclick="M7.close()">Fechar</button></div>';
+    modal(h);
+  }
+  function train(id){const r=E.actTreino(G,me,id);closeModal();if(!r.ok){toast(r.msg);return}hs('treino');toast('<b>'+esc(r.card.n)+'</b> treinou: +1★.');render()}
+  function sellC(id){E.sell(G,me,id);closeModal();render()}
+  function swap(b,f){E.swap(G,me,b,f);closeModal();render()}
+  function end(){if(!myTurn()||!G.acted)return;busy=true;E.endTurn(G);render();loop()}
+
+  /* ── NEGOCIAÇÃO ── */
+  function nego(){
+    if(!myTurn()||me.negUsed)return;sel={ai:null,pos:null,want:null,give:null};negoModal();
+  }
+  function negoModal(){
+    let h='<h2>🤝 Negociar</h2><p>Uma consulta por turno, sem gastar a ação. Vocês mostram as cartas <b>só um para o outro</b>.</p><p style="margin-bottom:.2rem">Com quem?</p><div class="m7chips">'+
+      G.players.filter(x=>!x.human).map(x=>'<button class="m7chip'+(sel.ai===x.id?' on':'')+'" onclick="M7.ngAi('+x.id+')">'+esc(x.name)+' · banco '+x.bench.length+'</button>').join('')+'</div>';
+    if(sel.ai!=null){
+      const ai=G.players[sel.ai];
+      h+='<p style="margin-bottom:.2rem">Que posição você procura?</p><div class="m7chips">'+E.POS.map(k=>'<button class="m7chip'+(sel.pos===k?' on':'')+'" '+(ai.bench.some(c=>c.p===k)?'':'disabled')+' onclick="M7.ngPos(\''+k+'\')">'+E.PSHORT[k]+'</button>').join('')+'</div>';
+      if(!ai.bench.length)h+='<p>'+esc(ai.name)+' não tem reservas para negociar agora.</p>';
+    }
+    if(sel.want){
+      const ai=G.players[sel.ai],q=E.quote(G,ai,sel.want,sel.give);
+      h+='<p style="margin-bottom:.2rem">'+esc(ai.name)+' mostra a você:</p><div class="rowc">'+cardH(sel.want)+'</div>'+
+        '<p style="margin-bottom:.2rem">Oferecer um jogador seu em troca (opcional):</p><div class="rowc">'+
+        me.bench.concat(E.titulares(me)).map(c=>cardH(c,{sm:1,click:'M7.ngGive('+c.id+')',pick:sel.give===c?'m7pick':''})).join('')+'</div>'+
+        '<p>'+(q>0?'Você paga <b>'+mo(q)+'</b>'+(sel.give?' e entrega <b>'+esc(sel.give.n)+'</b>':'')+'.':q<0?'Você entrega <b>'+esc(sel.give.n)+'</b> e ainda recebe <b>'+mo(Math.min(-q,ai.coins))+'</b>.':'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>.')+' Você tem <b>'+me.coins+'</b>.</p>'+
+        '<div class="act"><button class="m7b sec" onclick="M7.ngNo()">Recusar</button><button class="m7b gold" '+(q>me.coins?'disabled':'')+' onclick="M7.ngOk()">Fechar negócio</button></div>';
+    }else h+='<div class="act"><button class="m7b sec" onclick="M7.close()">Cancelar</button></div>';
+    modal(h);
+  }
+  function ngAi(id){sel.ai=id;sel.pos=null;sel.want=null;sel.give=null;negoModal()}
+  function ngPos(k){sel.pos=k;sel.want=E.aiRelease(G,G.players[sel.ai],k);sel.give=null;me.negUsed=true;hs('consulta');negoModal();render()}
+  function ngGive(id){const c=me.bench.concat(E.titulares(me)).find(x=>x.id===id);sel.give=(sel.give===c)?null:c;negoModal()}
+  function ngNo(){closeModal();render()}
+  function ngOk(){
+    const ai=G.players[sel.ai],q=E.quote(G,ai,sel.want,sel.give);
+    const r=E.doTrade(G,me,ai,sel.want,sel.give,q);closeModal();
+    if(!r.ok){toast(r.msg);return}hs('troca');afterPlace(sel.want,r.where);render();
+  }
+
+  /* ── REVELAÇÃO ── */
+  let rv=0;
+  const RSTEPS=['goleiro','defesa','meio','ataque','tec','conv','empty','fim'];
+  function reveal(){rv=0;$('m7bar').innerHTML='<div class="msg">Fim da janela. Hora de virar as cartas.</div>';revealRender()}
+  function revealRender(){
+    const sc=E.score(G),cv=E.convPoints(G),step=RSTEPS[rv];
+    const upTo=k=>RSTEPS.indexOf(k)<=rv;
+    const run=sc.map(s=>{let t=0;E.POS.forEach(k=>{if(upTo(k))t+=s.bySector[k]});if(upTo('tec'))t+=s.tec;if(upTo('conv'))t+=s.conv;if(upTo('empty'))t+=s.empty+s.first;return t});
+    const done=step==='fim',mx=Math.max(...run),rk0=E.ranking(G)[0].id;
+    const titles={goleiro:'Goleiros',defesa:'Defesas',meio:'Meio-campo',ataque:'Ataques',tec:'Técnicos',conv:'Convocações',empty:'Vagas vazias',fim:'Resultado final'};
+    let h='<h2>'+(done?'🏆 ':'')+titles[step]+'</h2><div class="m7rev" style="--n:'+G.players.length+'">';
+    G.players.forEach((p,i)=>{
+      const s=sc[i];
+      h+='<div class="m7rc'+(done&&p.id===rk0?' win':'')+'"><div class="n">'+esc(p.name)+'</div><div class="tot">'+run[i]+'</div>';
+      E.POS.forEach(k=>{
+        h+='<div class="cs">'+(upTo(k)?(p.field[k].map(c=>cardH(c,{sm:1})).join('')||'<span style="font-size:.66rem;color:var(--red)">vazio</span>'):p.field[k].map(c=>backH(c)).join('')+Array(E.FORM[k]-p.field[k].length).fill(emptyBk()).join(''))+'</div>';
+        if(upTo(k))h+='<div class="ln"><span>'+E.PSHORT[k]+'</span><b>'+s.bySector[k]+'</b></div>';
+      });
+      if(upTo('tec'))h+='<div class="ln"><span>🎓 '+(p.tec?E.tecDef(p.tec).n:'sem técnico')+'</span><b>+'+s.tec+'</b></div>';
+      if(upTo('conv'))h+='<div class="ln"><span>Convocações</span><b>+'+s.conv+'</b></div>';
+      if(upTo('empty'))h+='<div class="ln"><span>Vagas vazias</span><b>'+s.empty+'</b></div>';
+      h+='</div>';
+    });
+    h+='</div>';
+    if(step==='conv')h+='<p style="margin-top:.6rem">'+cv.detail.map(d=>E.REG[d.r].f+' <b>'+E.REG[d.r].n+'</b>: '+d.counts.map((c,i)=>esc(G.players[i].name)+' '+c).join(' · ')+(d.win.length?' → +'+d.each+' para '+d.win.map(i=>esc(G.players[i].name)).join(' e '):' → ninguém')).join('<br>')+'</p>';
+    if(done){
+      const rk=E.ranking(G),won=rk[0].id===0;
+      h+='<p style="margin-top:.7rem;font-size:1rem"><b>'+(won?'Você venceu a janela!':esc(rk[0].name)+' venceu.')+'</b> Você ficou em '+(rk.findIndex(x=>x.id===0)+1)+'º com '+sc[0].total+' pontos. A partida foi salva em 📊 Testes.</p>'+
+        '<div class="act"><button class="m7b sec" onclick="M7.tests()">📊 Testes</button><button class="m7b sec" onclick="M7.open()">Mudar regras</button><button class="m7b gold" onclick="M7.start()">Jogar de novo</button></div>';
+    }else h+='<div class="act"><button class="m7b gold" onclick="M7.revNext()">Revelar: '+titles[RSTEPS[rv+1]]+' ➜</button></div>';
+    modal(h,true);
+    if(done&&!G.saved){G.saved=true;saveHist(sc)}
+  }
+  function revNext(){rv=Math.min(RSTEPS.length-1,rv+1);revealRender()}
+  function saveHist(sc){
+    const rk=E.ranking(G),h=lsGet(LSK,[]);
+    h.push({d:new Date().toISOString(),np:G.players.length,rounds:G.round,min:Math.round((Date.now()-t0)/600)/100,
+      cfg:{r:G.cfg.maxRounds,i:G.cfg.income,s:G.cfg.startCoins,e:G.cfg.emptyPen,c:G.cfg.convPts,f:G.cfg.endOn11},
+      me:sc[0],pos:rk.findIndex(x=>x.id===0)+1,best:rk[0].total,tec:me.tec,hs:humanStats,
+      all:sc.map((s,i)=>({n:s.name,t:s.total,st:s.stars,tc:s.tec,cv:s.conv,e:s.empty,tec:G.players[i].tec}))});
+    lsSet(LSK,h.slice(-60));
+  }
+
+  /* ── REGRAS ── */
+  function rules(){
+    const c=G?G.cfg:Object.assign({},E.DEFAULTS,cfgFromOpt());
+    modal('<h2>Como jogar — Janela Secreta</h2><div class="m7rules">'+
+    '<h4>Objetivo</h4><ul><li>Montar o 11 (1 goleiro, 4 defensores, 3 meias, 3 atacantes) com a <b>maior pontuação</b> ao fim de <b>'+(c.endOn11?'quando alguém completar os 11':c.maxRounds+' rodadas')+'</b>.</li><li>Os times ficam <b>escondidos</b>. Você vê só as costas das cartas dos rivais: a posição e a cor do mercado de onde vieram.</li></ul>'+
+    '<h4>Seu turno</h4><ul><li>Receba <b>'+c.income+' moedas</b> e faça <b>1 ação</b>:</li>'+
+    '<li><b>Contratar na vitrine</b>: carta aberta, preço cheio (Bronze 1, Prata 2, Ouro 4, Especial 6, Ícone 8). Todos veem.</li>'+
+    '<li><b>Olheiro</b>: veja 3 cartas fechadas do monte, fique com 1 em segredo. Outra pode ir para a <b>sua vitrine</b>, fechada, com o relatório que você quiser — verdade ou blefe.</li>'+
+    '<li><b>Comprar às cegas</b> da vitrine de um rival: você paga a ele e só então vira a carta.</li>'+
+    '<li><b>Técnico</b> ('+c.tecCost+' moedas, 1 por time) ou <b>Patrocínio</b> (+'+c.sponsor+' moedas).</li>'+
+    '<li>Viajar para outra região custa de 1 a 3 moedas e já está somado no preço mostrado.</li></ul>'+
+    '<h4>Ações livres</h4><ul><li><b>Treinar</b>: '+c.treinoCost+' moedas, +1★ em um jogador (1 por turno, '+c.maxTreino+' por partida, Ícone não treina).</li><li><b>Negociar</b>: 1 consulta por turno a um rival; as cartas são mostradas só entre vocês dois.</li><li>Mexer no banco: escalar, vender ao banco.</li></ul>'+
+    '<h4>Pontuação — 4 linhas</h4><ul><li><b>Estrelas</b> dos 11 titulares.</li><li><b>Técnico</b>: bônus pelo estilo do elenco.</li><li><b>Convocações</b>: quem tem mais titulares daquela região ganha +'+c.convPts+' (empate divide).</li><li><b>Vagas vazias</b>: −'+c.emptyPen+' cada.</li></ul>'+
+    '<h4>Mercados</h4><ul><li><b>Brasil</b>: barato, muito Bronze e Prata. <b>América do Sul</b>: mistura, com Ouro. <b>Resto do Mundo</b>: mais Ouro e alguns Especiais. <b>Europa</b>: caro, só Ouro, Especial e Ícone.</li><li>A nacionalidade do jogador (bolinha colorida) é o que conta para a convocação, não o mercado onde você o achou.</li></ul></div>'+
+    '<div class="act"><button class="m7b" onclick="M7.close()">Entendi</button></div>');
+  }
+
+  /* ── TESTES ── */
+  function f1(x){return (Math.round(x*10)/10).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})}
+  function pct(x){return Math.round(x*100)+'%'}
+  let lastSim=null;
+  function tests(){
+    const h=lsGet(LSK,[]);
+    let html='<h2>📊 Testes</h2><p>Partidas que você jogou neste navegador e simulação de IA contra IA com as regras do laboratório.</p>';
+    if(h.length){
+      const n=h.length,w=h.filter(x=>x.pos===1).length,avg=k=>h.reduce((s,x)=>s+x.me[k],0)/n;
+      const bonus=h.reduce((s,x)=>s+x.me.tec+x.me.conv,0)/Math.max(1,h.reduce((s,x)=>s+x.me.total,0));
+      html+='<div class="m7kpis"><div class="m7kpi"><small>Partidas jogadas</small><b>'+n+'</b></div><div class="m7kpi"><small>Suas vitórias</small><b>'+w+' <span style="font-size:1rem">('+pct(w/n)+')</span></b></div><div class="m7kpi"><small>Seus pontos (média)</small><b>'+f1(avg('total'))+'</b></div><div class="m7kpi"><small>Duração média</small><b>'+f1(h.reduce((s,x)=>s+x.min,0)/n)+' min</b></div><div class="m7kpi"><small>Bônus no seu total</small><b>'+pct(bonus)+'</b></div></div>'+
+        '<div class="m7tblw"><table class="m7tbl"><tr><th>Data</th><th>Jog.</th><th>Rod.</th><th>Min</th><th>Você</th><th>Pos.</th><th>★</th><th>Téc.</th><th>Conv.</th><th>Vagas</th><th>Melhor</th><th>Seu técnico</th></tr>'+
+        h.slice(-15).reverse().map(x=>'<tr><td>'+x.d.slice(5,10).split('-').reverse().join('/')+' '+x.d.slice(11,16)+'</td><td>'+x.np+'</td><td>'+x.rounds+'</td><td>'+f1(x.min)+'</td><td><b>'+x.me.total+'</b></td><td>'+x.pos+'º</td><td>'+x.me.stars+'</td><td>'+x.me.tec+'</td><td>'+x.me.conv+'</td><td>'+x.me.empty+'</td><td>'+x.best+'</td><td>'+(x.tec?E.tecDef(x.tec).n:'—')+'</td></tr>').join('')+'</table></div>'+
+        '<div class="m7btns"><button class="m7b sec sm" onclick="M7.clearHist()">Apagar histórico</button></div>';
+    }else html+='<p><b>Nenhuma partida jogada ainda.</b></p>';
+    html+='<h2 style="margin-top:1rem">Simulação IA × IA</h2><p>Roda centenas de partidas em segundos para ver se uma mudança de regra desequilibra o jogo. Usa '+(opt.rivals+1)+' jogadores e os números do laboratório.</p><div class="m7btns"><button class="m7b" onclick="M7.sim(300)">Simular 300 partidas</button><button class="m7b sec" onclick="M7.sim(1000)">Simular 1.000</button></div><div id="m7sim">'+(lastSim||'')+'</div>'+
+      '<div class="act"><button class="m7b sec" onclick="M7.close()">Fechar</button></div>';
+    modal(html,true);
+  }
+  function clearHist(){lsSet(LSK,[]);tests()}
+  function sim(n){
+    $('m7sim').innerHTML='<p>Simulando…</p>';
+    setTimeout(()=>{
+      const r=E.simulate(n,{players:opt.rivals+1,cfg:cfgFromOpt()});
+      const a=k=>f1((r.acoes[k]||0)/r.partidas/r.jogadores);
+      const tit=k=>(r.acoes['tit_'+k]||0)/r.partidas/r.jogadores;
+      lastSim='<div class="m7kpis">'+
+        '<div class="m7kpi"><small>Rodadas (média)</small><b>'+f1(r.rodadasMedia)+'</b></div>'+
+        '<div class="m7kpi"><small>Pontos por time</small><b>'+f1(r.pontosMedia)+'</b></div>'+
+        '<div class="m7kpi"><small>Estrelas por time</small><b>'+f1(r.estrelasMedia)+'</b></div>'+
+        '<div class="m7kpi"><small>Bônus no total</small><b>'+pct(r.bonusPct)+'</b></div>'+
+        '<div class="m7kpi"><small>Diferença 1º–2º</small><b>'+f1(r.margemMedia)+'</b></div>'+
+        '<div class="m7kpi"><small>Times com vaga vazia</small><b>'+pct(r.timesComBuraco)+'</b></div>'+
+        '<div class="m7kpi"><small>Moedas sobrando</small><b>'+f1(r.moedasSobra)+'</b></div></div>'+
+        '<div class="m7tblw"><table class="m7tbl"><tr><th>Técnico</th><th>Vezes usado</th><th>Vitórias de quem usou</th></tr>'+r.tecnico.map(t=>'<tr><td>'+t.n+'</td><td>'+t.usos+'</td><td><b>'+pct(t.winRate)+'</b></td></tr>').join('')+'</table></div>'+
+        '<p style="margin-top:.5rem">Referência: com '+r.jogadores+' jogadores, o esperado por acaso é <b>'+pct(1/r.jogadores)+'</b> de vitórias. Técnico muito acima disso está forte demais.</p>'+
+        '<div class="m7tblw"><table class="m7tbl"><tr><th>Por jogador, por partida</th><th>Vitrine</th><th>Olheiro</th><th>Compra às cegas</th><th>Técnico</th><th>Treino</th><th>Patrocínio</th></tr><tr><td>Ações</td><td><b>'+a('vitrine')+'</b></td><td><b>'+a('olheiro')+'</b></td><td><b>'+a('vitrine_rival')+'</b></td><td><b>'+a('tecnico')+'</b></td><td><b>'+a('treino')+'</b></td><td><b>'+a('patrocinio')+'</b></td></tr></table></div>'+
+        '<div class="m7tblw"><table class="m7tbl"><tr><th>Time final (titulares)</th><th>Bronze</th><th>Prata</th><th>Ouro</th><th>Especial</th><th>Ícone</th></tr><tr><td>Média por time</td>'+E.RORDER.map(k=>'<td><b>'+f1(tit(k))+'</b></td>').join('')+'</tr></table></div>'+
+        '<div class="m7tblw"><table class="m7tbl"><tr><th>Idas a cada mercado</th>'+E.RORD.map(k=>'<th>'+E.REG[k].n+'</th>').join('')+'</tr><tr><td>Por jogador</td>'+E.RORD.map(k=>'<td><b>'+a('reg_'+k)+'</b></td>').join('')+'</tr></table></div>';
+      const el=$('m7sim');if(el)el.innerHTML=lastSim;
+    },30);
+  }
+
+  return {open,start,back,setOpt,setRivals,setEnd,resetOpt,buy,buyOk,scout,scKeep,scList,scClaim,scPrice,scOk,sponsor,tec,tecOk,
+    buyShop,buyShopOk,retract,cardMenu,train,sell:sellC,swap,end,nego,ngAi,ngPos,ngGive,ngNo,ngOk,revNext,rules,tests,clearHist,sim,
+    close:closeModal,_state:()=>G};
+})();
+
 </script>
 <!-- ═══ MODE 3 — MUNDO DO FUTEBOL ═══════════════════════════ -->
 <div id="mode3s" class="screen">
