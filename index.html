@@ -1780,7 +1780,7 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
 #mode7 .game-header{flex-wrap:wrap}
 .m7hbtn{background:none;border:1px solid var(--border);color:var(--text2);padding:.28rem .6rem;border-radius:5px;cursor:pointer;font-size:.72rem}
 .m7hbtn:hover{color:var(--accent);border-color:var(--accent)}
-.m7{flex:1;overflow-y:auto;overflow-x:hidden;padding:.7rem .8rem 5.2rem;-webkit-overflow-scrolling:touch}
+.m7{flex:1;overflow-y:auto;overflow-x:hidden;padding:.7rem .8rem 8rem;-webkit-overflow-scrolling:touch}
 .m7 h3{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin:0 0 .45rem}
 .m7panel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.65rem .7rem;margin-bottom:.7rem}
 
@@ -1847,8 +1847,8 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
 .m7c.especial .st i{color:#aaffcb}
 .m7c .ps{position:absolute;top:.25rem;right:.3rem;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.72rem;background:rgba(0,0,0,.55);color:#fff;border-radius:4px;padding:0 .28rem}
 .m7c .nm{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.8rem;line-height:1.02;margin-top:.3rem;text-transform:uppercase;overflow-wrap:anywhere}
-.m7c .nm.lg{font-size:.66rem}
-.m7c.sm .nm.lg{font-size:.54rem}
+.m7c .nm.lg{font-size:.6rem}
+.m7c.sm .nm.lg{font-size:.5rem}
 .m7c .nt{font-size:.58rem;opacity:.85;margin-top:.15rem;display:flex;align-items:center;gap:.2rem}
 .m7dot{display:inline-block;width:7px;height:7px;border-radius:50%;border:1px solid rgba(0,0,0,.4);flex:0 0 auto}
 .m7c .rr{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;opacity:.75;margin-top:auto;padding-top:.2rem}
@@ -2014,7 +2014,7 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
         <div class="mode-num">06</div>
         <div class="mode-title">Janela Secreta</div>
         <div class="mode-desc">Monte seu 11 em segredo: olheiro, blefe na vitrine, técnico, convocação e negociação. Revelação no fim.</div>
-        <div class="mode-tag">🕵️ Novo · Teste · vs IA</div>
+        <div class="mode-tag">🕵️ Novo · Teste v0.2 · vs IA</div>
       </div>
     </div>
   </div>
@@ -2422,7 +2422,7 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;over
     <div class="game-title">Janela Secreta</div>
     <button class="m7hbtn" onclick="M7.rules()">❓ Regras</button>
     <button class="m7hbtn" onclick="M7.tests()">📊 Testes</button>
-    <div class="badge" id="m7badge">Teste v0.1</div>
+    <div class="badge" id="m7badge">Teste v0.2</div>
   </div>
   <div class="m7" id="m7body"></div>
   <div class="m7bar" id="m7bar" style="display:none"></div>
@@ -7218,7 +7218,7 @@ const SP7 = (function(){
   const PSHORT = {goleiro:'GOL',defesa:'DEF',meio:'MEI',ataque:'ATA'};
 
   const DEFAULTS = {
-    startCoins:6, income:3, sponsor:4, emptyPen:2, maxRounds:10, endOn11:false, rotate:true,
+    startCoins:6, income:3, sponsor:4, emptyPen:2, maxRounds:10, endOn11:false, rotate:true, vitRotate:true,
     benchMax:3, tecCost:4, treinoCost:3, maxTreino:3, convPts:4, firstBonus:0,
     price:{bronze:1,prata:2,ouro:4,especial:6,icone:8},
     olheiro:{br:2,as:3,rm:3,eu:6}
@@ -7289,13 +7289,22 @@ const SP7 = (function(){
     startTurn(G);
     return G;
   }
-  function refill(G,r){while(G.vit[r].length<3&&G.decks[r].length)G.vit[r].push(G.decks[r].shift())}
+  function refill(G,r){
+    while(G.vit[r].length<3&&G.decks[r].length){
+      let ix=0;
+      if(G.vit[r].some(c=>c.p==='goleiro')){ix=G.decks[r].findIndex(c=>c.p!=='goleiro');if(ix<0)ix=0}
+      G.vit[r].push(G.decks[r].splice(ix,1)[0]);
+    }
+  }
+  /* fim de rodada: a carta mais antiga de cada vitrine volta ao monte e entra uma nova */
+  function rotateVit(G){RORD.forEach(r=>{if(G.vit[r].length&&G.decks[r].length){G.decks[r].push(G.vit[r].shift());refill(G,r)}})}
+  const mo=n=>n+(n===1?' moeda':' moedas');
   function cur(G){return G.players[G.order[G.turn]]}
   function L(G,msg,who){G.log.push({r:G.round,who:who==null?-1:who,msg})}
   function count(G,k){G.stats.actions[k]=(G.stats.actions[k]||0)+1}
 
   function startTurn(G){
-    const p=cur(G);p.coins+=G.cfg.income;p.negUsed=false;p.trained=false;G.acted=false;G.pending=null;
+    const p=cur(G);p.coins+=G.cfg.income;p.negUsed=false;p.trained=false;p.offerUsed=false;G.acted=false;G.pending=null;
   }
   function endTurn(G){
     if(G.over)return;
@@ -7305,6 +7314,7 @@ const SP7 = (function(){
       if((G.cfg.endOn11&&G.endBy!=null)||G.round>=G.cfg.maxRounds){G.over=true;L(G,'Fim da janela! Hora de revelar os times.');return}
       G.round++;
       if(G.cfg.rotate)G.order.push(G.order.shift());
+      if(G.cfg.vitRotate)rotateVit(G);
     }
     startTurn(G);
   }
@@ -7319,10 +7329,10 @@ const SP7 = (function(){
 
   /* coloca a carta: vaga livre → titular; senão troca o pior se for melhor; senão banco */
   function place(G,p,c){
-    const k=c.p;
+    const k=c.p;G._out=null;
     if(p.field[k].length<FORM[k]){p.field[k].push(c);checkFull(G,p);return 'titular'}
     const w=worstIn(p,k);
-    if(cardVal(p,c)>cardVal(p,w)){p.field[k][p.field[k].indexOf(w)]=c;toBench(G,p,w);return 'titular'}
+    if(cardVal(p,c)>cardVal(p,w)){p.field[k][p.field[k].indexOf(w)]=c;G._out=w;toBench(G,p,w);return 'titular'}
     toBench(G,p,c);return 'banco';
   }
   function saleValue(G,c){return Math.max(1,Math.floor(G.cfg.price[c.r]/2))}
@@ -7371,7 +7381,7 @@ const SP7 = (function(){
     G.pending=null;
     const where=place(G,p,kept);
     L(G,p.name+' usou o olheiro n'+artigo(pd.r)+' '+REG[pd.r].n+' e ficou com 1 '+PSHORT[kept.p]+' (fechado).',p.id);
-    if(listed)L(G,p.name+' pôs um '+PSHORT[listed.p]+' na vitrine por '+p.shop.price+' moedas: “é '+RNAME[p.shop.claim]+'”.',p.id);
+    if(listed)L(G,p.name+' pôs um '+PSHORT[listed.p]+' na vitrine por '+mo(p.shop.price)+': “é '+RNAME[p.shop.claim]+'”.',p.id);
     return {ok:true,card:kept,where};
   }
   function actSponsor(G,p){
@@ -7393,7 +7403,10 @@ const SP7 = (function(){
   function actTreino(G,p,cardId){
     if(p.trained)return {ok:false,msg:'Só 1 treino por turno.'};
     const c=titulares(p).concat(p.bench).find(x=>x.id===cardId);
-    if(!canTrain(G,p,c))return {ok:false,msg:'Não dá para treinar esse jogador.'};
+    if(!c)return {ok:false,msg:'Jogador não encontrado.'};
+    if(c.r==='icone')return {ok:false,msg:'Ícone não treina: já está no máximo.'};
+    if(c.tr)return {ok:false,msg:'Esse jogador já treinou. Cada um treina só 1 vez.'};
+    if(p.treinos>=G.cfg.maxTreino)return {ok:false,msg:'Você já usou os '+G.cfg.maxTreino+' treinos da partida.'};
     if(p.coins<G.cfg.treinoCost)return {ok:false,msg:'Moedas insuficientes ('+G.cfg.treinoCost+').'};
     pay(p,G.cfg.treinoCost);c.tr=1;p.treinos++;p.trained=true;count(G,'treino');
     L(G,p.name+' treinou um jogador (+1★).',p.id);return {ok:true,card:c};
@@ -7409,7 +7422,7 @@ const SP7 = (function(){
     p.trust[sellerId]=honest?Math.min(.95,t+.15):t*.45;
     const where=place(G,p,sh.card);G.acted=true;count(G,'vitrine_rival');
     if(!honest)count(G,'blefe_pegou');
-    L(G,p.name+' comprou da vitrine de '+s.name+' por '+sh.price+' — '+(honest?'o relatório era verdadeiro.':'era blefe!'),p.id);
+    L(G,p.name+' comprou '+(s.human?'da sua vitrine':'da vitrine de '+s.name)+' por '+mo(sh.price)+' — '+(honest?'o relatório era verdadeiro.':'era blefe!'),p.id);
     return {ok:true,card:sh.card,claim:sh.claim,honest,where};
   }
 
@@ -7431,7 +7444,8 @@ const SP7 = (function(){
   }
   function retractShop(G,p){
     if(!p.shop)return {ok:false};
-    const c=p.shop.card;p.shop=null;place(G,p,c);return {ok:true};
+    const c=p.shop.card;p.shop=null;G.decks[c.m].push(c);
+    L(G,p.name+' recolheu a carta da vitrine; ela voltou ao monte.',p.id);return {ok:true};
   }
 
   /* ── PONTUAÇÃO ── */
@@ -7532,7 +7546,10 @@ const SP7 = (function(){
   }
   function aiTurn(G){
     const p=cur(G);const st=STYLES[p.style]||STYLES.equilibrado;
-    const o=aiOptions(G,p)[0];let res={t:o.t};
+    if(p.shop){p.shop.age=(p.shop.age||0)+1;
+      if(p.shop.age>=5)retractShop(G,p);
+      else if(p.shop.price>1&&G.rng()<.5)p.shop.price--;}
+    const o=aiOptions(G,p)[0];let res={t:o.t,seller:o.s};
     if(o.t==='vit')res=Object.assign(res,actBuyVit(G,p,o.r,o.i));
     else if(o.t==='olh'){
       const sc=actScout(G,p,o.r);
@@ -7548,8 +7565,6 @@ const SP7 = (function(){
     else if(o.t==='tec')res=Object.assign(res,actTec(G,p,o.i));
     else res=Object.assign(res,actSponsor(G,p));
     aiTrain(G,p,st);
-    /* vitrine encalhada: baixa o preço */
-    if(p.shop&&p.shop.price>1&&G.rng()<.35)p.shop.price--;
     return res;
   }
 
@@ -7560,12 +7575,24 @@ const SP7 = (function(){
     return c||null;
   }
   /* cotação: humano recebe `want` (da IA) e entrega `give` (ou null). Retorna moedas que o humano paga (>0) ou recebe (<0) */
+  function aiReleaseAll(G,pos){
+    return G.players.filter(x=>!x.human).map(ai=>({ai,card:aiRelease(G,ai,pos)})).filter(o=>o.card);
+  }
   function quote(G,ai,want,give){
     const st=STYLES[ai.style]||STYLES.equilibrado;
-    const ask=G.cfg.price[want.r]+1+(want.tr?1:0);
+    const ask=G.cfg.price[want.r]+(want.tr?1:0);
     let credit=0;
-    if(give){const g=gainIfAdd(G,ai,give,st);credit=Math.min(G.cfg.price[give.r]+1,Math.round(g/Math.max(.3,st.lam)*.8))}
+    if(give){const g=gainIfAdd(G,ai,give,st);credit=Math.max(saleValue(G,give),Math.min(G.cfg.price[give.r]+1,Math.round(g/Math.max(.3,st.lam)*.8)))}
     return ask-credit;
+  }
+  /* oferecer um reserva aos rivais: melhor lance (ou null) */
+  function bids(G,hu,card){
+    let best=null;
+    G.players.filter(x=>!x.human).forEach(ai=>{
+      const st=STYLES[ai.style]||STYLES.equilibrado,g=gainIfAdd(G,ai,card,st);
+      if(g>=1){const offer=Math.min(ai.coins,G.cfg.price[card.r]);if(offer>=1&&(!best||offer>best.offer||(offer===best.offer&&g>best.g)))best={ai,card,offer,g}}
+    });
+    return best;
   }
   function doTrade(G,hu,ai,want,give,coins){
     if(coins>0&&hu.coins<coins)return {ok:false,msg:'Moedas insuficientes.'};
@@ -7594,7 +7621,7 @@ const SP7 = (function(){
   function acceptProposal(G,ai,hu,pr){
     const i=hu.bench.indexOf(pr.card);if(i<0)return {ok:false};
     hu.bench.splice(i,1);hu.coins+=pr.offer;ai.coins-=pr.offer;place(G,ai,pr.card);count(G,'troca');
-    L(G,ai.name+' comprou um reserva de '+hu.name+' por '+pr.offer+' moedas.',ai.id);return {ok:true};
+    L(G,ai.name+' comprou um reserva seu por '+mo(pr.offer)+'.',ai.id);return {ok:true};
   }
 
   /* ── SIMULAÇÃO IA × IA ── */
@@ -7633,7 +7660,7 @@ const SP7 = (function(){
     stars,titulares,emptySlots,isFull,newGame,cur,startTurn,endTurn,travelCost,saleValue,
     actBuyVit,actScout,resolveScout,actSponsor,actTec,actTreino,actBuyShop,canTrain,
     sell,swap,retractShop,score,ranking,convPoints,convCount,tecPoints,tecDef,cardVal,
-    aiTurn,aiOptions,aiRelease,quote,doTrade,aiProposal,acceptProposal,simulate};
+    aiTurn,aiOptions,aiRelease,aiReleaseAll,bids,quote,doTrade,aiProposal,acceptProposal,simulate};
 })();
 
 /* ═══════════════════════════════════════════════════
@@ -7669,11 +7696,12 @@ const M7 = (function(){
       (o.price!=null?'<div class="pr">'+o.price+'</div>':'')+'</div>';
   }
   function backH(c,o){o=o||{};return '<span class="m7bk'+(o.lg?' lg':'')+'" style="--rc:'+E.REG[c.m].c+'" title="Veio do mercado: '+E.REG[c.m].n+'">'+E.PSHORT[c.p]+'</span>'}
+  function shopBk(c,o){o=o||{};return '<span class="m7bk'+(o.lg?' lg':'')+'" style="--rc:#5b6478" title="Carta fechada">'+E.PSHORT[c.p]+'</span>'}
   function emptyBk(){return '<span class="m7bk empty">·</span>'}
 
   /* ── SETUP ── */
   function open(){
-    scr('mode7');G=null;$('m7bar').style.display='none';$('m7badge').textContent='Teste v0.1';closeModal();
+    scr('mode7');G=null;$('m7bar').style.display='none';$('m7badge').textContent='Teste v0.2';closeModal();
     renderSetup();
   }
   function stepper(k,min,max,lbl){
@@ -7723,9 +7751,11 @@ const M7 = (function(){
         if(pr&&!G._ref[key]){const ok=await askProposal(p,pr);if(G!==g)return;if(ok){E.acceptProposal(G,p,me,pr);hs('troca');render()}else G._ref[key]=1}
       }
       const res=E.aiTurn(G);
-      if(res.t==='shop'&&res.ok&&res.card&&G.log.length){
-        const last=G.log[G.log.length-1].msg;
-        if(last.indexOf('vitrine de Você')>=0)toast(esc(p.name)+' comprou da sua vitrine. '+(res.honest?'Seu relatório era verdadeiro.':'Seu blefe passou… mas agora ela desconfia de você.'),3600);
+      if(res.t==='shop'&&res.ok&&res.card&&res.seller===0){
+        hs(res.honest?'venda_vitrine':'blefe_vendido');
+        await tell('<h2>'+(res.honest?'💰 Vendido!':'🃏 Caiu no seu blefe!')+'</h2><div class="rowc">'+cardH(res.card)+'</div>'+(res.card.f?'<div class="m7frase">'+esc(res.card.f)+'</div>':'')+
+          '<p><b>'+esc(p.name)+'</b> pagou a você pela carta da sua vitrine, anunciada como <b>'+E.RNAME[res.claim]+'</b>.'+(res.honest?'':' Era <b>'+E.RNAME[res.card.r]+'</b>. Agora esse rival desconfia dos seus relatórios.')+'</p>');
+        if(G!==g)return;
       }
       render();await sleep(420);if(G!==g)return;
       E.endTurn(G);
@@ -7733,6 +7763,7 @@ const M7 = (function(){
     if(G&&G.over){busy=true;render();reveal()}
   }
   function hs(k){humanStats[k]=(humanStats[k]||0)+1}
+  function tell(html){return new Promise(res=>{M7._tell=()=>{closeModal();res()};modal(html+'<div class="act"><button class="m7b gold" onclick="M7._tell()">Ok</button></div>')})}
   function askProposal(ai,pr){
     return new Promise(res=>{
       M7._prop=v=>{closeModal();res(v)};
@@ -7757,6 +7788,7 @@ const M7 = (function(){
       '<div class="m7stat"><small>Rodada</small><b>'+G.round+(G.cfg.endOn11?'':'<span style="font-size:.9rem;color:var(--text2)"> / '+G.cfg.maxRounds+'</span>')+'</b></div>'+
       '<div class="m7stat"><small>Suas moedas</small><b class="gold">'+me.coins+'</b></div>'+
       '<div class="m7stat"><small>Você está em</small><b style="font-size:1.05rem;color:'+E.REG[me.reg].c+'">'+E.REG[me.reg].f+' '+E.REG[me.reg].n+'</b></div>'+
+      '<div class="m7stat"><small>Ordem desta rodada</small><b style="font-size:.82rem;font-family:Barlow,sans-serif;font-weight:600">'+G.order.map(i=>(G.players[i]===p&&!G.over?'<span style="color:var(--accent)">':'<span>')+esc(G.players[i].name)+'</span>').join(' → ')+'</b></div>'+
       '<div class="m7stat" style="flex:1"><small>Convocações abertas — mais titulares da região leva +'+G.cfg.convPts+'</small><div class="m7convs">'+
         G.conv.map(r=>'<span class="m7conv" style="border-color:'+E.REG[r].c+';color:'+E.REG[r].c+'">'+E.REG[r].f+' Seleção · '+E.REG[r].n+' — você tem <b>'+E.convCount(me,r)+'</b></span>').join('')+
       '</div></div></div>';
@@ -7781,14 +7813,15 @@ const M7 = (function(){
     h+='<div class="m7panel"><h3>Vestiário e ofertas dos rivais — valem em qualquer região</h3><div class="m7side" style="margin-top:0">';
     G.tecOpen.forEach((id,i)=>{
       const t=E.tecDef(id),can=mine&&!G.acted&&!me.tec&&me.coins>=G.cfg.tecCost;
-      h+='<div class="m7box"><div class="m7tec'+(can?' buy':'')+'" '+(can?'onclick="M7.tec('+i+')"':'style="opacity:'+(me.tec?'.5':'.8')+'"')+'><span class="cst">'+G.cfg.tecCost+' moedas</span><b>🎓 '+t.n+'</b>'+t.d+'</div></div>';
+      const sv=me.tec;me.tec=id;const now=E.tecPoints(me);me.tec=sv;
+      h+='<div class="m7box"><div class="m7tec'+(can?' buy':'')+'" '+(can?'onclick="M7.tec('+i+')"':'style="opacity:'+(me.tec?'.5':'.8')+'"')+'><span class="cst">'+G.cfg.tecCost+' moedas</span><b>🎓 '+t.n+'</b>'+t.d+(me.tec?'':'<br><span style="color:var(--green)">No seu time de hoje: <b style="display:inline;font-size:1rem;color:var(--green)">+'+now+'</b></span>')+'</div></div>';
     });
     h+='<div class="m7box" style="flex:0 1 190px"><button class="m7b sec" style="width:100%" '+(mine&&!G.acted?'':'disabled')+' onclick="M7.sponsor()">💰 Patrocínio +'+G.cfg.sponsor+'</button><div style="font-size:.66rem;color:var(--text2);margin-top:.35rem">Gasta sua ação do turno.</div></div>';
     h+='</div>';
     const offers=G.players.filter(x=>!x.human&&x.shop);
     if(offers.length){
       h+='<div class="m7offers">'+offers.map(x=>{const can=mine&&!G.acted&&me.coins>=x.shop.price;
-        return '<div class="m7shop">'+backH(x.shop.card)+'<span><b>'+esc(x.name)+'</b> anuncia: <q>'+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'</q> por <b style="color:var(--gold)">'+x.shop.price+'</b></span><button class="m7b sm" style="margin-left:auto" '+(can?'':'disabled')+' onclick="M7.buyShop('+x.id+')">Comprar às cegas</button></div>'}).join('')+'</div>';
+        return '<div class="m7shop">'+shopBk(x.shop.card)+'<span><b>'+esc(x.name)+'</b> anuncia: <q>'+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'</q> por <b style="color:var(--gold)">'+x.shop.price+'</b></span><button class="m7b sm" style="margin-left:auto" '+(can?'':'disabled')+' onclick="M7.buyShop('+x.id+')">Comprar às cegas</button></div>'}).join('')+'</div>';
     }
     h+='</div>';
     /* log */
@@ -7803,12 +7836,12 @@ const M7 = (function(){
       for(let i=me.field[k].length;i<E.FORM[k];i++)h+='<div class="m7slot">vaga</div>';
       h+='</div>';
     });
-    h+='</div><div class="m7partial"><span>Estrelas <b>'+sc.stars+'</b></span><span>Técnico <b>+'+sc.tec+'</b></span><span>Convocação hoje <b>?</b></span><span>Vagas <b>'+sc.empty+'</b></span><span class="tot">Parcial <b>'+(sc.stars+sc.tec+sc.empty)+'</b></span></div>';
+    h+='</div><div class="m7partial"><span>Estrelas <b>'+sc.stars+'</b></span><span>Técnico <b>+'+sc.tec+'</b></span><span>Convocações: só no fim</span><span>Vagas vazias <b>'+E.emptySlots(me)+'</b> (−'+G.cfg.emptyPen+' cada)</span><span class="tot">Parcial <b>'+(sc.stars+sc.tec+sc.empty)+'</b></span></div>';
     h+='<div class="m7side">'+
       '<div class="m7box"><h3>Banco ('+me.bench.length+'/'+G.cfg.benchMax+')</h3><div class="cards">'+(me.bench.map(c=>cardH(c,{sm:1,click:'M7.cardMenu('+c.id+')'})).join('')||'<span style="font-size:.7rem;color:var(--text2)">vazio</span>')+'</div></div>'+
       '<div class="m7box"><h3>Técnico</h3>'+(me.tec?'<div class="m7tec"><b>🎓 '+E.tecDef(me.tec).n+'</b>'+E.tecDef(me.tec).d+'</div>':'<span style="font-size:.7rem;color:var(--text2)">sem técnico — contrate no Vestiário</span>')+
         '<h3 style="margin-top:.5rem">Treinos '+me.treinos+'/'+G.cfg.maxTreino+'</h3><span style="font-size:.7rem;color:var(--text2)">Clique em um jogador seu para treinar ('+G.cfg.treinoCost+' moedas, +1★, ação livre).</span></div>'+
-      '<div class="m7box"><h3>Sua vitrine</h3>'+(me.shop?'<div class="cards">'+cardH(me.shop.card,{sm:1})+'<div style="font-size:.7rem;line-height:1.4">Anunciado como<br><b style="color:var(--gold)">'+E.RNAME[me.shop.claim]+'</b> por <b style="color:var(--gold)">'+me.shop.price+'</b><br><button class="m7b sec sm" style="margin-top:.3rem" '+(mine?'':'disabled')+' onclick="M7.retract()">Recolher</button></div></div>':'<span style="font-size:.7rem;color:var(--text2)">vazia — o olheiro deixa você anunciar 1 carta fechada</span>')+'</div>'+
+      '<div class="m7box"><h3>Sua vitrine</h3>'+(me.shop?'<div class="cards">'+cardH(me.shop.card,{sm:1})+'<div style="font-size:.7rem;line-height:1.4">Anunciado como<br><b style="color:var(--gold)">'+E.RNAME[me.shop.claim]+'</b> por <b style="color:var(--gold)">'+me.shop.price+'</b><br><button class="m7b sec sm" style="margin-top:.3rem" '+(mine?'':'disabled')+' onclick="M7.retract()">Recolher (volta ao monte)</button></div></div>':'<span style="font-size:.7rem;color:var(--text2)">vazia — o olheiro deixa você anunciar 1 carta fechada</span>')+'</div>'+
       '</div></div>';
     /* rivais */
     h+='<div class="m7panel"><h3>Rivais — você só vê as costas (cor = mercado de origem)</h3>';
@@ -7822,7 +7855,7 @@ const M7 = (function(){
       h+='<span class="grp" data-l="banco">'+(x.bench.map(c=>backH(c)).join('')||emptyBk())+'</span></div>';
       if(x.shop){
         const can=mine&&!G.acted&&me.coins>=x.shop.price;
-        h+='<div class="m7shop">'+backH(x.shop.card)+'<span>Vitrine: <q>É um '+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'.</q> — <b style="color:var(--gold)">'+x.shop.price+' moedas</b></span></div>';
+        h+='<div class="m7shop">'+shopBk(x.shop.card)+'<span>Vitrine: <q>É um '+E.PSHORT[x.shop.card.p]+' '+E.RNAME[x.shop.claim]+'.</q> — <b style="color:var(--gold)">'+x.shop.price+' moedas</b></span></div>';
       }
       h+='</div>';
     });
@@ -7832,19 +7865,25 @@ const M7 = (function(){
     let msg,btn='';
     if(G.over)msg='Fim da janela.';
     else if(!mine)msg='⏳ <b>'+esc(p.name)+'</b> está jogando…';
-    else if(!G.acted)msg='<b>Sua vez.</b> Faça 1 ação: contratar na vitrine, olheiro, técnico, comprar de um rival ou patrocínio. Negociar e treinar são livres.';
-    else msg='Ação feita. Negocie ou treine se quiser, e encerre o turno.';
-    if(mine)btn='<button class="m7b sec sm" '+(me.negUsed?'disabled':'')+' onclick="M7.nego()">🤝 Negociar</button><button class="m7b sm'+(G.acted?' m7pulse':'')+'" '+(G.acted?'':'disabled')+' onclick="M7.end()">Encerrar turno ➜</button>';
+    else{
+      const falta=E.POS.filter(k=>me.field[k].length<E.FORM[k]).map(k=>(E.FORM[k]-me.field[k].length)+' '+E.PSHORT[k]).join(', ');
+      const left=G.cfg.maxRounds-G.round+1;
+      let warn=falta?' <span style="color:var(--red)">Faltam: '+falta+'.</span>':' <span style="color:var(--green)">Time completo.</span>';
+      if(!me.tec&&G.round>=Math.ceil(G.cfg.maxRounds*.6))warn+=' <span style="color:var(--gold)">Você ainda não tem técnico.</span>';
+      if(!G.cfg.endOn11)warn+=' '+(left===1?'<b>Última rodada!</b>':'Restam '+left+' rodadas.');
+      msg=(G.acted?'Ação feita. Negocie ou treine se quiser, e encerre o turno.':'<b>Sua vez:</b> 1 ação (vitrine, olheiro, técnico, compra às cegas ou patrocínio). Negociar e treinar são livres.')+warn;
+    }
+    if(mine)btn='<button class="m7b sec sm" '+(me.negUsed?'disabled':'')+' onclick="M7.nego()">🤝 Negociar</button><button class="m7b sm'+(G.acted?' m7pulse':' sec')+'" onclick="M7.end()">'+(G.acted?'Encerrar turno ➜':'Passar a vez')+'</button>';
     $('m7bar').innerHTML='<div class="msg">'+msg+'</div>'+btn;
   }
 
   /* ── AÇÕES DO HUMANO ── */
-  function afterPlace(c,where){toast('<b>'+esc(c.n)+'</b> ('+E.RNAME[c.r]+') foi para '+(where==='titular'?'o time titular':'o banco')+'.')}
+  function afterPlace(c,where){toast('<b>'+esc(c.n)+'</b> ('+E.RNAME[c.r]+') foi para '+(where==='titular'?'o time titular':'o banco')+'.'+(G._out?' <b>'+esc(G._out.n)+'</b> saiu para o banco.':''),3400)}
   function buy(r,i){
     if(!myTurn()||G.acted)return;
     const c=G.vit[r][i],tc=E.travelCost(me,r),cost=tc+G.cfg.price[c.r];
     modal('<h2>Contratar na vitrine</h2><div class="rowc">'+cardH(c)+'</div>'+(c.f?'<div class="m7frase">'+esc(c.f)+'</div>':'')+
-      '<p>Preço <b>'+G.cfg.price[c.r]+'</b>'+(tc?' + viagem <b>'+tc+'</b>':'')+' = <b>'+cost+' moedas</b>. Você tem <b>'+me.coins+'</b>. Todos veem esta contratação.</p>'+
+      '<p>Preço <b>'+G.cfg.price[c.r]+'</b>'+(tc?' + viagem <b>'+tc+'</b>':'')+' = <b>'+cost+' moedas</b>. Você tem <b>'+me.coins+'</b>.'+(me.coins<cost?' <span style="color:var(--red)">Faltam <b>'+mo(cost-me.coins)+'</b>: pegue patrocínio ou venda um reserva.</span>':'')+' Todos veem esta contratação.</p>'+
       '<div class="act"><button class="m7b sec" onclick="M7.close()">Cancelar</button><button class="m7b gold" '+(me.coins>=cost?'':'disabled')+' onclick="M7.buyOk(\''+r+'\','+i+')">Contratar por '+cost+'</button></div>');
   }
   function buyOk(r,i){const res=E.actBuyVit(G,me,r,i);closeModal();if(!res.ok){toast(res.msg);return}hs('vitrine');afterPlace(res.card,res.where);render()}
@@ -7891,7 +7930,7 @@ const M7 = (function(){
   function tecOk(i){const r=E.actTec(G,me,i);closeModal();if(!r.ok){toast(r.msg);return}hs('tecnico');render()}
   function buyShop(id){
     if(!myTurn()||G.acted)return;const s=G.players[id];
-    modal('<h2>Comprar às cegas</h2><div class="rowc">'+backH(s.shop.card,{lg:1})+'</div><p>'+esc(s.name)+' diz: <b>“É um '+E.PSHORT[s.shop.card.p]+' '+E.RNAME[s.shop.claim]+'.”</b> Pode ser verdade. Pode ser blefe. A posição é garantida; o resto, não.</p><p>Preço: <b>'+s.shop.price+' moedas</b>, pagas a '+esc(s.name)+'.</p>'+
+    modal('<h2>Comprar às cegas</h2><div class="rowc">'+shopBk(s.shop.card,{lg:1})+'</div><p>'+esc(s.name)+' diz: <b>“É um '+E.PSHORT[s.shop.card.p]+' '+E.RNAME[s.shop.claim]+'.”</b> Pode ser verdade. Pode ser blefe. A posição é garantida; o resto, não.</p><p>Preço: <b>'+s.shop.price+' moedas</b>, pagas a '+esc(s.name)+'.</p>'+
       '<div class="act"><button class="m7b sec" onclick="M7.close()">Desistir</button><button class="m7b gold" onclick="M7.buyShopOk('+id+')">Pagar '+s.shop.price+' e virar a carta</button></div>');
   }
   function buyShopOk(id){
@@ -7901,7 +7940,7 @@ const M7 = (function(){
       '<p>Anunciado como <b>'+E.RNAME[r.claim]+'</b>. Veio um <b>'+E.RNAME[r.card.r]+'</b>, que foi para '+(r.where==='titular'?'o time titular':'o banco')+'.</p><div class="act"><button class="m7b" onclick="M7.close()">Ok</button></div>');
     render();
   }
-  function retract(){if(!myTurn())return;E.retractShop(G,me);render()}
+  function retract(){if(!myTurn())return;E.retractShop(G,me);toast('Carta recolhida: ela voltou ao monte do mercado.');render()}
   function cardMenu(id){
     if(!G||G.over)return;
     const c=E.titulares(me).concat(me.bench).find(x=>x.id===id);if(!c)return;
@@ -7911,6 +7950,7 @@ const M7 = (function(){
     h+='<button class="m7chip" '+(canT?'':'disabled')+' onclick="M7.train('+id+')">🏋️ Treinar +1★ ('+G.cfg.treinoCost+' moedas)</button>';
     if(onBench){
       h+='<button class="m7chip" '+(mine?'':'disabled')+' onclick="M7.sell('+id+')">Vender ao banco (+'+E.saleValue(G,c)+')</button>';
+      h+='<button class="m7chip" '+(mine&&!me.offerUsed?'':'disabled')+' onclick="M7.offer('+id+')">📣 Oferecer aos rivais (1 por turno)</button>';
       if(me.field[c.p].length<E.FORM[c.p])h+='<button class="m7chip" '+(mine?'':'disabled')+' onclick="M7.swap('+id+',null)">Escalar na vaga</button>';
       h+='</div>';
       if(me.field[c.p].length)h+='<p style="margin-bottom:.2rem">Escalar no lugar de:</p><div class="rowc">'+me.field[c.p].map(f=>cardH(f,{sm:1,click:mine?'M7.swap('+id+','+f.id+')':null})).join('')+'</div>';
@@ -7922,32 +7962,38 @@ const M7 = (function(){
   function train(id){const r=E.actTreino(G,me,id);closeModal();if(!r.ok){toast(r.msg);return}hs('treino');toast('<b>'+esc(r.card.n)+'</b> treinou: +1★.');render()}
   function sellC(id){E.sell(G,me,id);closeModal();render()}
   function swap(b,f){E.swap(G,me,b,f);closeModal();render()}
-  function end(){if(!myTurn()||!G.acted)return;busy=true;E.endTurn(G);render();loop()}
+  function offer(id){
+    const c=me.bench.find(x=>x.id===id);if(!c||!myTurn()||me.offerUsed)return;
+    me.offerUsed=true;hs('oferta');const b=E.bids(G,me,c);
+    if(!b){modal('<h2>📣 Oferta aos rivais</h2><div class="rowc">'+cardH(c)+'</div><p>Você mostrou a carta aos rivais e <b>ninguém quis</b> agora. Dá para vender ao banco por '+mo(E.saleValue(G,c))+'.</p><div class="act"><button class="m7b" onclick="M7.close()">Ok</button></div>');render();return}
+    M7._bid=b;
+    modal('<h2>📣 Oferta aos rivais</h2><div class="rowc">'+cardH(c)+'</div><p><b>'+esc(b.ai.name)+'</b> oferece <b>'+mo(b.offer)+'</b> por ele. O banco paga '+mo(E.saleValue(G,c))+'.</p><div class="act"><button class="m7b sec" onclick="M7.close()">Recusar</button><button class="m7b gold" onclick="M7.offerOk()">Vender por '+b.offer+'</button></div>');render();
+  }
+  function offerOk(){const b=M7._bid;if(!b)return;E.acceptProposal(G,b.ai,me,b);M7._bid=null;hs('troca');closeModal();toast('Vendido para '+esc(b.ai.name)+' por '+mo(b.offer)+'.');render()}
+  function end(){if(!myTurn()||G.pending)return;if(!G.acted)hs('passou');busy=true;closeModal();E.endTurn(G);render();loop()}
 
   /* ── NEGOCIAÇÃO ── */
   function nego(){
-    if(!myTurn()||me.negUsed)return;sel={ai:null,pos:null,want:null,give:null};negoModal();
+    if(!myTurn()||me.negUsed)return;sel={ai:null,pos:null,want:null,give:null,offers:null};negoModal();
   }
   function negoModal(){
-    let h='<h2>🤝 Negociar</h2><p>Uma consulta por turno, sem gastar a ação. Vocês mostram as cartas <b>só um para o outro</b>.</p><p style="margin-bottom:.2rem">Com quem?</p><div class="m7chips">'+
-      G.players.filter(x=>!x.human).map(x=>'<button class="m7chip'+(sel.ai===x.id?' on':'')+'" onclick="M7.ngAi('+x.id+')">'+esc(x.name)+' · banco '+x.bench.length+'</button>').join('')+'</div>';
-    if(sel.ai!=null){
-      const ai=G.players[sel.ai];
-      h+='<p style="margin-bottom:.2rem">Que posição você procura?</p><div class="m7chips">'+E.POS.map(k=>'<button class="m7chip'+(sel.pos===k?' on':'')+'" '+(ai.bench.some(c=>c.p===k)?'':'disabled')+' onclick="M7.ngPos(\''+k+'\')">'+E.PSHORT[k]+'</button>').join('')+'</div>';
-      if(!ai.bench.length)h+='<p>'+esc(ai.name)+' não tem reservas para negociar agora.</p>';
+    let h='<h2>🤝 Negociar</h2><p>Pergunte à mesa quem tem jogador sobrando numa posição. Quem tiver mostra a carta <b>só para você</b>. Vale 1 consulta com resposta por turno e não gasta a ação.</p><p style="margin-bottom:.2rem">Que posição você procura?</p><div class="m7chips">'+
+      E.POS.map(k=>'<button class="m7chip'+(sel.pos===k?' on':'')+'" '+(sel.offers&&sel.offers.length?'disabled':'')+' onclick="M7.ngPos(\''+k+'\')">'+E.PSHORT[k]+'</button>').join('')+'</div>';
+    if(sel.pos&&sel.offers&&!sel.offers.length)h+='<p><b>Ninguém tem '+E.PSHORT[sel.pos]+' sobrando agora.</b> A consulta não foi gasta: tente outra posição.</p>';
+    if(sel.offers&&sel.offers.length){
+      h+='<p style="margin-bottom:.2rem">Ofertas (clique para escolher):</p><div class="rowc">'+sel.offers.map((o,i)=>'<div style="text-align:center"><div style="font-size:.72rem;margin-bottom:.3rem"><b>'+esc(o.ai.name)+'</b> pede '+mo(E.quote(G,o.ai,o.card,null))+'</div>'+cardH(o.card,{click:'M7.ngPick('+i+')',pick:sel.want===o.card?'m7pick':''})+'</div>').join('')+'</div>';
     }
     if(sel.want){
       const ai=G.players[sel.ai],q=E.quote(G,ai,sel.want,sel.give);
-      h+='<p style="margin-bottom:.2rem">'+esc(ai.name)+' mostra a você:</p><div class="rowc">'+cardH(sel.want)+'</div>'+
-        '<p style="margin-bottom:.2rem">Oferecer um jogador seu em troca (opcional):</p><div class="rowc">'+
+      h+='<p style="margin-bottom:.2rem">Dar um jogador seu em troca abaixa o preço (opcional):</p><div class="rowc">'+
         me.bench.concat(E.titulares(me)).map(c=>cardH(c,{sm:1,click:'M7.ngGive('+c.id+')',pick:sel.give===c?'m7pick':''})).join('')+'</div>'+
-        '<p>'+(q>0?'Você paga <b>'+mo(q)+'</b>'+(sel.give?' e entrega <b>'+esc(sel.give.n)+'</b>':'')+'.':q<0?'Você entrega <b>'+esc(sel.give.n)+'</b> e ainda recebe <b>'+mo(Math.min(-q,ai.coins))+'</b>.':'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>.')+' Você tem <b>'+me.coins+'</b>.</p>'+
+        '<p>'+(q>0?'Você paga <b>'+mo(q)+'</b>'+(sel.give?' e entrega <b>'+esc(sel.give.n)+'</b>':'')+'.':(q<0&&ai.coins>0)?'Você entrega <b>'+esc(sel.give.n)+'</b> e ainda recebe <b>'+mo(Math.min(-q,ai.coins))+'</b>.':q<0?'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>. O rival está sem moedas para completar a diferença.':'Troca simples: <b>'+esc(sel.give.n)+'</b> por <b>'+esc(sel.want.n)+'</b>.')+' Você tem <b>'+me.coins+'</b>.</p>'+
         '<div class="act"><button class="m7b sec" onclick="M7.ngNo()">Recusar</button><button class="m7b gold" '+(q>me.coins?'disabled':'')+' onclick="M7.ngOk()">Fechar negócio</button></div>';
-    }else h+='<div class="act"><button class="m7b sec" onclick="M7.close()">Cancelar</button></div>';
+    }else h+='<div class="act"><button class="m7b sec" onclick="M7.close()">Fechar</button></div>';
     modal(h);
   }
-  function ngAi(id){sel.ai=id;sel.pos=null;sel.want=null;sel.give=null;negoModal()}
-  function ngPos(k){sel.pos=k;sel.want=E.aiRelease(G,G.players[sel.ai],k);sel.give=null;me.negUsed=true;hs('consulta');negoModal();render()}
+  function ngPos(k){sel.pos=k;sel.offers=E.aiReleaseAll(G,k);sel.want=null;sel.give=null;hs('consulta');if(sel.offers.length){me.negUsed=true;hs('consulta_com_oferta');if(sel.offers.length===1){sel.want=sel.offers[0].card;sel.ai=sel.offers[0].ai.id}}negoModal();render()}
+  function ngPick(i){const o=sel.offers[i];sel.want=o.card;sel.ai=o.ai.id;sel.give=null;negoModal()}
   function ngGive(id){const c=me.bench.concat(E.titulares(me)).find(x=>x.id===id);sel.give=(sel.give===c)?null:c;negoModal()}
   function ngNo(){closeModal();render()}
   function ngOk(){
@@ -7983,7 +8029,10 @@ const M7 = (function(){
     if(step==='conv')h+='<p style="margin-top:.6rem">'+cv.detail.map(d=>E.REG[d.r].f+' <b>'+E.REG[d.r].n+'</b>: '+d.counts.map((c,i)=>esc(G.players[i].name)+' '+c).join(' · ')+(d.win.length?' → +'+d.each+' para '+d.win.map(i=>esc(G.players[i].name)).join(' e '):' → ninguém')).join('<br>')+'</p>';
     if(done){
       const rk=E.ranking(G),won=rk[0].id===0;
-      h+='<p style="margin-top:.7rem;font-size:1rem"><b>'+(won?'Você venceu a janela!':esc(rk[0].name)+' venceu.')+'</b> Você ficou em '+(rk.findIndex(x=>x.id===0)+1)+'º com '+sc[0].total+' pontos. A partida foi salva em 📊 Testes.</p>'+
+      const ot=won?rk[1]:rk[0],m0=sc[0],sg=n=>(n>0?'+':'')+n;
+      const why=[['estrelas',m0.stars-ot.stars],['técnico',m0.tec-ot.tec],['convocações',m0.conv-ot.conv],['vagas vazias',m0.empty-ot.empty]].filter(x=>x[1]!==0).map(x=>x[0]+' <b>'+sg(x[1])+'</b>').join(' · ');
+      h+='<p style="margin-top:.7rem;font-size:1rem"><b>'+(won?'Você venceu a janela!':esc(rk[0].name)+' venceu.')+'</b> Você ficou em '+(rk.findIndex(x=>x.id===0)+1)+'º com '+sc[0].total+' pontos.</p>'+
+        '<p><b>Onde a partida foi decidida</b> (você contra '+esc(ot.name)+'): '+(why||'tudo igual; desempate por estrelas e depois por moedas')+'.'+(!me.tec?' Você jogou <b>sem técnico</b>.':'')+' A partida foi salva em 📊 Testes.</p>'+
         '<div class="act"><button class="m7b sec" onclick="M7.tests()">📊 Testes</button><button class="m7b sec" onclick="M7.open()">Mudar regras</button><button class="m7b gold" onclick="M7.start()">Jogar de novo</button></div>';
     }else h+='<div class="act"><button class="m7b gold" onclick="M7.revNext()">Revelar: '+titles[RSTEPS[rv+1]]+' ➜</button></div>';
     modal(h,true);
@@ -8009,9 +8058,11 @@ const M7 = (function(){
     '<li><b>Olheiro</b>: veja 3 cartas fechadas do monte, fique com 1 em segredo. Outra pode ir para a <b>sua vitrine</b>, fechada, com o relatório que você quiser — verdade ou blefe.</li>'+
     '<li><b>Comprar às cegas</b> da vitrine de um rival: você paga a ele e só então vira a carta.</li>'+
     '<li><b>Técnico</b> ('+c.tecCost+' moedas, 1 por time) ou <b>Patrocínio</b> (+'+c.sponsor+' moedas).</li>'+
-    '<li>Viajar para outra região custa de 1 a 3 moedas e já está somado no preço mostrado.</li></ul>'+
-    '<h4>Ações livres</h4><ul><li><b>Treinar</b>: '+c.treinoCost+' moedas, +1★ em um jogador (1 por turno, '+c.maxTreino+' por partida, Ícone não treina).</li><li><b>Negociar</b>: 1 consulta por turno a um rival; as cartas são mostradas só entre vocês dois.</li><li>Mexer no banco: escalar, vender ao banco.</li></ul>'+
-    '<h4>Pontuação — 4 linhas</h4><ul><li><b>Estrelas</b> dos 11 titulares.</li><li><b>Técnico</b>: bônus pelo estilo do elenco.</li><li><b>Convocações</b>: quem tem mais titulares daquela região ganha +'+c.convPts+' (empate divide).</li><li><b>Vagas vazias</b>: −'+c.emptyPen+' cada.</li></ul>'+
+    '<li>Viajar para outra região custa de 1 a 3 moedas e já está somado no preço mostrado. Depois de comprar lá, você fica naquela região.</li>'+
+    '<li>Se a posição já está cheia, a carta nova entra só se for melhor que a pior titular, que desce para o banco (máx. '+c.benchMax+' reservas; o excesso é vendido).</li></ul>'+
+    '<h4>O que muda sozinho</h4><ul><li><b>Ordem dos turnos</b>: quem começa gira a cada rodada (está no topo da tela).</li><li><b>Vitrines dos mercados</b>: no fim de cada rodada a carta mais antiga volta ao monte e entra uma nova; nunca há mais de 1 goleiro por vitrine.</li><li><b>Técnicos</b>: quando um é contratado, outro aparece no lugar.</li><li><b>Vitrine de rival</b>: carta encalhada baixa de preço e, depois de um tempo, é recolhida.</li><li><b>Recolher</b> a sua carta da vitrine devolve a carta ao monte; ela não volta para o seu time.</li></ul>'+
+    '<h4>Ações livres</h4><ul><li><b>Treinar</b>: '+c.treinoCost+' moedas, +1★ em um jogador (1 por turno, '+c.maxTreino+' por partida, Ícone não treina).</li><li><b>Negociar</b>: pergunte à mesa quem tem jogador sobrando numa posição; as cartas são mostradas só entre vocês. Dar um jogador seu em troca abaixa o preço.</li><li><b>Oferecer um reserva</b> aos rivais (1 por turno) ou vender ao banco pela metade do preço.</li><li>Mexer no banco: escalar um reserva no lugar de um titular.</li></ul>'+
+    '<h4>Pontuação — 4 linhas</h4><ul><li><b>Estrelas</b> dos 11 titulares.</li><li><b>Técnico</b>: bônus pelo estilo do elenco.</li><li><b>Convocações</b>: quem tem mais titulares daquela região ganha +'+c.convPts+' (empate divide).</li><li><b>Vagas vazias</b>: −'+c.emptyPen+' cada.</li><li>Empate: vence quem tem mais estrelas; depois, mais moedas.</li></ul>'+
     '<h4>Mercados</h4><ul><li><b>Brasil</b>: barato, muito Bronze e Prata. <b>América do Sul</b>: mistura, com Ouro. <b>Resto do Mundo</b>: mais Ouro e alguns Especiais. <b>Europa</b>: caro, só Ouro, Especial e Ícone.</li><li>A nacionalidade do jogador (bolinha colorida) é o que conta para a convocação, não o mercado onde você o achou.</li></ul></div>'+
     '<div class="act"><button class="m7b" onclick="M7.close()">Entendi</button></div>');
   }
@@ -8060,7 +8111,7 @@ const M7 = (function(){
   }
 
   return {open,start,back,setOpt,setRivals,setEnd,resetOpt,buy,buyOk,scout,scKeep,scList,scClaim,scPrice,scOk,sponsor,tec,tecOk,
-    buyShop,buyShopOk,retract,cardMenu,train,sell:sellC,swap,end,nego,ngAi,ngPos,ngGive,ngNo,ngOk,revNext,rules,tests,clearHist,sim,
+    buyShop,buyShopOk,retract,cardMenu,train,sell:sellC,swap,end,nego,ngPos,ngPick,ngGive,ngNo,ngOk,offer,offerOk,revNext,rules,tests,clearHist,sim,
     close:closeModal,_state:()=>G};
 })();
 
