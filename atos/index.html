@@ -84,6 +84,18 @@ button{font-family:inherit;cursor:pointer}
 button.card:hover{background:#fff1cf}
 .card.comp{border-color:var(--bom);border-left-color:var(--bom);background:#f3f7ee}
 .card.comp b{color:var(--bom)}
+.goal{border:2px solid var(--ouro);background:linear-gradient(#fff8e2,#f1e2bd)}
+.goal ul{list-style:none;margin:0;padding:0;font-size:15.5px}
+.goal li{display:flex;gap:8px;align-items:baseline;padding:2px 0}
+.goal li em{font-style:normal;flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--rose);display:grid;place-items:center;font-size:13px;color:#fff;align-self:center}
+.goal li.ok em{background:var(--bom);border-color:var(--bom)}
+.goal li b{font-family:var(--tit);font-size:19px;color:var(--vinho)}
+.next{margin-top:8px;padding:8px 10px;background:var(--vinho);color:#fff;border-radius:5px;font-size:15.5px}
+.next b{color:var(--ouro2)}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:6px}
+.how div{background:#fbf5e6;border:1px solid #c9b48a;border-radius:6px;padding:10px;font-size:15px}
+.how b{display:block;font-family:var(--tit);color:var(--vinho);font-size:15px;margin-bottom:3px}
+.how span{font-family:var(--tit);font-weight:700;font-size:22px;color:var(--ouro);float:right;line-height:1}
 .empty{font-style:italic;color:#7a6a55;font-size:14.5px}
 .log{max-height:210px;overflow:auto;font-size:14.5px;display:flex;flex-direction:column;gap:3px}
 .log div{padding-left:9px;border-left:3px solid #c9b48a}
@@ -126,7 +138,7 @@ button.card:hover{background:#fff1cf}
 .res{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
 @media (min-width:981px){.board{position:sticky;top:10px}}
 @media (max-width:760px){.scroll svg{width:820px;max-width:none}.hint{position:static;padding:8px;background:#2b2118}.hint div{border:0;background:none;padding:0;font-size:15px;text-align:center}.stats{display:grid;grid-template-columns:repeat(3,1fr);width:100%}.stat{min-width:0}.tbtn{grid-column:span 3}.stats .tbtn{grid-column:auto}}
-@media (max-width:980px){.main{grid-template-columns:1fr}.pgrid{grid-template-columns:repeat(2,1fr)}.dgrid{grid-template-columns:1fr}.logo{font-size:26px}.stats{margin-left:0}.stat{min-width:76px;padding:4px 8px}.stat b{font-size:22px}.sheet{padding:18px 16px}.sheet h1{font-size:38px}.lbl{font-size:19px}.porta{font-size:25px}}
+@media (max-width:980px){.how{grid-template-columns:1fr 1fr}.main{grid-template-columns:1fr}.pgrid{grid-template-columns:repeat(2,1fr)}.dgrid{grid-template-columns:1fr}.logo{font-size:26px}.stats{margin-left:0}.stat{min-width:76px;padding:4px 8px}.stat b{font-size:22px}.sheet{padding:18px 16px}.sheet h1{font-size:38px}.lbl{font-size:19px}.porta{font-size:25px}}
 </style>
 </head>
 <body>
@@ -515,6 +527,12 @@ function render(){
   const okP = sel!==null && A.canPreach(S,sel);
   let pTxt = here.church?'Aqui já há igreja':here.opp>=3?'Oposição no máximo: fortaleça antes':sel===null?`Porta <strong>${C.porta}</strong> · precisa do dado certo`:cost===0?'<strong>+1</strong> discípulo, sem custo':`<strong>+1</strong> discípulo · custa <strong>${cost}</strong> 🙏`;
   const fortN = sel!==null ? (p.persona==='silas'?here.opp:Math.min(here.opp,S.dice[sel].v===C.porta?2:1)) : 0;
+  const miss=Object.keys(A.REG).filter(k=>!cov.has(k)).map(k=>A.REG[k].n);
+  let next='';
+  if (!free) next='Você usou todos os dados. <b>Encerre o turno.</b>';
+  else if (!here.church && here.opp>=3) next=`${esc(C.n)} está tomada pela oposição. Use <b>Fortalecer</b> antes de pregar.`;
+  else if (!here.church) next=`Você está em <b>${esc(C.n)}</b>, que ainda não tem igreja. Use <b>Pregar</b>: faltam <b>${C.need-here.disc}</b> pregações. Sem Oração suficiente, use <b>Orar</b>.`;
+  else next='Aqui já há igreja. Use <b>Viajar</b> e clique numa cidade com número (sem igreja) para pregar lá.';
   const html=`
   <div class="top">
     <div class="logo">ATOS<small>Até os Confins da Terra</small></div>
@@ -531,6 +549,15 @@ function render(){
   <div class="main">
     <div class="board"><div class="scroll">${mapSVG()}</div>${hint?`<div class="hint"><div>${hint}</div></div>`:''}</div>
     <div class="side">
+      <div class="pan goal">
+        <h3><span>Objetivo da equipe</span></h3>
+        <ul>
+          <li class="${n>=S.goal?'ok':''}"><em>${n>=S.goal?'✓':''}</em><span>Plantar <b>${S.goal}</b> igrejas — vocês têm <b>${n}</b></span></li>
+          <li class="${cov.size===4?'ok':''}"><em>${cov.size===4?'✓':''}</em><span>Uma igreja em cada região${miss.length?' — falta: <b style="font-size:15px">'+miss.join(', ')+'</b>':''}</span></li>
+          <li class="${S.cities.rom.church?'ok':''}"><em>${S.cities.rom.church?'✓':''}</em><span>Uma igreja em <b>Roma</b></span></li>
+        </ul>
+        ${S.over?'':`<div class="next"><b>Agora:</b> ${next}</div>`}
+      </div>
       <div class="pan">
         <h3><span>Turno ${S.turn}</span><span>${esc(A.C[p.city].n)}</span></h3>
         <div class="who"><div class="pawn" style="background:${per.cor}">${per.n[0]}</div><div><h2>${per.n}${p.jailed?' ⛓':''}</h2><p><i>${per.sub}.</i> ${per.txt}</p></div></div>
@@ -596,6 +623,13 @@ function renderSetup(){
   $('#app').innerHTML=`<div class="ov" style="position:static;background:none;min-height:96vh"><div class="sheet">
     <h1>ATOS</h1><div class="sub">Até os Confins da Terra</div>
     <div class="vers">“…e sereis minhas testemunhas tanto em Jerusalém como em toda a Judeia e Samaria, e até aos confins da terra.” — Atos 1:8</div>
+    <h4>O jogo em 4 frases</h4>
+    <div class="how">
+      <div><span>1</span><b>Juntos</b>Vocês são missionários e jogam em equipe, contra o jogo.</div>
+      <div><span>2</span><b>Objetivo</b>Plantar igrejas pelo mapa: a meta abaixo, com uma em cada região e uma em Roma.</div>
+      <div><span>3</span><b>Como</b>Vá até uma cidade e pregue 3 vezes. Cada dado do turno é uma ação.</div>
+      <div><span>4</span><b>Perigo</b>A oposição (chamas) cresce todo turno. 7 tumultos ou o fim do tempo: todos perdem.</div>
+    </div>
     <h4>Missionários — escolha de 2 a 4 (um por jogador; sozinho, controle dois)</h4>
     <div class="pgrid">${Object.keys(P).map(k=>`<button class="pcard${setup.personas.includes(k)?' on':''}" data-per="${k}"><div class="pawn" style="background:${P[k].cor}">${P[k].n[0]}</div><b>${P[k].n}</b><i>${P[k].sub} · ${P[k].ref}</i>${P[k].txt}</button>`).join('')}</div>
     <h4>Dificuldade — meta de igrejas</h4>
